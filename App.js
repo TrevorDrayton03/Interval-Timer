@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Timer from "./src/components/Timer";
+import { Dimensions } from "react-native";
 
-export default function App() {
+var { height, width } = Dimensions.get('window');
+
+
+const App = () => {
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Timer name="Round Length" icon="boxing-glove">
+      </Timer>
+      <Timer name="Rest Time" icon="arrow-down-circle">
+      </Timer>
+      <Timer name="Rounds" icon="alarm-bell">
+      </Timer>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //flex: 0,
+    justifyContent: "center",
+    width: width,
+    height: height
   },
 });
+export default App;
