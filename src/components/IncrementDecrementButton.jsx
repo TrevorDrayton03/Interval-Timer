@@ -1,54 +1,36 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Button } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const IncrementDecrementButtons = () => {
+const IncrementDecrementButtons = (props) => {
+    const { count, countChanger } = props;
+    const onPlusPress = () => {
+        countChanger(prevCount => prevCount + 1);
+    }
+    const onMinusPress = () => {
+        if (count != 0) {
+            countChanger(prevCount => prevCount - 1);
+        }
+    }
     return (
-        0
+        <View style={styles.buttonRow}>
+            <TouchableOpacity onPress={onMinusPress} style={{ marginRight: 10 }}>
+                <Icon name="clock-minus-outline" size={50}></Icon>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onPlusPress}>
+                <Icon name="clock-plus-outline" size={50}></Icon>
+            </TouchableOpacity>
+        </View>
     )
 };
 
+export default IncrementDecrementButtons;
+
 const styles = StyleSheet.create({
-    timerContainer: {
-        //flex: 0,
-        //width: width,
-        height: height / 9,
-        justifyContent: "center",
-        paddingHorizontal: 10
-    },
-    button: {
-        alignItems: "center",
-        backgroundColor: "#DDDDDD",
-        padding: 10
-    },
-    row: {
-        flexDirection: "row",
-        width: width,
-        justifyContent: "space-between",
-        paddingHorizontal: 20,
-        marginTop: 20,
-    },
-    column: {
-        //flexDirection: "column", //this appears to be implied
-        //flex: 3,
-        width: width / 5,
-        justifyContent: "center",
-        paddingHorizontal: 20,
-        //marginTop: 20,
-    },
-    buttonColumn: {
-        //flexDirection: "column", //this appears to be implied
-        //flex: 2,
-        //width: width,
-        justifyContent: "center",
-        //paddingHorizontal: 20,
-        //marginTop: 20,
-    },
     buttonRow: {
-        //flexDirection: "column", //this appears to be implied
-        //flex: 2,
-        //width: width,
-        justifyContent: "flex-end",
-        //paddingHorizontal: 20,
-        //marginTop: 20,
-    },
+        flexDirection: "row",
+        justifyContent: "center",
+        //backgroundColor: "#DDDDDD",
+        //padding: 0
+    }
 });
