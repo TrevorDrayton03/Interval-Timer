@@ -3,21 +3,29 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const IncrementDecrementButtons = (props) => {
-    const { count, countChanger } = props;
+    const { count, countSetter, incremental, startVal, minVal } = props;
     const onPlusPress = () => {
-        countChanger(prevCount => prevCount + 1);
+        countSetter(prevCount => prevCount + incremental);
     }
     const onMinusPress = () => {
-        if (count != 0) {
-            countChanger(prevCount => prevCount - 1);
+        if (count > minVal) {
+            countSetter(prevCount => prevCount - incremental);
+        }
+        else {
+            alert("Minimum value of " + minVal + ".")
         }
     }
     return (
         <View style={styles.buttonRow}>
-            <TouchableOpacity onPress={onMinusPress} style={{ marginRight: 10 }}>
+            <TouchableOpacity
+                onPress={onMinusPress}
+                style={{ marginRight: 10 }}
+            >
                 <Icon name="clock-minus-outline" size={50}></Icon>
             </TouchableOpacity>
-            <TouchableOpacity onPress={onPlusPress}>
+            <TouchableOpacity
+                onPress={onPlusPress}
+            >
                 <Icon name="clock-plus-outline" size={50}></Icon>
             </TouchableOpacity>
         </View>

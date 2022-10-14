@@ -14,11 +14,32 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Timer name="Round Length" icon="boxing-glove" roundLength={roundLength}> 
+      <Timer
+        name="Round Length"
+        icon="boxing-glove"
+        incremental={5}
+        roundLength={roundLength}
+        startVal={0}
+        minVal={0}
+      >
       </Timer>
-      <Timer name="Rest Time" icon="arrow-down-circle" restLength={restLength}>
+      <Timer
+        name="Rest Time"
+        icon="arrow-down-circle"
+        incremental={5}
+        restLength={restLength}
+        startVal={0}
+        minVal={0}
+        >
       </Timer>
-      <Timer name="Rounds" icon="alarm-bell" intervals={intervals}>
+      <Timer
+        name="Rounds"
+        icon="alarm-bell"
+        incremental={1}
+        intervals={intervals}
+        startVal={1}
+        minVal={1}
+      >
       </Timer>
     </View>
   );

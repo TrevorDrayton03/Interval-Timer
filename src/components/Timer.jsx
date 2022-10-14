@@ -7,8 +7,8 @@ import IncrementDecrementbutton from "./IncrementDecrementButton";
 var { height, width } = Dimensions.get('window');
 
 const Timer = (props) => {
-    const { name, icon } = props;
-    const [count, setCount] = useState(0);
+    const { name, icon, incremental, startVal, minVal } = props;
+    const [count, setCount] = useState(startVal);
 
     return (
         <View style={styles.timerContainer}>
@@ -23,7 +23,13 @@ const Timer = (props) => {
                     </Text>
                 </View>
                 <View style={styles.buttonColumn}>
-                    <IncrementDecrementbutton count={count} countChanger={setCount}>
+                    <IncrementDecrementbutton
+                        count={count}
+                        countSetter={setCount}
+                        incremental={incremental}
+                        startVal={startVal}
+                        minVal={minVal}
+                    >
                     </IncrementDecrementbutton>
                 </View>
             </View>
