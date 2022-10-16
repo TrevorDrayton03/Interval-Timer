@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 import { Dimensions } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncrementDecrementbutton from "./IncrementDecrementButton";
@@ -7,25 +7,51 @@ import IncrementDecrementbutton from "./IncrementDecrementButton";
 var { height, width } = Dimensions.get('window');
 
 const Timer = (props) => {
-    const { name, icon, incremental, startVal, minVal } = props;
-    const [count, setCount] = useState(startVal);
+    const { name, icon, incremental, startVal, minVal, isDuration, value, setValue } = props;
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('time');
+    const [show, setShow] = useState(false);
+
+    const zeroPad = (num) => {
+        let numString = num.toString().padStart(2, "0");
+        return numString;
+    }
+
+    if (isDuration) {
+        var seconds = value % 60;
+        var minutes = Math.floor(value / 60) % 60;
+        var hours = Math.floor(minutes / 60) % 24;
+        minutes = zeroPad(minutes);
+        seconds = zeroPad(seconds);
+        if (hours == 0) {
+            var time = minutes + ":" + seconds;
+        }
+        else {
+            var time = hours + ":" + minutes + ":" + seconds;
+        }
+    }
 
     return (
         <View style={styles.timerContainer}>
             <View style={styles.row}>
                 <Icon name={icon} size={50} />
                 <View style={styles.column}>
-                    <Text>
-                        {count}
-                    </Text>
+                    <TouchableOpacity
+                        onPress={null}
+                    //activeOpacity={100}
+                    >
+                        <Text>
+                            {isDuration == false ? value : time}
+                        </Text>
+                    </TouchableOpacity>
                     <Text>
                         {name}
                     </Text>
                 </View>
                 <View style={styles.buttonColumn}>
                     <IncrementDecrementbutton
-                        count={count}
-                        countSetter={setCount}
+                        count={value}
+                        countSetter={setValue}
                         incremental={incremental}
                         startVal={startVal}
                         minVal={minVal}
@@ -33,7 +59,7 @@ const Timer = (props) => {
                     </IncrementDecrementbutton>
                 </View>
             </View>
-        </View>
+        </View >
     )
 };
 

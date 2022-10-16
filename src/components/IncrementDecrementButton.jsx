@@ -1,9 +1,8 @@
-import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const IncrementDecrementButtons = (props) => {
-    const { count, countSetter, incremental, startVal, minVal } = props;
+    const { count, countSetter, incremental, minVal } = props;
     const onPlusPress = () => {
         countSetter(prevCount => prevCount + incremental);
     }
@@ -12,7 +11,7 @@ const IncrementDecrementButtons = (props) => {
             countSetter(prevCount => prevCount - incremental);
         }
         else {
-            alert("Minimum value of " + minVal + ".")
+            //alert("Minimum value of " + minVal + ".")
         }
     }
     return (
