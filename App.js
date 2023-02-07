@@ -16,81 +16,74 @@ const App = () => {
 
   const interval = useRef();
 
-  // const start = () => {
-  //     setIsRunning(true);
-  //     setStartTime(Date.now());
-  // }
-
-  // useEffect(() => {
-  //     if (startTime > 0) {
-  //         interval.current = setInterval(() => {
-  //             setTimeout(() => Date.now() - startTime)
-  //         }, 1)
-  //     }
-  //     else {
-  //         if(interval.current) {
-  //             clearInterval(interval.current);
-  //             interval.current=undefined;
-  //         }
-  //     }
-  // }, [startTime])
-
   return (
     <View style={styles.container}>
-      <Timer
-        name="Round Length"
-        icon="boxing-glove"
-        incremental={5}
-        value={roundLength}
-        setValue={setRoundLength}
-        startVal={0}
-        minVal={0}
-        isDuration={true}
-      >
-      </Timer>
-      <Timer
-        name="Rest Time"
-        icon="arrow-down-circle"
-        incremental={5}
-        value={restLength}
-        setValue={setRestLength}
-        startVal={0}
-        minVal={0}
-        isDuration={true}
-      >
-      </Timer>
-      <Timer
-        name="Rounds"
-        icon="alarm-bell"
-        incremental={1}
-        value={intervals}
-        setValue={setIntervals}
-        startVal={1}
-        minVal={1}
-        isDuration={false}
-      >
-      </Timer>
-      <TouchableOpacity
-        style={{ marginTop: 75, marginBottom: 75 }}
-        onPress={null}
-      >
-        <Icon
-          name="send"
-          size={50}
+      <View style={styles.smallercontainer}>
+      </View>
+      <View style={styles.smallercontainer}>
+        <Timer
+          name="Round Length"
+          icon="boxing-glove"
+          incremental={5}
+          value={roundLength}
+          setValue={setRoundLength}
+          startValue={0}
+          minValue={0}
+          isDuration={true}
         >
-        </Icon>
-      </TouchableOpacity>
+        </Timer>
+        <Timer
+          name="Rest Time"
+          icon="arrow-down-circle"
+          incremental={5}
+          value={restLength}
+          setValue={setRestLength}
+          startValue={0}
+          minValue={0}
+          isDuration={true}
+        >
+        </Timer>
+        <Timer
+          name="Rounds"
+          icon="alarm-bell"
+          incremental={1}
+          value={intervals}
+          setValue={setIntervals}
+          startValue={1}
+          minValue={1}
+          isDuration={false}
+        >
+        </Timer>
+      </View>
+      <View style={styles.smallercontainer}>
+        <TouchableOpacity
+          style={{ marginTop: 0, marginBottom: 0 }}
+          onPress={null}
+        >
+          <Icon
+            name="send"
+            size={50}
+          >
+          </Icon>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 0,
-    justifyContent: "flex-end",
+    flex: 0,
+    justifyContent: "center",
     width: width,
     height: height,
-    alignItems: "center"
+    alignItems: "center",
+  },
+  smallercontainer: {
+    flexDirection:"column",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
   },
 });
 export default App;
