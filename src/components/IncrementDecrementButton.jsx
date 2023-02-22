@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const IncrementDecrementButtons = (props) => {
-    const { count, countSetter, incremental, minValue } = props;
-
+const IncrementDecrementButtons = ({ count, countSetter, incremental, minValue }) => {
     // interval states are required because without them the clear interval will not clear the current timer properly (it will try to clear a prior version of a timer, even if there isn't one)
     const [plusInterval, setPlusInterval] = useState(null);
     const [minusInterval, setMinusInterval] = useState(null);
@@ -16,13 +14,10 @@ const IncrementDecrementButtons = (props) => {
         if (count > minValue) {
             countSetter(prevCount => prevCount - incremental);
         }
-        else {
-            //alert("Minimum value of " + minValue + ".")
-        }
     }
 
     const handlePlusPressIn = () => {
-        setPlusInterval(setInterval(() => countSetter(prevCount => prevCount + incremental), 100));
+        setPlusInterval(setInterval(() => countSetter(prevCount => prevCount + incremental), 150));
     };
 
     const handlePlusPressOut = () => {
@@ -41,7 +36,7 @@ const IncrementDecrementButtons = (props) => {
                     return prevCount - incremental;
                 }
             });
-        }, 100)
+        }, 150)
         );
     };
 

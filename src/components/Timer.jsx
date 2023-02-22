@@ -4,27 +4,31 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncrementDecrementbutton from "./IncrementDecrementButton";
 import MinuteSecondPicker from "./MinuteSecondPicker";
 
+// TODO - limit the max value to 59 minues and 55 seconds 
+// Make a helper function file to turn seconds into minutes:seconds for display purposes
+// to separate the component from the logic ( there's quite a bit of duplicate logic throughout the files )
+// Debug option to show comments
 
-var { height, width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
-const Timer = (props) => {
-    const { name, icon, incremental, startValue, minValue, isDuration, value, setValue } = props;
+const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, value, setValue }) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const zeroPad = (num) => {
         if (typeof (num) != typeof (String)) {
-            var numString = num.toString().padStart(2, "0");
+            let numString = num.toString().padStart(2, "0");
+            return numString;
         }
         else {
-            var numString = num.padStart(2, "0");
+            let numString = num.padStart(2, "0");
+            return numString;
         }
-        return numString;
     }
 
     if (isDuration) {
-        var seconds = value % 60;
-        var minutes = Math.floor(value / 60) % 60;
-        var hours = Math.floor(minutes / 60) % 24;
+        let seconds = value % 60;
+        let minutes = Math.floor(value / 60) % 60;
+        let hours = Math.floor(minutes / 60) % 24;
         minutes = zeroPad(minutes);
         seconds = zeroPad(seconds);
         if (hours == 0) {

@@ -1,24 +1,47 @@
-import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import Timer from "./src/components/Timer";
+import FightClock from "./src/components/FightClock";
+import StoreButton from "./src/components/StoreButton";
 import { Dimensions } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-var { height, width } = Dimensions.get('window');
-
+const { height, width } = Dimensions.get('window');
 
 const App = () => {
   const [roundLength, setRoundLength] = useState(0);
   const [restLength, setRestLength] = useState(0);
   const [intervals, setIntervals] = useState(1);
-  const [isRunning, setIsRunning] = useState(false);
-  const [startTime, setStartTime] = useState(0);
 
-  const interval = useRef();
+  const zeroPad = (num) => {
+    if (typeof (num) != typeof (String)) {
+      let numString = num.toString().padStart(2, "0");
+      return numString;
+    }
+    else {
+      let numString = num.padStart(2, "0");
+      return numString;
+    }
+  }
+
+  let timeVal = roundLength * intervals + restLength * (intervals - 1);
+  let seconds = timeVal % 60;
+  let minutes = Math.floor(timeVal / 60) % 60;
+  let hours = Math.floor(minutes / 60) % 24;
+  seconds = zeroPad(seconds);
+  if (hours == 0) {
+    var displayTime = minutes + ":" + seconds;
+  }
+  else if (roundLength == 0) {
+    var displayTime = hours + "0:0" + minutes + ":" + seconds;
+  }
+  else {
+    var displayTime = hours + ":" + minutes + ":" + seconds;
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.smallercontainer}>
+        <Text style={{ fontSize: 20 }}>Total Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
       <View style={styles.smallercontainer}>
         <Timer
@@ -55,17 +78,24 @@ const App = () => {
         >
         </Timer>
       </View>
-      <View style={styles.smallercontainer}>
-        <TouchableOpacity
-          style={{ marginTop: 0, marginBottom: 0 }}
-          onPress={null}
-        >
-          <Icon
-            name="send"
-            size={50}
+      <View style={[styles.smallercontainer, { flexDirection: "row" }]}>
+        <View style={styles.buttoncontainer}>
+          {/* <StoreButton
+            intervals={intervals}
+            restLength={restLength}
+            roundLength={roundLength}
+            setIntervals={setIntervals}
+            setRestLength={setRestLength}
+            setRoundLength={setRoundLength}
           >
-          </Icon>
-        </TouchableOpacity>
+          </StoreButton> */}
+          <FightClock
+            intervals={intervals}
+            restLength={restLength}
+            roundLength={roundLength}
+          >
+          </FightClock>
+        </View>
       </View>
     </View>
   );
@@ -80,10 +110,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   smallercontainer: {
-    flexDirection:"column",
+    flexDirection: "column",
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
   },
+  buttoncontainer: {
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  }
+
 });
 export default App;
