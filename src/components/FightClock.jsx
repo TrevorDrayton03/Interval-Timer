@@ -93,7 +93,6 @@ const FightClock = ({ intervals, restLength, roundLength }) => {
 
     return (
         <View>
-            {console.log(rest)}
             <TouchableOpacity
                 onPress={onPressHandle}
                 style={{ marginTop: 0, marginBottom: 0 }}
