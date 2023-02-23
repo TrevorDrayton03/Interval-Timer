@@ -48,7 +48,7 @@ const MinuteSecondPicker = ({ value, setValue }) => {
                             key={val}
                             label={(val * 5).toString()}
                             value={val * 5}
-                            style={{ fontSize: 24}}
+                            style={{ fontSize: 24 }}
                         />
                     ))}
                 </Picker>

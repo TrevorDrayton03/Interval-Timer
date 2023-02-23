@@ -53,14 +53,14 @@ const IncrementDecrementButtons = ({ count, countSetter, incremental, minValue }
                 onPressOut={handleMinusPressOut}
                 style={{ marginRight: 10 }}
             >
-                <Icon name="clock-minus-outline" size={50}></Icon>
+                <Icon name="minus" size={50}></Icon>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={onPlusPress}
                 onPressIn={handlePlusPressIn}
                 onPressOut={handlePlusPressOut}
             >
-                <Icon name="clock-plus-outline" size={50}></Icon>
+                <Icon name="plus" size={50}></Icon>
             </TouchableOpacity>
         </View>
     )
@@ -72,7 +72,5 @@ const styles = StyleSheet.create({
     buttonRow: {
         flexDirection: "row",
         justifyContent: "center",
-        //backgroundColor: "#DDDDDD",
-        //padding: 0
     }
 });

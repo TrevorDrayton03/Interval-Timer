@@ -3,7 +3,7 @@ import { Modal, Button, Text, View, TouchableOpacity, Alert, StyleSheet, TextInp
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRestLength, setIntervals }) => {
+const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRoundLength, setRestLength, setIntervals, setReadyLength }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [allItems, setAllItems] = useState(null);
     const [inputModalVisible, setInputModalVisible] = useState(false);
@@ -19,7 +19,8 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
             "title": title,
             "storeRoundLength": roundLength,
             "storeRestLength": restLength,
-            "storeIntervals": intervals
+            "storeReadyLength": readyLength,
+            "storeIntervals": intervals,
         }
         try {
             training = JSON.stringify(training);
@@ -90,10 +91,9 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
         }
     }
 
-    const updateItem = async () => {
+    const updateItem = async (key) => {
         try {
-            await AsyncStorage.mergeItem('trainingNameHere');
-            console.log("Done updateItem");
+            await AsyncStorage.mergeItem(key);
         }
         catch (e) {
             console.log(e, " @upd");
@@ -186,13 +186,14 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
                             onRequestClose={() => setInputModalVisible(false)}
                         >
                             <View style={{ flex: 1, justifyContent: "center" }}>
-                                <Text style={{ textAlign: "center", padding: 10 }}>Store Current Settings</Text>
+                                <Text style={{ textAlign: "center", padding: 10, fontSize: 24 }}>Store Current Settings</Text>
                                 <View style={styles.textinput}>
                                     <TextInput
                                         onChangeText={setInputText}
                                         placeholder="Name"
                                         maxLength={40}
                                         numberOfLines={2}
+                                        style={{ fontSize: 24, width: "100%", textAlign: "center" }}
                                     >
                                     </TextInput>
                                 </View>
@@ -213,7 +214,7 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
                         </Modal>
                     }
                     <View style={{ alignItems: "center", flex: 5 }}>
-                        <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "row", alignItems: "center" }}>
                             <Text style={{ flex: 1, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Name</Text>
                             <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Round</Text>
                             <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Rest</Text>
@@ -231,6 +232,7 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
                                             onPress={() => {
                                                 setRoundLength(item.storeRoundLength)
                                                 setRestLength(item.storeRestLength)
+                                                setReadyLength(item.storeReadyLength)
                                                 setIntervals(item.storeIntervals)
                                                 setModalVisible(false)
                                             }}
@@ -238,15 +240,15 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
                                                 handleDelete(item.title)
                                             }}
                                         >
-                                            <View style={{ flexDirection: "row" }}>
+                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
                                                 <Text style={{ flex: 1, textAlign: "center", fontSize: 14 }}>{item.title}</Text>
                                                 <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeRoundLength}</Text>
                                                 <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeRestLength}</Text>
-                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>0</Text>
+                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeReadyLength}</Text>
                                                 <Text style={{ flex: 1, textAlign: "center", fontSize: 14 }}>{item.storeIntervals}</Text>
                                             </View>
                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ flex: 1, height: 1, backgroundColor: 'gray', marginTop:20 }} />
+                                                <View style={{ flex: 1, height: 1, backgroundColor: 'gray', marginTop: 20 }} />
                                             </View>
                                         </TouchableOpacity>
                                     </View>

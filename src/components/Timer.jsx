@@ -45,7 +45,7 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
                 >
                     <View style={styles.modalcontainer}>
                         <View style={styles.modal}>
-                            <Text style={styles.text}>Set Time</Text>
+                            <Text style={styles.text}>Set {name}</Text>
                             <View style={{ flexDirection: "row", alignItems: "center", flex: .4 }}>
                                 <MinuteSecondPicker
                                     value={value}
@@ -63,11 +63,11 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
                 <TouchableOpacity
                     onPress={() => setModalVisible(!modalVisible)}
                 >
-                    <Text style={{fontSize:20}}>
+                    <Text style={{ fontSize: 20 }}>
                         {isDuration == false ? value : displayTime}
                     </Text>
                 </TouchableOpacity>
-                <Text style={{fontSize:20}}>
+                <Text style={{ fontSize: 20 }}>
                     {name}
                 </Text>
             </View>

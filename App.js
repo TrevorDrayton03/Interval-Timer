@@ -5,8 +5,9 @@ import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
 
 const App = () => {
-  const [roundLength, setRoundLength] = useState(0);
+  const [roundLength, setRoundLength] = useState(5);
   const [restLength, setRestLength] = useState(0);
+  const [readyLength, setReadyLength] = useState(0);
   const [intervals, setIntervals] = useState(1);
 
   const zeroPad = (num) => {
@@ -38,7 +39,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.titlecontainer}>
-        <Text style={{ fontSize: 28 }}>Total Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
+        <Text style={{ fontSize: 28 }}>Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
       <View style={styles.smallercontainer}>
         <Timer
@@ -47,8 +48,8 @@ const App = () => {
           incremental={5}
           value={roundLength}
           setValue={setRoundLength}
-          startValue={0}
-          minValue={0}
+          startValue={5}
+          minValue={5}
           isDuration={true}
         >
         </Timer>
@@ -58,6 +59,17 @@ const App = () => {
           incremental={5}
           value={restLength}
           setValue={setRestLength}
+          startValue={0}
+          minValue={0}
+          isDuration={true}
+        >
+        </Timer>
+        <Timer
+          name="Ready Time"
+          icon="timelapse"
+          incremental={5}
+          value={readyLength}
+          setValue={setReadyLength}
           startValue={0}
           minValue={0}
           isDuration={true}
@@ -80,6 +92,7 @@ const App = () => {
           intervals={intervals}
           restLength={restLength}
           roundLength={roundLength}
+          readyLength={readyLength}
         >
         </FightClock>
       </View>
@@ -90,9 +103,11 @@ const App = () => {
               intervals={intervals}
               restLength={restLength}
               roundLength={roundLength}
+              readyLength={readyLength}
               setIntervals={setIntervals}
               setRestLength={setRestLength}
               setRoundLength={setRoundLength}
+              setReadyLength={setReadyLength}
             >
             </StoreButton>
           </View>
@@ -110,7 +125,7 @@ const styles = StyleSheet.create({
   },
   smallercontainer: {
     flexDirection: "column",
-    flex: .9,
+    flex: 1.4,
     alignItems: "center",
     justifyContent: "center"
   },
