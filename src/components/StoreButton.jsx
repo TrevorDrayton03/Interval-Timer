@@ -9,6 +9,10 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
     const [inputModalVisible, setInputModalVisible] = useState(false);
     const [inputText, setInputText] = useState(null);
 
+    useEffect(() => {
+        getAllItemsHandle()
+        setInputText(null)
+    }, [inputModalVisible])
 
     const setItem = async (title) => {
         let training = {
@@ -20,7 +24,7 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
         try {
             training = JSON.stringify(training);
             await AsyncStorage.setItem(title, training);
-            //setInputModalVisible(false);
+            await getAllItemsHandle()
         }
         catch (e) {
             console.log(e, " @set");
@@ -62,6 +66,7 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
     const deleteItem = async (key) => {
         try {
             await AsyncStorage.removeItem(key);
+            await getAllItemsHandle()
         }
         catch (e) {
             console.log(e, '@deleteItem');
@@ -113,27 +118,6 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
         }
     }
 
-    // const addTrainingHandle = async () => {
-    //     setInputModalVisible(true);
-    // }
-
-    // const addTrainingHandle = async () => {
-    //     try {
-    //         await setItem("This Is Titlef");
-    //         // const training = await getItem();
-    //         // setRoundLength(training.storeRoundLength);
-    //         // setRestLength(training.storeRestLength);
-    //         // setIntervals(training.storeIntervals);
-    //         // return getItem("This Is Titlef");
-    //     } catch (e) {
-    //         console.log(e, " @addTrainingHandle")
-    //         Alert.alert(
-    //             'addTrainingHandle',
-    //             JSON.stringify(e)
-    //         )
-    //     }
-    // }
-
     const getAllItemsHandle = async () => {
         try {
             const keys = await getAllKeys()
@@ -160,9 +144,25 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
         }
     }
 
-    const handleOnLongPress = async () => {
-
-    }
+    const handleDelete = (key) => {
+        Alert.alert(
+            'Delete',
+            'Are you sure you want to delete ' + key + '?',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Delete',
+                    onPress: () => {
+                        deleteItem(key)
+                    },
+                },
+            ],
+            { cancelable: false },
+        );
+    };
 
     return (
         <View>
@@ -214,14 +214,14 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
                     }
                     <View style={{ alignItems: "center", flex: 5 }}>
                         <View style={{ flexDirection: "row" }}>
-                            <Text style={{ flex: 1, textAlign: "center", fontSize: 18 }}>Name</Text>
-                            <Text style={{ flex: 1, textAlign: "center", fontSize: 18 }}>Round Time</Text>
-                            <Text style={{ flex: 1, textAlign: "center", fontSize: 18 }}>Rest Time</Text>
-                            <Text style={{ flex: 1, textAlign: "center", fontSize: 18 }}>Ready Time</Text>
-                            <Text style={{ flex: 1, textAlign: "center", fontSize: 18 }}>Intervals</Text>
+                            <Text style={{ flex: 1, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Name</Text>
+                            <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Round</Text>
+                            <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Rest</Text>
+                            <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Ready</Text>
+                            <Text style={{ flex: 1, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold', marginRight: 5 }}>Interval</Text>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
+                            <View style={{ flex: 1, height: 2, backgroundColor: 'black' }} />
                         </View>
                         <ScrollView style={{ width: "100%" }}>
                             {allItems && allItems.map((item, index) => {
@@ -235,15 +235,18 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
                                                 setModalVisible(false)
                                             }}
                                             onLongPress={() => {
-                                                deleteItem(item.title)
+                                                handleDelete(item.title)
                                             }}
                                         >
                                             <View style={{ flexDirection: "row" }}>
-                                                <Text style={{ flex: 1, textAlign: "left" }}>{item.title}</Text>
-                                                <Text style={{ flex: 1, textAlign: "center" }}>{item.storeRoundLength}</Text>
-                                                <Text style={{ flex: 1, textAlign: "center" }}>{item.storeRestLength}</Text>
-                                                <Text style={{ flex: 1, textAlign: "center" }}>0</Text>
-                                                <Text style={{ flex: 1, textAlign: "center" }}>{item.storeIntervals}</Text>
+                                                <Text style={{ flex: 1, textAlign: "center", fontSize: 14 }}>{item.title}</Text>
+                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeRoundLength}</Text>
+                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeRestLength}</Text>
+                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>0</Text>
+                                                <Text style={{ flex: 1, textAlign: "center", fontSize: 14 }}>{item.storeIntervals}</Text>
+                                            </View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                <View style={{ flex: 1, height: 1, backgroundColor: 'gray', marginTop:20 }} />
                                             </View>
                                         </TouchableOpacity>
                                     </View>
@@ -257,14 +260,6 @@ const StoreButton = ({ roundLength, restLength, intervals, setRoundLength, setRe
                             <Button
                                 onPress={() => setInputModalVisible(true)}
                                 title="    New     "
-                            ></Button>
-                            <Button
-                                onPress={getAllItemsHandle}
-                                title="     Get     "
-                            ></Button>
-                            <Button
-                                onPress={deleteAllItemsHandle}
-                                title=" Delete "
                             ></Button>
                         </View>
                     </View>

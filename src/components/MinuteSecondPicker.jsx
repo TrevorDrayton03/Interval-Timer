@@ -18,7 +18,7 @@ const MinuteSecondPicker = ({ value, setValue }) => {
     return (
         <View style={{ flex: 1, flexDirection: 'row' }}>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Minutes:</Text>
+                <Text style={{ fontSize: 24 }}>Minutes:</Text>
                 <Picker
                     selectedValue={MINUTES.indexOf((Math.floor(value / 60) % 60))}
                     style={{ height: 50, width: 100 }}
@@ -30,20 +30,26 @@ const MinuteSecondPicker = ({ value, setValue }) => {
                                 key={val}
                                 label={val.toString()}
                                 value={val}
+                                style={{ fontSize: 24 }}
                             />
                         ))
                     }
                 </Picker>
             </View>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Seconds:</Text>
+                <Text style={{ fontSize: 24 }}>Seconds:</Text>
                 <Picker
                     selectedValue={(SECONDS.indexOf((value % 60))) * 5}
                     style={{ height: 50, width: 100 }}
                     onValueChange={(itemValue) => setSecond(itemValue)}
                 >
                     {[...SECONDS.keys()].map((val) => (
-                        <Picker.Item key={val} label={(val * 5).toString()} value={val * 5} />
+                        <Picker.Item
+                            key={val}
+                            label={(val * 5).toString()}
+                            value={val * 5}
+                            style={{ fontSize: 24}}
+                        />
                     ))}
                 </Picker>
             </View>

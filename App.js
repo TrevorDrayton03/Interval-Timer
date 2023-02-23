@@ -38,7 +38,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.titlecontainer}>
-        <Text style={{ fontSize: 20 }}>Total Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
+        <Text style={{ fontSize: 28 }}>Total Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
       <View style={styles.smallercontainer}>
         <Timer
