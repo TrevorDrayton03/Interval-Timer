@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Modal, View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// 1. I want a pause button that pauses the interval and reveals a stop button to end the training.
-// 2. I want a 5 second get ready time.
-
 const FightClock = ({ intervals, restLength, roundLength }) => {
     const [duration, setDuration] = useState(roundLength);
     const [rounds, setRounds] = useState(1);
@@ -49,7 +46,6 @@ const FightClock = ({ intervals, restLength, roundLength }) => {
     }, [modalVisible, roundLength])
 
     useEffect(() => {
-        // if (duration == 0) {
         if ((duration == restLength - 1 || duration == roundLength - 1) && rounds != intervals) {
             if (restLength > 0) {
                 setRest(!rest);
@@ -82,8 +78,8 @@ const FightClock = ({ intervals, restLength, roundLength }) => {
                 setDuration(prevCount => {
                     if (prevCount > 0) { return prevCount - 1; }
                     else {
-                        if (rest && restLength != 0) { return restLength - 1; } // will toggle a change in rest state
-                        else { return roundLength - 1; } // will toggle a change in rest state
+                        if (rest && restLength != 0) { return restLength - 1; }
+                        else { return roundLength - 1; }
                     }
                 });
 
@@ -105,7 +101,7 @@ const FightClock = ({ intervals, restLength, roundLength }) => {
             </TouchableOpacity>
             <Modal
                 visible={modalVisible}
-                animationType="slide"
+                animationType="fade"
                 onRequestClose={() => {
                     setModalVisible(false);
                     clearInterval(training);

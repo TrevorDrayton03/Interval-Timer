@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Modal, Pressable } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Modal, Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncrementDecrementbutton from "./IncrementDecrementButton";
 import MinuteSecondPicker from "./MinuteSecondPicker";
-
-// TODO - limit the max value to 59 minues and 55 seconds 
-// Make a helper function file to turn seconds into minutes:seconds for display purposes
-// to separate the component from the logic ( there's quite a bit of duplicate logic throughout the files )
-// Debug option to show comments
-
-const { height, width } = Dimensions.get('window');
 
 const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, value, setValue }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -53,7 +46,7 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
                     <View style={styles.modalcontainer}>
                         <View style={styles.modal}>
                             <Text style={styles.text}>Set Time</Text>
-                            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                            <View style={{ flexDirection: "row", alignItems: "center", flex: .4 }}>
                                 <MinuteSecondPicker
                                     value={value}
                                     setValue={setValue}
@@ -62,14 +55,13 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
                             <Pressable
                                 onPress={() => setModalVisible(!modalVisible)}
                             >
-                                <Text style={styles.text}>OK</Text>
+                                <Text style={styles.okbutton}>OK</Text>
                             </Pressable>
                         </View>
                     </View>
                 </Modal>}
                 <TouchableOpacity
                     onPress={() => setModalVisible(!modalVisible)}
-                //activeOpacity={100}
                 >
                     <Text>
                         {isDuration == false ? value : displayTime}
@@ -94,8 +86,6 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //width: width,
-        //height: height / 7,
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
@@ -115,7 +105,6 @@ const styles = StyleSheet.create({
     },
     modal: {
         flex: 1,
-        //flexDirection: "row",
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
@@ -139,7 +128,14 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 30,
-    }
+    },
+    okbutton: {
+        borderWidth: 2,
+        borderColor: 'gray',
+        borderRadius: 15,
+        padding: 20,
+        fontSize: 30
+    },
 
 });
 

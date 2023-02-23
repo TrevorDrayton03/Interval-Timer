@@ -26,7 +26,11 @@ const MinuteSecondPicker = ({ value, setValue }) => {
                 >
                     {
                         [...MINUTES.keys()].map((val) => (
-                            <Picker.Item key={val} label={val.toString()} value={val} />
+                            <Picker.Item
+                                key={val}
+                                label={val.toString()}
+                                value={val}
+                            />
                         ))
                     }
                 </Picker>

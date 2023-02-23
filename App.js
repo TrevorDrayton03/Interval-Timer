@@ -3,9 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import Timer from "./src/components/Timer";
 import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
-import { Dimensions } from "react-native";
-
-const { height, width } = Dimensions.get('window');
 
 const App = () => {
   const [roundLength, setRoundLength] = useState(0);
@@ -40,12 +37,12 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.smallercontainer}>
+      <View style={styles.titlecontainer}>
         <Text style={{ fontSize: 20 }}>Total Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
       <View style={styles.smallercontainer}>
         <Timer
-          name="Round Length"
+          name="Round Time"
           icon="boxing-glove"
           incremental={5}
           value={roundLength}
@@ -67,7 +64,7 @@ const App = () => {
         >
         </Timer>
         <Timer
-          name="Rounds"
+          name="Intervals"
           icon="alarm-bell"
           incremental={1}
           value={intervals}
@@ -78,23 +75,27 @@ const App = () => {
         >
         </Timer>
       </View>
-      <View style={[styles.smallercontainer, { flexDirection: "row" }]}>
-        <View style={styles.buttoncontainer}>
-          {/* <StoreButton
-            intervals={intervals}
-            restLength={restLength}
-            roundLength={roundLength}
-            setIntervals={setIntervals}
-            setRestLength={setRestLength}
-            setRoundLength={setRoundLength}
-          >
-          </StoreButton> */}
-          <FightClock
-            intervals={intervals}
-            restLength={restLength}
-            roundLength={roundLength}
-          >
-          </FightClock>
+      <View style={styles.startbuttoncontainer}>
+        <FightClock
+          intervals={intervals}
+          restLength={restLength}
+          roundLength={roundLength}
+        >
+        </FightClock>
+      </View>
+      <View style={styles.column}>
+        <View style={styles.row}>
+          <View style={styles.storebuttoncontainer}>
+            <StoreButton
+              intervals={intervals}
+              restLength={restLength}
+              roundLength={roundLength}
+              setIntervals={setIntervals}
+              setRestLength={setRestLength}
+              setRoundLength={setRoundLength}
+            >
+            </StoreButton>
+          </View>
         </View>
       </View>
     </View>
@@ -103,24 +104,40 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0,
+    flex: 1,
     justifyContent: "center",
-    width: width,
-    height: height,
     alignItems: "center",
   },
   smallercontainer: {
+    flexDirection: "column",
+    flex: .9,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  titlecontainer: {
     flexDirection: "column",
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
   },
-  buttoncontainer: {
+  startbuttoncontainer: {
     flexDirection: "row",
-    flex: 1,
+    flex: .6,
     alignItems: "center",
     justifyContent: "space-evenly",
-  }
+  },
+  storebuttoncontainer: {
+    flexDirection: "row",
+    flex: .82,
+    justifyContent: "flex-start"
+  },
+  row: {
+    flexDirection: "row",
+  },
+  column: {
+    flex: .25,
+    alignItems: "flex-start"
+  },
 
 });
 export default App;
