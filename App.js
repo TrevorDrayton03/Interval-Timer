@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import Timer from "./src/components/Timer";
 import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
+import { styles } from "./src/styles/styles"
 
 const App = () => {
   const [roundLength, setRoundLength] = useState(5);
@@ -38,10 +39,10 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titlecontainer}>
-        <Text style={{ fontSize: 28 }}>Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.trainingTime}>Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
-      <View style={styles.smallercontainer}>
+      <View style={styles.smallerContainer}>
         <Timer
           name="Round Time"
           icon="boxing-glove"
@@ -87,7 +88,7 @@ const App = () => {
         >
         </Timer>
       </View>
-      <View style={styles.startbuttoncontainer}>
+      <View style={styles.startButtonContainer}>
         <FightClock
           intervals={intervals}
           restLength={restLength}
@@ -98,7 +99,7 @@ const App = () => {
       </View>
       <View style={styles.column}>
         <View style={styles.row}>
-          <View style={styles.storebuttoncontainer}>
+          <View style={styles.storeButtonContainer}>
             <StoreButton
               intervals={intervals}
               restLength={restLength}
@@ -117,42 +118,4 @@ const App = () => {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  smallercontainer: {
-    flexDirection: "column",
-    flex: 1.4,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  titlecontainer: {
-    flexDirection: "column",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  startbuttoncontainer: {
-    flexDirection: "row",
-    flex: .6,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  storebuttoncontainer: {
-    flexDirection: "row",
-    flex: .82,
-    justifyContent: "flex-start"
-  },
-  row: {
-    flexDirection: "row",
-  },
-  column: {
-    flex: .25,
-    alignItems: "flex-start"
-  },
-
-});
 export default App;

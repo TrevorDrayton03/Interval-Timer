@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Text, View, TouchableOpacity, Alert, StyleSheet, TextInput, ScrollView } from "react-native";
+import { Modal, Button, Text, View, TouchableOpacity, Alert, TextInput, ScrollView } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { styles } from "../styles/styles"
 
 const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRoundLength, setRestLength, setIntervals, setReadyLength }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -178,26 +179,26 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                 animationType="fade"
                 onRequestClose={() => setModalVisible(false)}
             >
-                <View style={{ flex: .95 }}>
+                <View style={styles.storeButtonModalView}>
                     {
                         <Modal
                             visible={inputModalVisible}
                             animationType="none"
                             onRequestClose={() => setInputModalVisible(false)}
                         >
-                            <View style={{ flex: 1, justifyContent: "center" }}>
-                                <Text style={{ textAlign: "center", padding: 10, fontSize: 24 }}>Store Current Settings</Text>
-                                <View style={styles.textinput}>
+                            <View style={styles.storeButtonInputModalContainer}>
+                                <Text style={styles.storeButtonInputModalTitle}>Store Current Settings</Text>
+                                <View style={styles.storeButtonTextInputContainer}>
                                     <TextInput
                                         onChangeText={setInputText}
                                         placeholder="Name"
                                         maxLength={40}
                                         numberOfLines={2}
-                                        style={{ fontSize: 24, width: "100%", textAlign: "center" }}
+                                        style={styles.storeButtonTextInput}
                                     >
                                     </TextInput>
                                 </View>
-                                <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+                                <View style={styles.storeButtonButtonInputContainer}>
                                     <Button
                                         onPress={() => {
                                             setItem(inputText)
@@ -213,21 +214,21 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                             </View>
                         </Modal>
                     }
-                    <View style={{ alignItems: "center", flex: 5 }}>
-                        <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Text style={{ flex: 1, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Name</Text>
-                            <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Round</Text>
-                            <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Rest</Text>
-                            <Text style={{ flex: .8, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold' }}>Ready</Text>
-                            <Text style={{ flex: 1, textAlign: "center", fontSize: 14, marginTop: 20, marginBottom: 20, fontWeight: 'bold', marginRight: 5 }}>Interval</Text>
+                    <View style={styles.storeButtonModalContainer}>
+                        <View style={styles.storeButtonRowContainer}>
+                            <Text style={styles.storeButtonRow1}>Name</Text>
+                            <Text style={styles.storeButtonRow2}>Round</Text>
+                            <Text style={styles.storeButtonRow2}>Rest</Text>
+                            <Text style={styles.storeButtonRow2}>Ready</Text>
+                            <Text style={styles.storeButtonRow3}>Interval</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <View style={{ flex: 1, height: 2, backgroundColor: 'black' }} />
+                        <View style={styles.storeButtonRowContainer}>
+                            <View style={styles.storeButtonBlackBar1} />
                         </View>
-                        <ScrollView style={{ width: "100%" }}>
+                        <ScrollView style={styles.storeButtonScrollView}>
                             {allItems && allItems.map((item, index) => {
                                 return (
-                                    <View key={index} style={{ flex: 1, flexDirection: "column", padding: 10 }}>
+                                    <View key={index} style={styles.storeButtonColumnContainer}>
                                         <TouchableOpacity
                                             onPress={() => {
                                                 setRoundLength(item.storeRoundLength)
@@ -240,15 +241,15 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                                                 handleDelete(item.title)
                                             }}
                                         >
-                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                <Text style={{ flex: 1, textAlign: "center", fontSize: 14 }}>{item.title}</Text>
-                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeRoundLength}</Text>
-                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeRestLength}</Text>
-                                                <Text style={{ flex: .8, textAlign: "center", fontSize: 14 }}>{item.storeReadyLength}</Text>
-                                                <Text style={{ flex: 1, textAlign: "center", fontSize: 14 }}>{item.storeIntervals}</Text>
+                                            <View style={styles.storeButtonRowContainer}>
+                                                <Text style={styles.storeButtonRow4}>{item.title}</Text>
+                                                <Text style={styles.storeButtonRow5}>{item.storeRoundLength}</Text>
+                                                <Text style={styles.storeButtonRow5}>{item.storeRestLength}</Text>
+                                                <Text style={styles.storeButtonRow5}>{item.storeReadyLength}</Text>
+                                                <Text style={styles.storeButtonRow4}>{item.storeIntervals}</Text>
                                             </View>
-                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ flex: 1, height: 1, backgroundColor: 'gray', marginTop: 20 }} />
+                                            <View style={styles.storeButtonRowContainer}>
+                                                <View style={styles.storeButtonBlackBar2} />
                                             </View>
                                         </TouchableOpacity>
                                     </View>
@@ -257,8 +258,8 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                         </ScrollView>
 
                     </View>
-                    <View style={{ flex: .5, justifyContent: "flex-end" }}>
-                        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+                    <View style={styles.storeButtonFooterContainer}>
+                        <View style={styles.storeButtonFooter}>
                             <Button
                                 onPress={() => setInputModalVisible(true)}
                                 title="    New     "
@@ -272,15 +273,3 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
 }
 
 export default StoreButton;
-
-const styles = StyleSheet.create({
-    textinput: {
-        borderWidth: 2,
-        borderColor: 'gray',
-        borderRadius: 15,
-        margin: 20,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 10
-    },
-})

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Modal, Pressable } from "react-native";
+import { Text, View, TouchableOpacity, Modal, Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncrementDecrementbutton from "./IncrementDecrementButton";
 import MinuteSecondPicker from "./MinuteSecondPicker";
+import { styles } from "../styles/styles"
 
 const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, value, setValue }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -33,9 +34,9 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.timerContainer}>
             <Icon name={icon} size={50} />
-            <View style={styles.column}>
+            <View style={styles.timerColumn}>
                 {isDuration && <Modal
                     transparent={true}
                     visible={modalVisible}
@@ -43,10 +44,10 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
                         setModalVisible(!modalVisible);
                     }}
                 >
-                    <View style={styles.modalcontainer}>
-                        <View style={styles.modal}>
-                            <Text style={styles.text}>Set {name}</Text>
-                            <View style={{ flexDirection: "row", alignItems: "center", flex: .4 }}>
+                    <View style={styles.timerModalContainer}>
+                        <View style={styles.timerModal}>
+                            <Text style={styles.timerText}>Set {name}</Text>
+                            <View style={styles.timerRow}>
                                 <MinuteSecondPicker
                                     value={value}
                                     setValue={setValue}
@@ -55,7 +56,7 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
                             <Pressable
                                 onPress={() => setModalVisible(!modalVisible)}
                             >
-                                <Text style={styles.okbutton}>OK</Text>
+                                <Text style={styles.timerOkButton}>OK</Text>
                             </Pressable>
                         </View>
                     </View>
@@ -83,60 +84,5 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
     )
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingHorizontal: 20,
-
-    },
-    column: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "flex-start",
-        paddingHorizontal: 10,
-    },
-    row: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    modal: {
-        flex: 1,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        justifyContent: "center",
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-    },
-    modalcontainer: {
-        flex: 1,
-    },
-    text: {
-        fontSize: 30,
-    },
-    okbutton: {
-        borderWidth: 2,
-        borderColor: 'gray',
-        borderRadius: 15,
-        padding: 20,
-        fontSize: 30
-    },
-
-});
 
 export default Timer;

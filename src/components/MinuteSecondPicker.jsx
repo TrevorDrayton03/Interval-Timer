@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
+import { styles } from "../styles/styles"
 
 const MinuteSecondPicker = ({ value, setValue }) => {
     const SECONDS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
@@ -16,12 +16,12 @@ const MinuteSecondPicker = ({ value, setValue }) => {
     }, [second, minute])
 
     return (
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 24 }}>Minutes:</Text>
+        <View style={styles.row}>
+            <View style={styles.container}>
+                <Text style={styles.text}>Minutes:</Text>
                 <Picker
                     selectedValue={MINUTES.indexOf((Math.floor(value / 60) % 60))}
-                    style={{ height: 50, width: 100 }}
+                    style={styles.picker}
                     onValueChange={(itemValue) => setMinute(itemValue)}
                 >
                     {
@@ -30,17 +30,17 @@ const MinuteSecondPicker = ({ value, setValue }) => {
                                 key={val}
                                 label={val.toString()}
                                 value={val}
-                                style={{ fontSize: 24 }}
+                                style={styles.text}
                             />
                         ))
                     }
                 </Picker>
             </View>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 24 }}>Seconds:</Text>
+            <View style={styles.container}>
+                <Text style={styles.text}>Seconds:</Text>
                 <Picker
                     selectedValue={(SECONDS.indexOf((value % 60))) * 5}
-                    style={{ height: 50, width: 100 }}
+                    style={styles.picker}
                     onValueChange={(itemValue) => setSecond(itemValue)}
                 >
                     {[...SECONDS.keys()].map((val) => (
@@ -48,7 +48,7 @@ const MinuteSecondPicker = ({ value, setValue }) => {
                             key={val}
                             label={(val * 5).toString()}
                             value={val * 5}
-                            style={{ fontSize: 24 }}
+                            style={styles.text}
                         />
                     ))}
                 </Picker>

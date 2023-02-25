@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Modal, View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { Modal, View, Text, TouchableOpacity, Alert } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { styles } from "../styles/styles"
 
 // this file sets on interval for duration when this component's button is pressed and uses useEffects on the duration to manage the states
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
@@ -120,7 +121,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         <View>
             <TouchableOpacity
                 onPress={onPressHandle}
-                style={{ marginTop: 0, marginBottom: 0 }}
             >
                 <Icon
                     name="send"
@@ -137,27 +137,27 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                     setTraining(null);
                 }}
             >
-                <View style={styles.modalContainer}>
+                <View style={styles.fightClockModalContainer}>
                     {!complete && ready &&
                         <View>
-                            <Text style={{ fontSize: 24 }}>Ready Time Left: {formatDuration(duration)}</Text>
+                            <Text style={styles.text}>Ready Time Left: {formatDuration(duration)}</Text>
                         </View>
                     }
                     {!complete && !rest && !ready &&
                         <View>
-                            <Text style={{ fontSize: 24 }}>Round Time Left: {formatDuration(duration)}</Text>
-                            <Text style={{ fontSize: 24 }}>Round: {rounds}</Text>
+                            <Text style={styles.text}>Round Time Left: {formatDuration(duration)}</Text>
+                            <Text style={styles.text}>Round: {rounds}</Text>
                         </View>
                     }
                     {!complete && rest && !ready &&
                         <View>
-                            <Text style={{ fontSize: 24 }}>Rest Time Left: {formatDuration(duration)}</Text>
-                            <Text style={{ fontSize: 24 }}>Round: {rounds}</Text>
+                            <Text style={styles.text}>Rest Time Left: {formatDuration(duration)}</Text>
+                            <Text style={styles.text}>Round: {rounds}</Text>
                         </View>
                     }
                     {complete &&
                         <View>
-                            <Text style={{ fontWeight: 'bold', fontSize: 40 }}>DONE!</Text>
+                            <Text style={styles.fightClockComplete}>DONE!</Text>
                         </View>
                     }
                 </View>
@@ -165,13 +165,5 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         </View>
     )
 };
-
-const styles = StyleSheet.create({
-    modalContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 export default FightClock;
