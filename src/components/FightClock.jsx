@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Modal, View, Text, TouchableOpacity, Alert } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { styles } from "../styles/styles"
+import styles from "../styles/styles"
+import helpers from "../helpers/helpers"
 
 // this file sets on interval for duration when this component's button is pressed and uses useEffects on the duration to manage the states
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
@@ -14,33 +15,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [complete, setComplete] = useState(false);
     const [count, setCount] = useState(0);
 
-    const zeroPad = (num) => {
-        if (typeof (num) != typeof (String)) {
-            let numString = num.toString().padStart(2, "0");
-            return numString;
-        }
-        else {
-            let numString = num.padStart(2, "0");
-            return numString;
-        }
-    }
-
-    const formatDuration = (duration) => {
-        let seconds = duration % 60;
-        let minutes = Math.floor(duration / 60) % 60;
-        let hours = Math.floor(minutes / 60) % 24;
-        seconds = zeroPad(seconds);
-        if (hours == 0) {
-            var displayTime = minutes + ":" + seconds;
-        }
-        else if (roundLength == 0) {
-            var displayTime = hours + "0:0" + minutes + ":" + seconds;
-        }
-        else {
-            var displayTime = hours + ":" + minutes + ":" + seconds;
-        }
-        return displayTime
-    }
+    let displayTime = helpers.displayTime(duration)
 
     useEffect(() => {
         if (readyLength > 0) {
@@ -140,18 +115,18 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 <View style={styles.fightClockModalContainer}>
                     {!complete && ready &&
                         <View>
-                            <Text style={styles.text}>Ready Time Left: {formatDuration(duration)}</Text>
+                            <Text style={styles.text}>Ready Time Left: {displayTime}</Text>
                         </View>
                     }
                     {!complete && !rest && !ready &&
                         <View>
-                            <Text style={styles.text}>Round Time Left: {formatDuration(duration)}</Text>
+                            <Text style={styles.text}>Round Time Left: {displayTime}</Text>
                             <Text style={styles.text}>Round: {rounds}</Text>
                         </View>
                     }
                     {!complete && rest && !ready &&
                         <View>
-                            <Text style={styles.text}>Rest Time Left: {formatDuration(duration)}</Text>
+                            <Text style={styles.text}>Rest Time Left: {displayTime}</Text>
                             <Text style={styles.text}>Round: {rounds}</Text>
                         </View>
                     }

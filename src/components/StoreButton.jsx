@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Text, View, TouchableOpacity, Alert, TextInput, ScrollView } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { styles } from "../styles/styles"
+import styles from "../styles/styles"
+import helpers from "../helpers/helpers"
 
 const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRoundLength, setRestLength, setIntervals, setReadyLength }) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -11,11 +11,11 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
     const [inputText, setInputText] = useState(null);
 
     useEffect(() => {
-        getAllItemsHandle()
+        setAllItemsHandle()
         setInputText(null)
     }, [inputModalVisible])
 
-    const setItem = async (title) => {
+    const setItemHandle = async (title) => {
         let training = {
             "title": title,
             "storeRoundLength": roundLength,
@@ -23,129 +23,17 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
             "storeReadyLength": readyLength,
             "storeIntervals": intervals,
         }
-        try {
-            training = JSON.stringify(training);
-            await AsyncStorage.setItem(title, training);
-            await getAllItemsHandle()
-        }
-        catch (e) {
-            console.log(e, " @set");
-            Alert.alert(
-                'setItem',
-                JSON.stringify(e)
-            )
-        }
+        training = JSON.stringify(training);
+        await helpers.setItem(title, training);
+        await setAllItemsHandle()
     }
 
-    const getItem = async (key) => {
-        try {
-            const getItem = await AsyncStorage.getItem(key);
-            return getItem != null ? JSON.parse(getItem) : null;
-        }
-        catch (e) {
-            console.log(e, " @get");
-            Alert.alert(
-                'getItem',
-                JSON.stringify(e)
-            )
-        }
+    const setAllItemsHandle = async () => {
+        const keys = await helpers.getAllKeys()
+        setAllItems(await helpers.getMultipleItems(keys));
     }
 
-    const getMultipleItems = async (keys) => {
-        let training
-        try {
-            training = await AsyncStorage.multiGet(keys)
-            return training != null ? training.map(item => JSON.parse(item[1])) : null;
-        } catch (e) {
-            console.log(e, " @getMultiple");
-            Alert.alert(
-                'getMultipleItems',
-                JSON.stringify(e)
-            )
-        }
-    }
-
-    const deleteItem = async (key) => {
-        try {
-            await AsyncStorage.removeItem(key);
-            await getAllItemsHandle()
-        }
-        catch (e) {
-            console.log(e, '@deleteItem');
-            Alert.alert(
-                'deleteItem',
-                JSON.stringify(e)
-            )
-        }
-    }
-
-    const deleteMultipleItems = async (keys) => {
-        try {
-            await AsyncStorage.multiRemove(keys);
-        }
-        catch (e) {
-            console.log(e, '@deleteMultipleItems');
-            Alert.alert(
-                'deleteMultipleItems',
-                JSON.stringify(e)
-            )
-        }
-    }
-
-    const updateItem = async (key) => {
-        try {
-            await AsyncStorage.mergeItem(key);
-        }
-        catch (e) {
-            console.log(e, " @upd");
-            Alert.alert(
-                'updateItem',
-                JSON.stringify(e)
-            )
-        }
-    }
-    const getAllKeys = async () => {
-        let keys = []
-        try {
-            keys = await AsyncStorage.getAllKeys();
-            return keys;
-        }
-        catch (e) {
-            console.log(e, ' @getall');
-            Alert.alert(
-                'getAllKeys',
-                JSON.stringify(e)
-            )
-        }
-    }
-
-    const getAllItemsHandle = async () => {
-        try {
-            const keys = await getAllKeys()
-            setAllItems(await getMultipleItems(keys));
-        } catch (e) {
-            console.log(e, " @getAllItemsHandle")
-            Alert.alert(
-                'getAllItemsHandle',
-                JSON.stringify(e)
-            )
-        }
-    }
-
-    const deleteAllItemsHandle = async () => {
-        try {
-            const keys = await getAllKeys()
-            setAllItems(await deleteMultipleItems(keys));
-        } catch (e) {
-            console.log(e, " @getAllItemsHandle")
-            Alert.alert(
-                'deleteAllItemsHandle',
-                JSON.stringify(e)
-            )
-        }
-    }
-
-    const handleDelete = (key) => {
+    const deleteItemHandle = async (key) => {
         Alert.alert(
             'Delete',
             'Are you sure you want to delete ' + key + '?',
@@ -156,13 +44,19 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                 },
                 {
                     text: 'Delete',
-                    onPress: () => {
-                        deleteItem(key)
+                    onPress: async () => {
+                        helpers.deleteItem(key)
+                        await setAllItemsHandle(setAllItems)
                     },
                 },
             ],
             { cancelable: false },
         );
+    };
+
+    const deleteAllItemsHandle = async () => {
+        const keys = await helpers.getAllKeys()
+        setAllItems(await helpers.deleteMultipleItems(keys));
     };
 
     return (
@@ -201,7 +95,7 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                                 <View style={styles.storeButtonButtonInputContainer}>
                                     <Button
                                         onPress={() => {
-                                            setItem(inputText)
+                                            setItemHandle(inputText)
                                             setInputModalVisible(false)
                                         }}
                                         title="     OK     "
@@ -238,7 +132,7 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                                                 setModalVisible(false)
                                             }}
                                             onLongPress={() => {
-                                                handleDelete(item.title)
+                                                deleteItemHandle(item.title)
                                             }}
                                         >
                                             <View style={styles.storeButtonRowContainer}>

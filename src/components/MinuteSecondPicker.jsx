@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { styles } from "../styles/styles"
+import styles from "../styles/styles"
 
 const MinuteSecondPicker = ({ value, setValue }) => {
     const SECONDS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
@@ -17,12 +17,13 @@ const MinuteSecondPicker = ({ value, setValue }) => {
 
     return (
         <View style={styles.row}>
-            <View style={styles.container}>
+            <View style={styles.pickerContainer}>
                 <Text style={styles.text}>Minutes:</Text>
                 <Picker
                     selectedValue={MINUTES.indexOf((Math.floor(value / 60) % 60))}
                     style={styles.picker}
                     onValueChange={(itemValue) => setMinute(itemValue)}
+                    pickerStyleType={1}
                 >
                     {
                         [...MINUTES.keys()].map((val) => (

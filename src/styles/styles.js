@@ -18,7 +18,12 @@ export const styles = StyleSheet.create({
     // MinuteSecondPicker
     picker: {
         height: 50,
-        width: 100
+        width: 110,
+    },
+    pickerContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
     // Timer
     timerContainer: {

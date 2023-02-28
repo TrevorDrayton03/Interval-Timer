@@ -3,35 +3,14 @@ import { Text, View, TouchableOpacity, Modal, Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncrementDecrementbutton from "./IncrementDecrementButton";
 import MinuteSecondPicker from "./MinuteSecondPicker";
-import { styles } from "../styles/styles"
+import styles from "../styles/styles"
+import helpers from "../helpers/helpers"
+
 
 const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, value, setValue }) => {
     const [modalVisible, setModalVisible] = useState(false);
 
-    const zeroPad = (num) => {
-        if (typeof (num) != typeof (String)) {
-            let numString = num.toString().padStart(2, "0");
-            return numString;
-        }
-        else {
-            let numString = num.padStart(2, "0");
-            return numString;
-        }
-    }
-
-    if (isDuration) {
-        let seconds = value % 60;
-        let minutes = Math.floor(value / 60) % 60;
-        let hours = Math.floor(minutes / 60) % 24;
-        minutes = zeroPad(minutes);
-        seconds = zeroPad(seconds);
-        if (hours == 0) {
-            var displayTime = minutes + ":" + seconds;
-        }
-        else {
-            var displayTime = hours + ":" + minutes + ":" + seconds;
-        }
-    }
+    let displayTime = helpers.displayTime(value)
 
     return (
         <View style={styles.timerContainer}>

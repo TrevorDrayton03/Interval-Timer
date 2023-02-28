@@ -3,7 +3,8 @@ import { Text, View } from "react-native";
 import Timer from "./src/components/Timer";
 import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
-import { styles } from "./src/styles/styles"
+import styles from "./src/styles/styles"
+import helpers from "./src/helpers/helpers"
 
 const App = () => {
   const [roundLength, setRoundLength] = useState(5);
@@ -11,22 +12,11 @@ const App = () => {
   const [readyLength, setReadyLength] = useState(0);
   const [intervals, setIntervals] = useState(1);
 
-  const zeroPad = (num) => {
-    if (typeof (num) != typeof (String)) {
-      let numString = num.toString().padStart(2, "0");
-      return numString;
-    }
-    else {
-      let numString = num.padStart(2, "0");
-      return numString;
-    }
-  }
-
   let timeVal = roundLength * intervals + restLength * (intervals - 1);
   let seconds = timeVal % 60;
   let minutes = Math.floor(timeVal / 60) % 60;
   let hours = Math.floor(minutes / 60) % 24;
-  seconds = zeroPad(seconds);
+  seconds = helpers.zeroPad(seconds);
   if (hours == 0) {
     var displayTime = minutes + ":" + seconds;
   }
