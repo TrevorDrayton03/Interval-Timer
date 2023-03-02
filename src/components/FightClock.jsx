@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
 import helpers from "../helpers/helpers"
 
-// this file sets on interval for duration when this component's button is pressed and uses useEffects on the duration to manage the states
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [duration, setDuration] = useState((readyLength > 0 ? readyLength - 1 : roundLength - 1));
     const [rounds, setRounds] = useState(1);
@@ -13,7 +12,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [rest, setRest] = useState(false);
     const [ready, setReady] = useState(false);
     const [complete, setComplete] = useState(false);
-    const [count, setCount] = useState(0);
 
     let displayTime = helpers.displayTime(duration)
 
@@ -24,13 +22,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         else {
             setReady(false)
         }
-        setCount(0)
-    }, [modalVisible, readyLength])
-
-    // make rest / setRest controlled via useEffect like readyLength (above) and remove restLength checks in code
-    // make use effects more cohesive as well
-
-    useEffect(() => {
         setDuration(readyLength > 0 ? readyLength - 1 : roundLength - 1);
         setRounds(1);
         setRest(false);
@@ -38,11 +29,36 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     }, [modalVisible, roundLength])
 
     useEffect(() => {
-        if (ready && duration == roundLength - 1 && count == 1) {
+        if (rest) {
+            setDuration(restLength > 0 ? restLength - 1 : roundLength - 1);
+        } else {
+            setDuration(roundLength - 1);
+        }
+    }, [rest]);
+
+    useEffect(() => {
+        if (!ready) {
+            setDuration(roundLength - 1);
+        } else {
+            setDuration(readyLength - 1)
+        }
+    }, [ready]);
+
+    // manages if there is multiple rounds with no rest
+    useEffect(() => {
+        if (!rest && !ready) {
+            setDuration(roundLength - 1);
+        }
+    }, [rounds]);
+
+    // the key to getting the FightClock to work as intended is having this use effect trigger the above use effects [rest, ready, rounds]
+    // otherwise, there is one too many steps in the interval that could not be avoided
+    useEffect(() => {
+        if (ready && duration == -1 && rounds == 1) {
             setReady(false)
         }
-        if ((duration == restLength - 1 || duration == roundLength - 1) && rounds != intervals) {
-            if (restLength > 0 && ready == false && duration != 0) {
+        if (duration == -1 && rounds != intervals) {
+            if (restLength > 0 && ready == false) {
                 setRest(!rest);
             }
             setRounds(prevCount => {
@@ -52,12 +68,10 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 else { return prevCount; }
             });
         }
-
-        if (duration === 0 && rounds === intervals && !ready) {
+        if (duration === -1 && rounds === intervals && !ready) {
             clearInterval(training);
             setTraining(null);
             setComplete(true);
-            // complete! Completed the training!
         }
     }, [duration]);
 
@@ -71,23 +85,8 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             setModalVisible(true);
             setTraining(setInterval(() => {
                 setDuration(prevCount => {
-                    if (prevCount > 0) {
-                        return prevCount - 1;
-                    }
-                    else {
-                        if (ready) {
-                            setCount(1)
-                            return roundLength - 1;
-                        }
-                        else if (rest && restLength != 0) {
-                            return restLength - 1;
-                        }
-                        else {
-                            return roundLength - 1;
-                        }
-                    }
+                    return prevCount - 1;
                 });
-
             }, 1000));
         }
     };
