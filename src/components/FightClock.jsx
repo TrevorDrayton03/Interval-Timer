@@ -24,37 +24,43 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         else {
             setReady(false)
         }
+        // count is to check that we only run the ready state once. if count > 0 then ready has been completed
         setCount(0)
     }, [modalVisible, readyLength])
 
-    // make rest / setRest controlled via useEffect like readyLength (above) and remove restLength checks in code
-    // make use effects more cohesive as well
+    useEffect(() => {
+        setRest(false);
+    }, [modalVisible, restLength])
 
     useEffect(() => {
-        setDuration(readyLength > 0 ? readyLength - 1 : roundLength - 1);
+        setDuration(ready ? readyLength - 1 : roundLength - 1);
         setRounds(1);
-        setRest(false);
         setComplete(false);
     }, [modalVisible, roundLength])
 
+    // manages the ready state, rest state, and the intervals
     useEffect(() => {
-        // handle the ready state
         if (ready && duration == roundLength - 1 && count == 1) {
             setReady(false)
         }
-        // handle the start of a new round
-        if (((duration == restLength - 1 && rest == true) || (duration == roundLength - 1) && rest == false) && rounds != intervals) {
+        // if it's the top of a new round and it's not the last round then set the rounds
+        if ((duration == restLength - 1 || duration == roundLength - 1) && rounds != intervals) {
+            // if there is a rest stage and if the ready stage is done and if there duration is not 0
             if (restLength > 0 && ready == false && duration != 0) {
                 setRest(!rest);
             }
             setRounds(prevCount => {
+                // if it's the ready stage
                 if (ready) { return prevCount }
+                // if it's a rest stage
                 if (rest && restLength != 0) { return prevCount + 1; }
+                // if there are no rest stages
                 if (restLength === 0) { return prevCount + 1; }
+                // otherwise it's the fight stage
                 else { return prevCount; }
             });
         }
-        // handle the final round/end
+
         if (duration === 0 && rounds === intervals && !ready) {
             clearInterval(training);
             setTraining(null);
@@ -78,10 +84,10 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                     }
                     else {
                         if (ready) {
-                            setCount(1)
+                            //setCount(1)
                             return roundLength - 1;
                         }
-                        else if (!rest && restLength != 0) {
+                        else if (!rest && restLength > 0) {
                             return restLength - 1;
                         }
                         else {
