@@ -38,10 +38,12 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     }, [modalVisible, roundLength])
 
     useEffect(() => {
+        // handle the ready state
         if (ready && duration == roundLength - 1 && count == 1) {
             setReady(false)
         }
-        if ((duration == restLength - 1 || duration == roundLength - 1) && rounds != intervals) {
+        // handle the start of a new round
+        if (((duration == restLength - 1 && rest == true) || (duration == roundLength - 1) && rest == false) && rounds != intervals) {
             if (restLength > 0 && ready == false && duration != 0) {
                 setRest(!rest);
             }
@@ -52,7 +54,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 else { return prevCount; }
             });
         }
-
+        // handle the final round/end
         if (duration === 0 && rounds === intervals && !ready) {
             clearInterval(training);
             setTraining(null);
@@ -79,7 +81,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                             setCount(1)
                             return roundLength - 1;
                         }
-                        else if (rest && restLength != 0) {
+                        else if (!rest && restLength != 0) {
                             return restLength - 1;
                         }
                         else {

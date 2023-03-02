@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, StatusBar } from "react-native";
 import Timer from "./src/components/Timer";
 import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
@@ -29,6 +29,14 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        // animated={true}
+        backgroundColor="white"
+        barStyle={'dark-content'}
+      // showHideTransition={'fade'}
+      // hidden={false}
+      >
+      </StatusBar>
       <View style={styles.titleContainer}>
         <Text style={styles.trainingTime}>Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>

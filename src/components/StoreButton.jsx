@@ -10,6 +10,8 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
     const [inputModalVisible, setInputModalVisible] = useState(false);
     const [inputText, setInputText] = useState(null);
 
+    // change key to uuivd from title
+
     useEffect(() => {
         setAllItemsHandle()
         setInputText(null)
