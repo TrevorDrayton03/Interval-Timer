@@ -12,20 +12,8 @@ const App = () => {
   const [readyLength, setReadyLength] = useState(0);
   const [intervals, setIntervals] = useState(1);
 
-  let timeVal = roundLength * intervals + restLength * (intervals - 1);
-  let seconds = timeVal % 60;
-  let minutes = Math.floor(timeVal / 60) % 60;
-  let hours = Math.floor(minutes / 60) % 24;
-  seconds = helpers.zeroPad(seconds);
-  if (hours == 0) {
-    var displayTime = minutes + ":" + seconds;
-  }
-  else if (roundLength == 0) {
-    var displayTime = hours + "0:0" + minutes + ":" + seconds;
-  }
-  else {
-    var displayTime = hours + ":" + minutes + ":" + seconds;
-  }
+  let trainingTime = roundLength * intervals + restLength * (intervals - 1);
+  let displayTime = helpers.displayTime(trainingTime)
 
   return (
     <View style={styles.container}>
