@@ -14,7 +14,7 @@ const helpers = {
     displayTime: function (value) {
         let seconds = value % 60;
         let minutes = Math.floor(value / 60) % 60;
-        let hours = Math.floor(minutes / 60) % 24;
+        let hours = Math.floor(value / 3600);
         //minutes = helpers.zeroPad(minutes);
         seconds = helpers.zeroPad(seconds);
         if (hours == 0) {

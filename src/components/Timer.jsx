@@ -43,11 +43,11 @@ const Timer = ({ name, icon, incremental, startValue, minValue, isDuration, valu
                 <TouchableOpacity
                     onPress={() => setModalVisible(!modalVisible)}
                 >
-                    <Text style={{ fontSize: 20 }}>
+                    <Text style={styles.text}>
                         {isDuration == false ? value : displayTime}
                     </Text>
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20 }}>
+                <Text style={styles.text}>
                     {name}
                 </Text>
             </View>
