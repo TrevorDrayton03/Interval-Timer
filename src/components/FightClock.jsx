@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Modal, View, Text, TouchableOpacity, Alert, AppState } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
@@ -15,31 +15,37 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [rest, setRest] = useState(false);
     const [ready, setReady] = useState(false);
     const [complete, setComplete] = useState(false);
-    const [appState, setAppState] = useState(AppState.currentState);
     const [stopTime, setStopTime] = useState(null);
     const [startTime, setStartTime] = useState(null);
     const [alteringState, setAlteringState] = useState(false);
+    const appState = useRef(AppState.currentState);
+    const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
     let totalDuration = roundLength * intervals + restLength * (intervals - 1) + readyLength;
     let displayTime = helpers.displayTime(duration)
 
-    const handleAppStateChange = (nextAppState) => {
-        if (appState === 'active' && nextAppState.match(/inactive|background/) && modalVisible) {
-            setStopTime(Date.now())
-        }
-        setAppState(nextAppState);
-    };
-
     useEffect(() => {
-        subscription = AppState.addEventListener('change', handleAppStateChange);
+        const subscription = AppState.addEventListener('change', nextAppState => {
+            if (
+                appState.current.match(/active/) &&
+                nextAppState === 'background'
+            ) {
+                setStopTime(Date.now())
+            }
+
+            appState.current = nextAppState;
+            setAppStateVisible(appState.current);
+            //console.log('AppState', appState.current);
+        });
+
         return () => {
-            subscription.remove()
+            subscription.remove();
         };
     }, []);
 
     useEffect(() => {
         if (!alteringState) {
-            console.log("rest useEffect")
+            //console.log("rest useEffect")
             if (rest) {
                 setDuration(restLength > 0 ? restLength - 1 : roundLength - 1);
             } else {
@@ -51,7 +57,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
 
     useEffect(() => {
         if (!alteringState) {
-            console.log("ready useEffect")
+            //console.log("ready useEffect")
             if (!ready) {
                 setDuration(roundLength - 1);
             } else {
@@ -63,7 +69,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
 
     useEffect(() => {
         if (!alteringState) {
-            console.log("rounds useEffect")
+            //console.log("rounds useEffect")
             if (!rest && !ready) {
                 setDuration(roundLength - 1);
             }
@@ -76,7 +82,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     useEffect(() => {
         if (stopTime !== null) {
             setAlteringState(true)
-            console.log("stoptime not null")
+            //console.log("stoptime not null")
             const currentTime = Math.floor((Date.now() - startTime) / 1000);
             const remainingTime = totalDuration - currentTime;
             // if the timer is not done
@@ -107,7 +113,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                             timeline.push(roundLength * i + readyLength)
                         }
                     }
-                    console.log("timeline: ", timeline)
+                    //console.log("timeline: ", timeline)
                     // loop through timeline to determine where current time stands
                     for (let i = 0; i < timeline.length; i++) {
                         // if there is rest time
@@ -117,14 +123,14 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds((Math.floor(i / 2)) + 1);
                                 setRest(false);
                                 setDuration(timeline[i + 1] - currentTime);
-                                console.log(i, ": round, ", duration, ": duration for round in condition 1")
+                                //console.log(i, ": round, ", duration, ": duration for round in condition 1")
                             }
                             // rest
                             else if (i % 2 == 1 && (timeline[i] <= currentTime && currentTime < timeline[i + 1])) {
                                 setRounds(Math.floor(i / 2) + 1);
                                 setRest(true);
                                 setDuration(timeline[i + 1] - currentTime);
-                                console.log(i, ": round, ", duration, ": duration for rest in condition 2")
+                                //console.log(i, ": round, ", duration, ": duration for rest in condition 2")
                             }
                         }
                         // if there isn't rest time
@@ -132,7 +138,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                             if (timeline[i] <= currentTime && currentTime < timeline[i + 1]) {
                                 setRounds(i + 1);
                                 setDuration(timeline[i + 1] - currentTime);
-                                console.log(i, ": round, ", duration, ": duration for round in condition 3")
+                                //console.log(i, ": round, ", duration, ": duration for round in condition 3")
 
                             }
                         }
@@ -154,7 +160,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 if (restLength > 0 && ready == false) {
                     setRest(!rest);
                 }
-                console.log("setRounds trigger in 2nd part of duration useEffect")
+                //console.log("setRounds trigger in 2nd part of duration useEffect")
                 setRounds(prevCount => {
                     if (ready) { return prevCount }
                     if (rest && restLength != 0) { return prevCount + 1; }
