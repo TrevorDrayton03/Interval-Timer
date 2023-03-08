@@ -14,12 +14,14 @@
     "expo": "~46.0.13",
     "expo-background-fetch": "~10.3.0",
     "expo-status-bar": "~1.4.0",
+    "expo-task-manager": "~10.3.0",
+    "jest": "^26.6.3",
+    "jest-expo": "^48.0.1",
     "react": "18.0.0",
     "react-icons": "^4.4.0",
     "react-native": "0.69.6",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-webview": "11.23.0",
-    "expo-task-manager": "~10.3.0"
+    "react-native-webview": "11.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
