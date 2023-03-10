@@ -151,6 +151,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 setTraining(null);
                 setComplete(true)
             }
+            setAlteringState(false)
         }
         else {
             if (ready && duration == -1 && rounds == 1) {
