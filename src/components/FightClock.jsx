@@ -4,9 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
 import helpers from "../helpers/helpers"
 
-// AppState example:
-// https://snack.expo.dev/@aboutreact/appstate-example?session_id=snack-session-y4eB29bZK
-
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [duration, setDuration] = useState((readyLength > 0 ? readyLength - 1 : roundLength - 1));
     const [rounds, setRounds] = useState(1);
@@ -210,6 +207,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         <View>
             <TouchableOpacity
                 onPress={onPressHandle}
+                testID="start-button"
             >
                 <Icon
                     name="send"
