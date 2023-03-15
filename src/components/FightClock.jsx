@@ -12,9 +12,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [rounds, setRounds] = useState(1);
     const [training, setTraining] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
-    // const [rest, setRest] = useState(false);
-    // const [ready, setReady] = useState(false);
-    // const [complete, setComplete] = useState(false);
     const [stopTime, setStopTime] = useState(null);
     const [startTime, setStartTime] = useState(null);
     const [alteringState, setAlteringState] = useState(false);
@@ -44,6 +41,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         };
     }, []);
 
+    // sets duration when app is in appState is active
     useEffect(() => {
         if (!alteringState) {
             //console.log("timerState useEffect")
@@ -60,8 +58,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         setAlteringState(false)
     }, [timerState, rounds]);
 
-    // the key to getting the FightClock to work as intended is having this use effect trigger the above use effects [rest, ready, rounds]
-    // otherwise, there is one too many steps in the interval that could not be avoided
     useEffect(() => {
         if (stopTime !== null) {
             setAlteringState(true)
@@ -74,10 +70,10 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 if (currentTime < readyLength) {
                     setTimerState('ready')
                     setDuration(readyLength - currentTime);
+                    setAlteringState(false)
                 }
                 // if should be in round or rest state
                 else {
-                    //setReady(false);
                     // do logic with remaining duration to determine which state the app needs to be in 
                     const timeline = [readyLength];
                     if (restLength > 0) {
@@ -104,13 +100,20 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                         if (restLength > 0) {
                             // round
                             if (i % 2 == 0 && (timeline[i] <= currentTime && currentTime < timeline[i + 1])) {
+                                if ((Math.floor(i / 2)) + 1 === rounds) {
+                                    setAlteringState(false)
+                                }
                                 setRounds((Math.floor(i / 2)) + 1);
                                 setTimerState('round');
                                 setDuration(timeline[i + 1] - currentTime);
                                 //console.log(i, ": round, ", duration, ": duration for round in condition 1")
+                                // if this is the same round as before then setAlteringState(true)
                             }
                             // rest
                             else if (i % 2 == 1 && (timeline[i] <= currentTime && currentTime < timeline[i + 1])) {
+                                if ((Math.floor(i / 2)) + 1 === rounds) {
+                                    setAlteringState(false)
+                                }
                                 setRounds(Math.floor(i / 2) + 1);
                                 setTimerState('rest');
                                 setDuration(timeline[i + 1] - currentTime);
@@ -124,7 +127,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setDuration(timeline[i + 1] - currentTime);
                                 setTimerState('round');
                                 //console.log(i, ": round, ", duration, ": duration for round in condition 3")
-
                             }
                         }
                     }
@@ -134,14 +136,12 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             else {
                 clearInterval(training);
                 setTraining(null);
-                //setComplete(true)
                 setTimerState('complete');
             }
         }
         else {
             // go from ready to round
             if (timerState == 'ready' && duration == -1 && rounds == 1) {
-                //setReady(false)
                 setTimerState('round')
             }
             // toggle rest if not ready and if there is a restlength
@@ -166,7 +166,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             if (duration === -1 && rounds === intervals && timerState != 'ready') {
                 clearInterval(training);
                 setTraining(null);
-                //setComplete(true);
                 setTimerState('complete');
                 setStartTime(null);
             }
@@ -189,17 +188,13 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 });
             }, 1000));
             if (readyLength > 0) {
-                //setReady(true)
                 setTimerState('ready')
             }
             else {
                 setTimerState('round')
-                //setReady(false)
             }
             setDuration(readyLength > 0 ? readyLength - 1 : roundLength - 1);
             setRounds(1);
-            //setRest(false);
-            //setComplete(false);
         }
     };
 
