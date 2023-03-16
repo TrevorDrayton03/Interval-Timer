@@ -10,7 +10,13 @@
 
 Interval Timer was inspired when I was using a popular interval timer when exercising in the gym. There was some features that I wish it had. Now, I am developing one for myself that will implement the features I want from an interval timer. Then, I will share it with others for free on the app store.
 
-In order to create a high quality mobile application, I will need to develop a robust, well-documented piece of software that includes test suites and works on various devices.
+In order to create a high quality mobile application, the application: 
+- must be robust
+- must be well-documented
+- must include a test suite
+- must work on various devices
+- must be user friendly, intuitive, and attractive
+- must be maintained
 
 ## Features
 - Store user-created timers to easily use for later
