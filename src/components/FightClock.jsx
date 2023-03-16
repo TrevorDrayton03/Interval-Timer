@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Modal, View, Text, TouchableOpacity, Alert, AppState } from "react-native";
+import { Modal, View, Text, TouchableOpacity, Alert, AppState, Vibration } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
 import helpers from "../helpers/helpers"
-
-// AppState example:
-// https://snack.expo.dev/@aboutreact/appstate-example?session_id=snack-session-y4eB29bZK
 
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [duration, setDuration] = useState((readyLength > 0 ? readyLength - 1 : roundLength - 1));
@@ -137,6 +134,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 clearInterval(training);
                 setTraining(null);
                 setTimerState('complete');
+                Vibration.vibrate(2000);
             }
         }
         else {
@@ -157,6 +155,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 }
                 //console.log("setRounds trigger in 2nd part of duration useEffect")
                 setRounds(prevCount => {
+                    Vibration.vibrate();
                     if (timerState == 'ready') { return prevCount }
                     if (timerState == 'rest' && restLength != 0) { return prevCount + 1; }
                     if (restLength === 0) { return prevCount + 1; }
@@ -167,6 +166,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 clearInterval(training);
                 setTraining(null);
                 setTimerState('complete');
+                Vibration.vibrate(2000);
                 setStartTime(null);
             }
         }
