@@ -127,6 +127,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                         // if there isn't rest time
                         else {
                             if (timeline[i] <= currentTime && currentTime < timeline[i + 1]) {
+                                setAlteringState(false)
                                 setRounds(i + 1);
                                 setDuration(timeline[i + 1] - currentTime);
                                 setTimerState('round');
