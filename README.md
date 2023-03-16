@@ -3,7 +3,7 @@
 ##### Project: React-Native Expo Mobile Application
 ##### Author: Trevor Drayton
 
-**Caveat:** This is application is a work in progress.
+##### **Caveat:** This is application is a work in progress.
 
 ## About 
 
