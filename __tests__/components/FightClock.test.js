@@ -11,6 +11,7 @@ jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 // all timeouts must be less than this timeout
 jest.setTimeout(30000);
+jest.useFakeTimers()
 
 describe('FightClock foreground test suite', () => {
     test('rest1, ready1, interval1', async () => {
