@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Modal, View, Text, TouchableOpacity, Alert, AppState, Vibration } from "react-native";
+import { Audio } from 'expo-av';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
 import helpers from "../helpers/helpers"
@@ -15,11 +16,25 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const appState = useRef(AppState.currentState);
     const [appStateVisible, setAppStateVisible] = useState(appState.current);
     const [timerState, setTimerState] = useState(null);
+    const [singleBellSound, setSingleBellSound] = useState();
+    const [tripleBellSound, setTripleBellSound] = useState();
+
 
     let totalDuration = roundLength * intervals + restLength * (intervals - 1) + readyLength;
     let displayTime = helpers.displayTime(duration)
 
     useEffect(() => {
+        async function playSingleBell() {
+            const { sound } = await Audio.Sound.createAsync(require('../sounds/single-bell(1.5s).mp3'))
+            setSingleBellSound(sound);
+        }
+        async function playTripleBell() {
+            const { sound } = await Audio.Sound.createAsync(require('../sounds/triple-bell(1.5s).mp3'))
+            setTripleBellSound(sound);
+        }
+        playSingleBell();
+        playTripleBell();
+
         const subscription = AppState.addEventListener('change', nextAppState => {
             if (
                 appState.current.match(/active/) &&
@@ -27,10 +42,8 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             ) {
                 setStopTime(Date.now())
             }
-
             appState.current = nextAppState;
             setAppStateVisible(appState.current);
-            //console.log('AppState', appState.current);
         });
 
         return () => {
@@ -41,7 +54,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     // sets duration when app is in appState is active
     useEffect(() => {
         if (!alteringState) {
-            //console.log("timerState useEffect")
             if (timerState == 'rest') {
                 setDuration(restLength - 1);
             }
@@ -58,7 +70,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     useEffect(() => {
         if (stopTime !== null) {
             setAlteringState(true)
-            //console.log("stoptime not null")
             const currentTime = Math.floor((Date.now() - startTime) / 1000);
             const remainingTime = totalDuration - currentTime;
             // if the timer is not done
@@ -90,7 +101,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                             timeline.push(roundLength * i + readyLength)
                         }
                     }
-                    //console.log("timeline: ", timeline)
                     // loop through timeline to determine where current time stands
                     for (let i = 0; i < timeline.length; i++) {
                         // if there is rest time
@@ -103,8 +113,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds((Math.floor(i / 2)) + 1);
                                 setTimerState('round');
                                 setDuration(timeline[i + 1] - currentTime);
-                                //console.log(i, ": round, ", duration, ": duration for round in condition 1")
-                                // if this is the same round as before then setAlteringState(true)
                             }
                             // rest
                             else if (i % 2 == 1 && (timeline[i] <= currentTime && currentTime < timeline[i + 1])) {
@@ -114,7 +122,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds(Math.floor(i / 2) + 1);
                                 setTimerState('rest');
                                 setDuration(timeline[i + 1] - currentTime);
-                                //console.log(i, ": round, ", duration, ": duration for rest in condition 2")
                             }
                         }
                         // if there isn't rest time
@@ -123,7 +130,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds(i + 1);
                                 setDuration(timeline[i + 1] - currentTime);
                                 setTimerState('round');
-                                //console.log(i, ": round, ", duration, ": duration for round in condition 3")
                             }
                         }
                     }
@@ -134,7 +140,8 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 clearInterval(training);
                 setTraining(null);
                 setTimerState('complete');
-                Vibration.vibrate(2000);
+                tripleBellSound.replayAsync();
+                Vibration.vibrate(1500);
             }
         }
         else {
@@ -153,8 +160,8 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                         setTimerState('rest');
                     }
                 }
-                //console.log("setRounds trigger in 2nd part of duration useEffect")
                 setRounds(prevCount => {
+                    singleBellSound.replayAsync()
                     Vibration.vibrate();
                     if (timerState == 'ready') { return prevCount }
                     if (timerState == 'rest' && restLength != 0) { return prevCount + 1; }
@@ -166,7 +173,8 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 clearInterval(training);
                 setTraining(null);
                 setTimerState('complete');
-                Vibration.vibrate(2000);
+                tripleBellSound.replayAsync();
+                Vibration.vibrate(1500);
                 setStartTime(null);
             }
         }
