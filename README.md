@@ -3,9 +3,10 @@
 ##### Project: React-Native Expo Mobile Application
 ##### Author: Trevor Drayton
 
+**Caveat:** This is application is a work in progress.
+
 ## About 
 
-**Caveat:** This is application is a work in progress.
 
 Interval Timer was inspired when I was using a popular interval timer when exercising in the gym. There was some features that I wish it had. Now, I am developing one for myself that will implement the features I want from an interval timer. Then, I will share it with others for free on the app store.
 
