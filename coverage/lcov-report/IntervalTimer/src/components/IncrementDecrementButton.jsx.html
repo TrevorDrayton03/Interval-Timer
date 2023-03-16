@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.71% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/28</span>
+                <span class='fraction'>0/28</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">7.69% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/24</span>
+                <span class='fraction'>0/24</span>
             </div>
         
             
@@ -138,50 +138,50 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -208,30 +208,30 @@ import { View, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { styles } from "../styles/styles"
 &nbsp;
-const IncrementDecrementButtons = ({ count, countSetter, incremental, minValue }) =&gt; {
+const IncrementDecrementButtons = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> count, countSetter, incremental, minValue }) =&gt; {</span>
     // interval states are required because without them the clear interval will not clear the current timer properly (it will try to clear a prior version of a timer, even if there isn't one)
-    const [plusInterval, setPlusInterval] = useState(null);
-    const [minusInterval, setMinusInterval] = useState(null);
+    const [plusInterval, setPlusInterval] = <span class="cstat-no" title="statement not covered" >useState(null);</span>
+    const [minusInterval, setMinusInterval] = <span class="cstat-no" title="statement not covered" >useState(null);</span>
 &nbsp;
-    const onPlusPress = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const onPlusPress = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        countSetter(<span class="fstat-no" title="function not covered" >pr</span>evCount =&gt; <span class="cstat-no" title="statement not covered" >prevCount + incremental)</span>;</span>
     }
-    const onMinusPress = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const onMinusPress = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        if (count &gt; minValue) {</span>
 <span class="cstat-no" title="statement not covered" >            countSetter(<span class="fstat-no" title="function not covered" >pr</span>evCount =&gt; <span class="cstat-no" title="statement not covered" >prevCount - incremental)</span>;</span>
         }
     }
 &nbsp;
-    const handlePlusPressIn = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const handlePlusPressIn = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        setPlusInterval(setInterval(<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >countSetter(<span class="fstat-no" title="function not covered" >pr</span>evCount =&gt; <span class="cstat-no" title="statement not covered" >prevCount + incremental)</span>,</span> 150));</span>
     };
 &nbsp;
-    const handlePlusPressOut = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const handlePlusPressOut = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        clearInterval(plusInterval);</span>
 <span class="cstat-no" title="statement not covered" >        setPlusInterval(null);</span>
     };
 &nbsp;
-    const handleMinusPressIn = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const handleMinusPressIn = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        setMinusInterval(setInterval(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >            countSetter(<span class="fstat-no" title="function not covered" >pr</span>evCount =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                if (prevCount &lt;= minValue) {</span>
@@ -246,12 +246,12 @@ const IncrementDecrementButtons = ({ count, countSetter, incremental, minValue }
         );
     };
 &nbsp;
-    const handleMinusPressOut = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+    const handleMinusPressOut = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        clearInterval(minusInterval);</span>
 <span class="cstat-no" title="statement not covered" >        setMinusInterval(null);</span>
     };
 &nbsp;
-    return (
+<span class="cstat-no" title="statement not covered" >    return (</span>
         &lt;View style={styles.incButtonRow}&gt;
             &lt;TouchableOpacity
                 onPress={onMinusPress}
@@ -280,7 +280,7 @@ export default IncrementDecrementButtons;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-15T14:44:04.460Z
+                at 2023-03-16T02:59:44.430Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

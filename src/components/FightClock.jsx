@@ -30,7 +30,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
 
             appState.current = nextAppState;
             setAppStateVisible(appState.current);
-            console.log('AppState', appState.current);
+            // console.log('AppState', appState.current);
         });
 
         return () => {
@@ -41,7 +41,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     // sets duration when app is in appState is active
     useEffect(() => {
         if (!alteringState) {
-            //console.log("timerState useEffect")
+            // console.log("timerState useEffect")
             if (timerState == 'rest') {
                 setDuration(restLength - 1);
             }
@@ -104,7 +104,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds((Math.floor(i / 2)) + 1);
                                 setTimerState('round');
                                 setDuration(timeline[i + 1] - currentTime);
-                                //console.log(i, ": round, ", duration, ": duration for round in condition 1")
+                                // console.log(i, ": round, ", duration, ": duration for round in condition 1")
                                 // if this is the same round as before then setAlteringState(true)
                             }
                             // rest
@@ -124,7 +124,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds(i + 1);
                                 setDuration(timeline[i + 1] - currentTime);
                                 setTimerState('round');
-                                //console.log(i, ": round, ", duration, ": duration for round in condition 3")
+                                // console.log(i, ": round, ", duration, ": duration for round in condition 3")
                             }
                         }
                     }
@@ -153,7 +153,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                         setTimerState('rest');
                     }
                 }
-                console.log("setRounds trigger in 2nd part of duration useEffect")
+                // console.log("setRounds trigger in 2nd part of duration useEffect")
                 setRounds(prevCount => {
                     if (timerState == 'ready') { return prevCount }
                     if (timerState == 'rest' && restLength != 0) { return prevCount + 1; }
@@ -198,7 +198,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     };
 
     return (
-        <View>
+        <View testID="fight-clock-instance">
             <TouchableOpacity
                 onPress={onPressHandle}
                 testID="start-button"

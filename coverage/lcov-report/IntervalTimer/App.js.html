@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -177,16 +177,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -283,16 +283,16 @@ import StoreButton from "./src/components/StoreButton";
 import styles from "./src/styles/styles"
 import helpers from "./src/helpers/helpers"
 &nbsp;
-const App = () =&gt; {
-  const [roundLength, setRoundLength] = useState(5);
-  const [restLength, setRestLength] = useState(0);
-  const [readyLength, setReadyLength] = useState(0);
-  const [intervals, setIntervals] = useState(1);
+const App = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  const [roundLength, setRoundLength] = <span class="cstat-no" title="statement not covered" >useState(5);</span>
+  const [restLength, setRestLength] = <span class="cstat-no" title="statement not covered" >useState(0);</span>
+  const [readyLength, setReadyLength] = <span class="cstat-no" title="statement not covered" >useState(0);</span>
+  const [intervals, setIntervals] = <span class="cstat-no" title="statement not covered" >useState(1);</span>
 &nbsp;
-  let trainingTime = roundLength * intervals + restLength * (intervals - 1);
-  let displayTime = helpers.displayTime(trainingTime)
+  let trainingTime = <span class="cstat-no" title="statement not covered" >roundLength * intervals + restLength * (intervals - 1);</span>
+  let displayTime = <span class="cstat-no" title="statement not covered" >helpers.displayTime(trainingTime)</span>
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;View style={styles.container}&gt;
       &lt;StatusBar
         // animated={true}
@@ -303,7 +303,7 @@ const App = () =&gt; {
       &gt;
       &lt;/StatusBar&gt;
       &lt;View style={styles.titleContainer}&gt;
-        &lt;Text style={styles.trainingTime}&gt;Training Time: {roundLength &gt; 0 ? displayTime : <span class="branch-1 cbranch-no" title="branch not covered" >"0:00"}</span>&lt;/Text&gt;
+        &lt;Text style={styles.trainingTime}&gt;Training Time: {roundLength &gt; 0 ? displayTime : "0:00"}&lt;/Text&gt;
       &lt;/View&gt;
       &lt;View style={styles.smallerContainer}&gt;
         &lt;Timer
@@ -388,7 +388,7 @@ export default App;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-15T14:44:04.460Z
+                at 2023-03-16T02:59:44.430Z
             </div>
         <script src="../prettify.js"></script>
         <script>
