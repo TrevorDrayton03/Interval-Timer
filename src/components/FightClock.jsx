@@ -4,6 +4,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
 import helpers from "../helpers/helpers"
 
+// AppState example:
+// https://snack.expo.dev/@aboutreact/appstate-example?session_id=snack-session-y4eB29bZK
+
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     const [duration, setDuration] = useState((readyLength > 0 ? readyLength - 1 : roundLength - 1));
     const [rounds, setRounds] = useState(1);
@@ -30,7 +33,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
 
             appState.current = nextAppState;
             setAppStateVisible(appState.current);
-            // console.log('AppState', appState.current);
+            //console.log('AppState', appState.current);
         });
 
         return () => {
@@ -41,7 +44,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     // sets duration when app is in appState is active
     useEffect(() => {
         if (!alteringState) {
-            // console.log("timerState useEffect")
+            //console.log("timerState useEffect")
             if (timerState == 'rest') {
                 setDuration(restLength - 1);
             }
@@ -58,10 +61,9 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     useEffect(() => {
         if (stopTime !== null) {
             setAlteringState(true)
-            console.log("stoptime not null")
+            //console.log("stoptime not null")
             const currentTime = Math.floor((Date.now() - startTime) / 1000);
             const remainingTime = totalDuration - currentTime;
-            console.log(remainingTime, " reimainingTime")
             // if the timer is not done
             if (remainingTime > 0) {
                 // if should be in ready state
@@ -91,7 +93,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                             timeline.push(roundLength * i + readyLength)
                         }
                     }
-                    console.log("timeline: ", timeline)
+                    //console.log("timeline: ", timeline)
                     // loop through timeline to determine where current time stands
                     for (let i = 0; i < timeline.length; i++) {
                         // if there is rest time
@@ -104,7 +106,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds((Math.floor(i / 2)) + 1);
                                 setTimerState('round');
                                 setDuration(timeline[i + 1] - currentTime);
-                                // console.log(i, ": round, ", duration, ": duration for round in condition 1")
+                                //console.log(i, ": round, ", duration, ": duration for round in condition 1")
                                 // if this is the same round as before then setAlteringState(true)
                             }
                             // rest
@@ -115,7 +117,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds(Math.floor(i / 2) + 1);
                                 setTimerState('rest');
                                 setDuration(timeline[i + 1] - currentTime);
-                                console.log(i, ": round, ", duration, ": duration for rest in condition 2")
+                                //console.log(i, ": round, ", duration, ": duration for rest in condition 2")
                             }
                         }
                         // if there isn't rest time
@@ -124,7 +126,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                                 setRounds(i + 1);
                                 setDuration(timeline[i + 1] - currentTime);
                                 setTimerState('round');
-                                // console.log(i, ": round, ", duration, ": duration for round in condition 3")
+                                //console.log(i, ": round, ", duration, ": duration for round in condition 3")
                             }
                         }
                     }
@@ -153,7 +155,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                         setTimerState('rest');
                     }
                 }
-                // console.log("setRounds trigger in 2nd part of duration useEffect")
+                //console.log("setRounds trigger in 2nd part of duration useEffect")
                 setRounds(prevCount => {
                     if (timerState == 'ready') { return prevCount }
                     if (timerState == 'rest' && restLength != 0) { return prevCount + 1; }
@@ -168,7 +170,6 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 setStartTime(null);
             }
         }
-        //setAlteringState(false)
         setStopTime(null);
     }, [duration]);
 
@@ -198,10 +199,9 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     };
 
     return (
-        <View testID="fight-clock-instance">
+        <View>
             <TouchableOpacity
                 onPress={onPressHandle}
-                testID="start-button"
             >
                 <Icon
                     name="send"
