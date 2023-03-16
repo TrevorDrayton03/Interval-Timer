@@ -25,7 +25,7 @@ In order to create a high quality mobile application, the application:
 - Vibration and sound to signify round changes
 - Set the duration of each round using a picker, onPressIn, or onPress
 
-## Examples
+## Screenshots
 <div style="display: inline-block;">
 <img src="https://user-images.githubusercontent.com/56656811/225755433-12209553-0d1c-4e14-b530-d6d63741f9e9.png" alt="March 16 Screenshot #1" width="300">
 <img src="https://user-images.githubusercontent.com/56656811/225755443-10fcda52-1faf-4c26-b267-1ef4344fa1e8.png" alt="March 16 Screenshot #2" width="300">
