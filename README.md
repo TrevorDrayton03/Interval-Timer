@@ -15,7 +15,7 @@ In order to create a high quality mobile application, the application:
 - must be well-documented
 - must include a test suite
 - must work on various devices
-- must be user friendly, intuitive, and attractive
+- must be user friendly, intuitive, and attractive ( a good design )
 - must be maintained
 
 ## Features
