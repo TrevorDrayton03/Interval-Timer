@@ -24,6 +24,7 @@ In order to create a high quality mobile application, the application:
 - Choose whether or not to use ready or rest rounds
 - Vibration and sound to signify round changes
 - Set the duration of each round using a picker, onPressIn, or onPress
+- Settings for vibration, sound, and default ready time
 
 ## Screenshots
 <div style="display: inline-block;">
