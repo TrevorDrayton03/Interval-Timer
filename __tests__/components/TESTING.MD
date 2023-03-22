@@ -6,17 +6,9 @@ The test suite performed on FightClock is a Strong Normal Equivalence Class test
 12 special test cases.
 
 The following are the equivalence classes:
-
-Rest1 = {restTime: > 0}
-
-Rest2 = {restTime: 0}
-
-
-Ready1 = {readyTime: > 0}
-
-Ready2 = {readyTime: 0}
-
-
-Interval1 = {rounds: 1}
-
-Interval2 = {rounds: > 1}
+- Rest1: {restTime: > 0}
+- Rest2: {restTime: 0}
+- Ready1: {readyTime: > 0}
+- Ready2: {readyTime: 0}
+- Interval1: {rounds: 1}
+- Interval2: {rounds: > 1}
