@@ -9,7 +9,6 @@
     "web": "expo start --web",
     "test": "jest",
     "eas-build-pre-install": "npm config set legacy-peer-deps true"
-
   },
   "jest": {
     "preset": "jest-expo",
