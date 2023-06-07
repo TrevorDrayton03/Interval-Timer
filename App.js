@@ -3,8 +3,9 @@ import { Text, View, StatusBar } from "react-native";
 import Timer from "./src/components/Timer";
 import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
-import styles from "./src/styles/styles"
-import helpers from "./src/helpers/helpers"
+import styles from "./src/styles/styles";
+import darkTheme from "./src/styles/darkTheme";
+import helpers from "./src/helpers/helpers";
 
 const App = () => {
   const [roundLength, setRoundLength] = useState(5);
@@ -16,7 +17,7 @@ const App = () => {
   let displayTime = helpers.displayTime(trainingTime)
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, darkTheme.container]}>
       <StatusBar
         // animated={true}
         backgroundColor="white"
@@ -26,9 +27,9 @@ const App = () => {
       >
       </StatusBar>
       <View style={styles.titleContainer}>
-        <Text style={styles.trainingTime}>Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
+        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
-      <View style={styles.smallerContainer}>
+      <View style={[styles.smallerContainer, darkTheme.smallerContainer]}>
         <Timer
           name="Round Time"
           icon="boxing-glove"

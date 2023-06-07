@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import styles from "../styles/styles"
+import darkTheme from "../styles/darkTheme";
+
 
 const MinuteSecondPicker = ({ value, setValue }) => {
     const SECONDS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
@@ -18,12 +20,12 @@ const MinuteSecondPicker = ({ value, setValue }) => {
     return (
         <View style={styles.row}>
             <View style={styles.pickerContainer}>
-                <Text style={styles.text}>Minutes:</Text>
+                <Text style={[styles.text, darkTheme.onSurface]}>Minutes:</Text>
                 <Picker
                     selectedValue={MINUTES.indexOf((Math.floor(value / 60) % 60))}
                     style={styles.picker}
                     onValueChange={(itemValue) => setMinute(itemValue)}
-                    pickerStyleType={1}
+                    dropdownIconColor='#BB86FC'
                 >
                     {
                         [...MINUTES.keys()].map((val) => (
@@ -31,25 +33,26 @@ const MinuteSecondPicker = ({ value, setValue }) => {
                                 key={val}
                                 label={val.toString()}
                                 value={val}
-                                style={styles.text}
+                                style={{ color: 'white', backgroundColor: '#121212', fontSize: 24 }}
                             />
                         ))
                     }
                 </Picker>
             </View>
             <View style={styles.container}>
-                <Text style={styles.text}>Seconds:</Text>
+                <Text style={[styles.text, darkTheme.onSurface]}>Seconds:</Text>
                 <Picker
                     selectedValue={(SECONDS.indexOf((value % 60))) * 5}
                     style={styles.picker}
                     onValueChange={(itemValue) => setSecond(itemValue)}
+                    dropdownIconColor='#BB86FC'
                 >
                     {[...SECONDS.keys()].map((val) => (
                         <Picker.Item
                             key={val}
                             label={(val * 5).toString()}
                             value={val * 5}
-                            style={styles.text}
+                            style={{ color: 'white', backgroundColor: '#121212', fontSize: 24 }}
                         />
                     ))}
                 </Picker>

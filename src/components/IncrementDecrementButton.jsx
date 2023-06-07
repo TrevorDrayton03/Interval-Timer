@@ -54,14 +54,14 @@ const IncrementDecrementButtons = ({ count, countSetter, incremental, minValue }
                 onPressOut={handleMinusPressOut}
                 style={styles.incButton}
             >
-                <Icon name="minus" size={50}></Icon>
+                <Icon name="minus" size={50} color='#BB86FC'></Icon>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={onPlusPress}
                 onPressIn={handlePlusPressIn}
                 onPressOut={handlePlusPressOut}
             >
-                <Icon name="plus" size={50}></Icon>
+                <Icon name="plus" size={50} color='#BB86FC'></Icon>
             </TouchableOpacity>
         </View>
     )

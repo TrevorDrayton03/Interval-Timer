@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Text, View, TouchableOpacity, Alert, TextInput, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
+import darkTheme from "../styles/darkTheme";
 import helpers from "../helpers/helpers"
 
 const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRoundLength, setRestLength, setIntervals, setReadyLength }) => {
@@ -52,7 +53,24 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                     },
                 },
             ],
-            { cancelable: false },
+            {
+                cancelable: false,
+                alertTitleStyle: {
+                    color: 'red', // Change font color of the title
+                },
+                alertMessageStyle: {
+                    color: 'blue', // Change font color of the message
+                },
+                containerStyle: {
+                    backgroundColor: 'lightgray', // Change background color of the alert
+                },
+                buttonStyle: {
+                    backgroundColor: 'orange', // Change background color of the buttons
+                },
+                buttonTextStyle: {
+                    color: 'white', // Change font color of the buttons
+                },
+            },
         );
     };
 
@@ -67,7 +85,7 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                 onPress={() => setModalVisible(true)}
             >
                 <Icon
-                    name={'arrange-bring-forward'} size={30}
+                    name={'arrange-bring-forward'} size={30} color="#03DAC6"
                 />
             </TouchableOpacity>
             <Modal
@@ -75,51 +93,54 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                 animationType="fade"
                 onRequestClose={() => setModalVisible(false)}
             >
-                <View style={styles.storeButtonModalView}>
+                <View style={[styles.storeButtonModalView, darkTheme.storeButtonModalView]}>
                     {
                         <Modal
                             visible={inputModalVisible}
                             animationType="none"
                             onRequestClose={() => setInputModalVisible(false)}
                         >
-                            <View style={styles.storeButtonInputModalContainer}>
-                                <Text style={styles.storeButtonInputModalTitle}>Store Current Settings</Text>
+                            <View style={[styles.storeButtonInputModalContainer, darkTheme.storeButtonInputModalContainer]}>
+                                <Text style={[styles.storeButtonInputModalTitle, darkTheme.onSurface]}>Store Current Settings</Text>
                                 <View style={styles.storeButtonTextInputContainer}>
                                     <TextInput
                                         onChangeText={setInputText}
                                         placeholder="Name"
                                         maxLength={40}
                                         numberOfLines={2}
-                                        style={styles.storeButtonTextInput}
+                                        style={[styles.storeButtonTextInput, darkTheme.onSurface]}
+                                        placeholderTextColor='#CCCCCC'
                                     >
                                     </TextInput>
                                 </View>
                                 <View style={styles.storeButtonButtonInputContainer}>
-                                    <Button
+                                    <TouchableOpacity
                                         onPress={() => {
                                             setItemHandle(inputText)
                                             setInputModalVisible(false)
                                         }}
-                                        title="     OK     "
-                                    ></Button>
-                                    <Button
+                                        style={[styles.button, darkTheme.button]}                                    >
+                                        <Text style={darkTheme.onPrimary}>     OK     </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
                                         onPress={() => setInputModalVisible(false)}
-                                        title="Cancel"
-                                    ></Button>
+                                        style={[styles.button, darkTheme.button]}                                    >
+                                        <Text style={darkTheme.onPrimary}>Cancel</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </Modal>
                     }
                     <View style={styles.storeButtonModalContainer}>
                         <View style={styles.storeButtonRowContainer}>
-                            <Text style={styles.storeButtonRow1}>Name</Text>
-                            <Text style={styles.storeButtonRow2}>Round</Text>
-                            <Text style={styles.storeButtonRow2}>Rest</Text>
-                            <Text style={styles.storeButtonRow2}>Ready</Text>
-                            <Text style={styles.storeButtonRow3}>Interval</Text>
+                            <Text style={[styles.storeButtonRow1, darkTheme.onSurface]}>Name</Text>
+                            <Text style={[styles.storeButtonRow2, darkTheme.onSurface]}>Round</Text>
+                            <Text style={[styles.storeButtonRow2, darkTheme.onSurface]}>Rest</Text>
+                            <Text style={[styles.storeButtonRow2, darkTheme.onSurface]}>Ready</Text>
+                            <Text style={[styles.storeButtonRow3, darkTheme.onSurface]}>Interval</Text>
                         </View>
                         <View style={styles.storeButtonRowContainer}>
-                            <View style={styles.storeButtonBlackBar1} />
+                            <View style={[styles.storeButtonBlackBar1, { backgroundColor: 'white' }]} />
                         </View>
                         <ScrollView style={styles.storeButtonScrollView}>
                             {allItems && allItems.map((item, index) => {
@@ -138,11 +159,11 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                                             }}
                                         >
                                             <View style={styles.storeButtonRowContainer}>
-                                                <Text style={styles.storeButtonRow4}>{item.title}</Text>
-                                                <Text style={styles.storeButtonRow5}>{item.storeRoundLength}</Text>
-                                                <Text style={styles.storeButtonRow5}>{item.storeRestLength}</Text>
-                                                <Text style={styles.storeButtonRow5}>{item.storeReadyLength}</Text>
-                                                <Text style={styles.storeButtonRow4}>{item.storeIntervals}</Text>
+                                                <Text style={[styles.storeButtonRow4, darkTheme.onSurface]}>{item.title}</Text>
+                                                <Text style={[styles.storeButtonRow5, darkTheme.onSurface]}>{item.storeRoundLength}</Text>
+                                                <Text style={[styles.storeButtonRow5, darkTheme.onSurface]}>{item.storeRestLength}</Text>
+                                                <Text style={[styles.storeButtonRow5, darkTheme.onSurface]}>{item.storeReadyLength}</Text>
+                                                <Text style={[styles.storeButtonRow4, darkTheme.onSurface]}>{item.storeIntervals}</Text>
                                             </View>
                                             <View style={styles.storeButtonRowContainer}>
                                                 <View style={styles.storeButtonBlackBar2} />
@@ -156,10 +177,12 @@ const StoreButton = ({ roundLength, restLength, intervals, readyLength, setRound
                     </View>
                     <View style={styles.storeButtonFooterContainer}>
                         <View style={styles.storeButtonFooter}>
-                            <Button
+                            <TouchableOpacity
                                 onPress={() => setInputModalVisible(true)}
-                                title="    New     "
-                            ></Button>
+                                style={[styles.button, darkTheme.button]}
+                            >
+                                <Text style={darkTheme.onPrimary}>    New     </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>

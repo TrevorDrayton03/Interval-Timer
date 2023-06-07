@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     // SHARED
     text: {
-        fontSize: 24
+        fontSize: 24,
     },
     container: {
         flex: 1,
@@ -19,6 +19,8 @@ export const styles = StyleSheet.create({
     picker: {
         height: 50,
         width: 110,
+        marginVertical: 0,
+        padding: 0,
     },
     pickerContainer: {
         flex: 1,
@@ -99,15 +101,15 @@ export const styles = StyleSheet.create({
         padding: 10
     },
     storeButtonModalView: {
-        flex: .95
+        flex: 1,
     },
     storeButtonModalContainer: {
         alignItems: "center",
-        flex: 5
+        flex: 5,
     },
     storeButtonRowContainer: {
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
     },
     storeButtonRow1: {
         flex: 1,
@@ -115,7 +117,7 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         marginTop: 20,
         marginBottom: 20,
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     storeButtonRow2: {
         flex: .8,
@@ -139,7 +141,7 @@ export const styles = StyleSheet.create({
         height: 2,
         backgroundColor: "black",
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
     },
     storeButtonBlackBar2: {
         flex: 1,
@@ -164,15 +166,15 @@ export const styles = StyleSheet.create({
     },
     storeButtonFooterContainer: {
         flex: .5,
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
     },
     storeButtonFooter: {
         flexDirection: "row",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
     },
     storeButtonInputModalContainer: {
         flex: 1,
-        justifyContent: "center"
+        justifyContent: "center",
     },
     storeButtonInputModalTitle: {
         textAlign: "center",
@@ -180,13 +182,13 @@ export const styles = StyleSheet.create({
         fontSize: 24
     },
     storeButtonTextInput: {
-        fontSize: 24,
+        fontSize: 20,
         width: "100%",
         textAlign: "center"
     },
     storeButtonButtonInputContainer: {
         flexDirection: "row",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
     },
     storeButtonScrollView: {
         width: "100%"
@@ -211,7 +213,7 @@ export const styles = StyleSheet.create({
         flexDirection: "column",
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     startButtonContainer: {
         flexDirection: "row",
@@ -222,14 +224,21 @@ export const styles = StyleSheet.create({
     storeButtonContainer: {
         flexDirection: "row",
         flex: .82,
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
     },
     column: {
         flex: .25,
-        alignItems: "flex-start"
+        alignItems: "flex-start",
     },
     trainingTime: {
-        fontSize: 28
+        fontSize: 28,
+    },
+    button: {
+        borderWidth: 1,
+        borderRadius: 5,
+        padding: 10,
+        alignItems: 'center',
+        marginBottom: 20
     }
 })
 

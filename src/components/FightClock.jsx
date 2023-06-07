@@ -3,6 +3,7 @@ import { Modal, View, Text, TouchableOpacity, Alert, AppState, Vibration } from 
 import { Audio } from 'expo-av';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from "../styles/styles"
+import darkTheme from "../styles/darkTheme"
 import helpers from "../helpers/helpers"
 
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
@@ -235,6 +236,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 <Icon
                     name="send"
                     size={50}
+                    color='#BB86FC'
                 >
                 </Icon>
             </TouchableOpacity>
@@ -250,27 +252,27 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                     setStopTime(null);
                 }}
             >
-                <View style={styles.fightClockModalContainer}>
+                <View style={[styles.fightClockModalContainer, darkTheme.fightClockModalContainer]}>
                     {timerState === 'ready' &&
                         <View>
-                            <Text style={styles.text}>Ready Time Left: {displayTime}</Text>
+                            <Text style={[styles.text, darkTheme.onSurface]}>Ready Time Left: {displayTime}</Text>
                         </View>
                     }
                     {timerState === 'round' &&
                         <View>
-                            <Text style={styles.text}>Round Time Left: {displayTime}</Text>
-                            <Text style={styles.text}>Round: {rounds}</Text>
+                            <Text style={[styles.text, darkTheme.onSurface]}>Round Time Left: {displayTime}</Text>
+                            <Text style={[styles.text, darkTheme.onSurface]}>Round: {rounds}</Text>
                         </View>
                     }
                     {timerState === 'rest' &&
                         <View>
-                            <Text style={styles.text}>Rest Time Left: {displayTime}</Text>
-                            <Text style={styles.text}>Round: {rounds}</Text>
+                            <Text style={[styles.text, darkTheme.onSurface]}>Rest Time Left: {displayTime}</Text>
+                            <Text style={[styles.text, darkTheme.onSurface]}>Round: {rounds}</Text>
                         </View>
                     }
                     {timerState === 'complete' &&
                         <View>
-                            <Text style={styles.fightClockComplete}>DONE!</Text>
+                            <Text style={[styles.fightClockComplete, darkTheme.onSurface]}>DONE!</Text>
                         </View>
                     }
                 </View>
