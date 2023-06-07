@@ -22,6 +22,7 @@ const helpers = {
             return displayTime
         }
         else {
+            minutes = helpers.zeroPad(minutes);
             var displayTime = hours + ":" + minutes + ":" + seconds;
             return displayTime
         }

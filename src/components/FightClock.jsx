@@ -86,14 +86,13 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
 
     useEffect(() => {
         async function playSingleBell() {
-            const { sound } = await Audio.Sound.createAsync(require('../sounds/single-bell(1.5s).mp3'))
+            let { sound } = await Audio.Sound.createAsync(require('../sounds/single-bell(1.5s).mp3'))
             setSingleBellSound(sound);
         }
         async function playTripleBell() {
-            const { sound } = await Audio.Sound.createAsync(require('../sounds/triple-bell(1.5s).mp3'))
+            let { sound } = await Audio.Sound.createAsync(require('../sounds/triple-bell(1.5s).mp3'))
             setTripleBellSound(sound);
         }
-        // why are these here..?
         playSingleBell();
         playTripleBell();
 
