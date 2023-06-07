@@ -93,6 +93,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             const { sound } = await Audio.Sound.createAsync(require('../sounds/triple-bell(1.5s).mp3'))
             setTripleBellSound(sound);
         }
+        // why are these here..?
         playSingleBell();
         playTripleBell();
 
@@ -203,6 +204,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                     }
                 }
                 setRounds(prevCount => {
+                    console.log('reached setRounds') // problem is here
                     singleBellSound.replayAsync()
                     Vibration.vibrate();
                     if (timerState === 'ready') { return prevCount }
@@ -218,6 +220,9 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
                 tripleBellSound.replayAsync();
                 Vibration.vibrate(1500);
                 setStartTime(null);
+            }
+            if (duration === -1 && rounds === intervals && intervals === 1 && timerState === 'ready') {
+                singleBellSound.replayAsync()
             }
         }
         setStopTime(null);

@@ -231,7 +231,6 @@ export const styles = StyleSheet.create({
     trainingTime: {
         fontSize: 28
     }
-
 })
 
 export default styles;
