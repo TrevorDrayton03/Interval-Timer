@@ -20,8 +20,9 @@ const App = () => {
     <View style={[styles.container, darkTheme.container]}>
       <StatusBar
         // animated={true}
-        backgroundColor="white"
-        barStyle={'dark-content'}
+        backgroundColor={"#121212"}
+        barStyle={'light-content'}
+      // statusBarStyle='dark-content'
       // showHideTransition={'fade'}
       // hidden={false}
       >
