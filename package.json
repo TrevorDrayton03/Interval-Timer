@@ -8,7 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest",
-    "eas-build-pre-install": "npm config set legacy-peer-deps true"
+    "eas-build-pre-install": "npm config set legacy-peer-deps true",
+    "format": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "jest": {
     "preset": "jest-expo",
@@ -47,6 +48,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@testing-library/react-native": "^11.5.4",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.8",
     "react-test-renderer": "^18.2.0"
   },
   "private": true
