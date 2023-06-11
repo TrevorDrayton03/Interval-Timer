@@ -23,7 +23,7 @@ const MinuteSecondPicker = ({ value, setValue }) => {
   }, [second, minute]);
 
   return (
-    <View style={styles.row}>
+    <View style={styles.pickerRow}>
       <View style={styles.pickerContainer}>
         <Text style={[styles.text, darkTheme.onSurface]}>Minutes:</Text>
         <Picker
@@ -31,6 +31,7 @@ const MinuteSecondPicker = ({ value, setValue }) => {
           style={styles.picker}
           onValueChange={(itemValue) => setMinute(itemValue)}
           dropdownIconColor="#BB86FC"
+          backgroundColor='white'
         >
           {[...MINUTES.keys()].map((val) => (
             <Picker.Item
@@ -39,7 +40,8 @@ const MinuteSecondPicker = ({ value, setValue }) => {
               value={val}
               style={{
                 color: "white",
-                backgroundColor: "#121212",
+                // backgroundColor: "#121212",
+                backgroundColor: '#212121',
                 fontSize: 24,
               }}
             />
@@ -61,7 +63,8 @@ const MinuteSecondPicker = ({ value, setValue }) => {
               value={val * 5}
               style={{
                 color: "white",
-                backgroundColor: "#121212",
+                // backgroundColor: "#121212",
+                backgroundColor: '#212121',
                 fontSize: 24,
               }}
             />

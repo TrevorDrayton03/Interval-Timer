@@ -15,6 +15,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
   },
+  pickerRow: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "#212121",
+    borderRadius: 15,
+    marginTop: 20,
+    marginBottom: 20
+  },
   // MinuteSecondPicker
   picker: {
     height: 50,
@@ -216,12 +224,11 @@ export const styles = StyleSheet.create({
     flex: 1.4,
     alignItems: "center",
     justifyContent: "center",
-    border: 5,
     borderRadius: 15,
     marginLeft: 20,
     marginRight: 20,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   titleContainer: {
     flexDirection: "column",

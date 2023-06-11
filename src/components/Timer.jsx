@@ -68,7 +68,7 @@ const Timer = ({
                   ></MinuteSecondPicker>
                 </View>
                 <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={[styles.timerOkButton, darkTheme.button]}>
+                  <Text style={[darkTheme.button, styles.button, { width: 75, textAlign: 'center' }]}>
                     OK
                   </Text>
                 </Pressable>
