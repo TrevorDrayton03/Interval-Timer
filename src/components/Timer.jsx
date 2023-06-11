@@ -26,6 +26,7 @@ const Timer = ({
       <TouchableOpacity
         style={[styles.timerContainer, darkTheme.timerContainer]}
         onPress={() => setModalVisible(!modalVisible)}
+        disabled={!isDuration}
       >
         <Icon name={icon} size={50} color={"#BB86FC"} />
         <View style={styles.timerColumn}>
