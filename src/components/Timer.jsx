@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, Modal, Pressable } from "react-native";
+import { Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IncrementDecrementbutton from "./IncrementDecrementButton";
 import MinuteSecondPicker from "./MinuteSecondPicker";
@@ -23,9 +23,27 @@ const Timer = ({
 
   return (
     <View style={[styles.timerContainer, darkTheme.timerContainer]}>
-      <Icon name={icon} size={50} color={"#BB86FC"} />
-      <View style={styles.timerColumn}>
-        {isDuration && (
+      <TouchableOpacity
+        style={[styles.timerContainer, darkTheme.timerContainer]}
+        onPress={() => setModalVisible(!modalVisible)}
+      >
+        <Icon name={icon} size={50} color={"#BB86FC"} />
+        <View style={styles.timerColumn}>
+          <Text style={[{ fontSize: 20 }, darkTheme.onSurface]}>
+            {isDuration == false ? value : displayTime}
+          </Text>
+          <Text style={[{ fontSize: 20 }, darkTheme.onSurface]}>{name}</Text>
+        </View>
+      </TouchableOpacity>
+      <IncrementDecrementbutton
+        count={value}
+        countSetter={setValue}
+        incremental={incremental}
+        startValue={startValue}
+        minValue={minValue}
+      ></IncrementDecrementbutton>
+      {
+        isDuration && (
           <Modal
             transparent={true}
             visible={modalVisible}
@@ -57,22 +75,9 @@ const Timer = ({
               </View>
             </View>
           </Modal>
-        )}
-        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-          <Text style={[{ fontSize: 20 }, darkTheme.onSurface]}>
-            {isDuration == false ? value : displayTime}
-          </Text>
-        </TouchableOpacity>
-        <Text style={[{ fontSize: 20 }, darkTheme.onSurface]}>{name}</Text>
-      </View>
-      <IncrementDecrementbutton
-        count={value}
-        countSetter={setValue}
-        incremental={incremental}
-        startValue={startValue}
-        minValue={minValue}
-      ></IncrementDecrementbutton>
-    </View>
+        )
+      }
+    </View >
   );
 };
 

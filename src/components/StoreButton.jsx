@@ -83,7 +83,7 @@ const StoreButton = ({
   return (
     <View>
       <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Icon name={"arrange-bring-forward"} size={30} color="#03DAC6" />
+        <Icon name={"bookmark-multiple-outline"} size={30} color="#03DAC6" />
       </TouchableOpacity>
       <Modal
         visible={modalVisible}
@@ -111,16 +111,17 @@ const StoreButton = ({
                     darkTheme.onSurface,
                   ]}
                 >
-                  Store Current Settings
+                  Save Current Timer
                 </Text>
-                <View style={styles.storeButtonTextInputContainer}>
+                <View style={[styles.storeButtonTextInputContainer, darkTheme.surface]}>
                   <TextInput
                     onChangeText={setInputText}
                     placeholder="Name"
-                    maxLength={40}
+                    maxLength={50}
                     numberOfLines={2}
                     style={[styles.storeButtonTextInput, darkTheme.onSurface]}
                     placeholderTextColor="#CCCCCC"
+                    // placeholderTextColor="#03DAC6"
                   ></TextInput>
                 </View>
                 <View style={styles.storeButtonButtonInputContainer}>
@@ -129,13 +130,13 @@ const StoreButton = ({
                       setItemHandle(inputText);
                       setInputModalVisible(false);
                     }}
-                    style={[styles.button, darkTheme.button]}
+                    style={[styles.button, darkTheme.button, { width: 75 }]}
                   >
-                    <Text style={darkTheme.onPrimary}> OK </Text>
+                    <Text style={darkTheme.onPrimary}>OK</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => setInputModalVisible(false)}
-                    style={[styles.button, darkTheme.button]}
+                    style={[styles.button, darkTheme.button, { width: 75 }]}
                   >
                     <Text style={darkTheme.onPrimary}>Cancel</Text>
                   </TouchableOpacity>
@@ -164,7 +165,7 @@ const StoreButton = ({
             <View style={styles.storeButtonRowContainer}>
               <View
                 style={[
-                  styles.storeButtonBlackBar1,
+                  // styles.storeButtonBlackBar1,
                   { backgroundColor: "white" },
                 ]}
               />
@@ -229,7 +230,7 @@ const StoreButton = ({
                           </Text>
                         </View>
                         <View style={styles.storeButtonRowContainer}>
-                          <View style={styles.storeButtonBlackBar2} />
+                          {/* <View style={styles.storeButtonBlackBar2} /> */}
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -243,7 +244,7 @@ const StoreButton = ({
                 onPress={() => setInputModalVisible(true)}
                 style={[styles.button, darkTheme.button]}
               >
-                <Text style={darkTheme.onPrimary}> New </Text>
+                <Text style={darkTheme.onPrimary}>Save Current Timer</Text>
               </TouchableOpacity>
             </View>
           </View>

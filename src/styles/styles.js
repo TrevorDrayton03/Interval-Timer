@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   timerColumn: {
     flex: 1,
@@ -93,7 +93,7 @@ export const styles = StyleSheet.create({
   // StoreButton
   storeButtonTextInputContainer: {
     borderWidth: 2,
-    borderColor: "gray",
+    borderColor: "#03DAC6",
     borderRadius: 15,
     margin: 20,
     justifyContent: "center",
@@ -162,7 +162,15 @@ export const styles = StyleSheet.create({
   storeButtonColumnContainer: {
     flex: 1,
     flexDirection: "column",
+    // padding: 10,
+    backgroundColor: '#212121',
+    borderRadius: 15,
+    borderColor: "#03DAC6",
+    borderWidth: 2,
+    margin: 5,
     padding: 10,
+    marginLeft: 10,
+    marginRight: 10
   },
   storeButtonFooterContainer: {
     flex: 0.5,
@@ -200,7 +208,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   incButton: {
-    marginRight: 10,
+    marginLeft: 50,
   },
   // App
   smallerContainer: {
@@ -208,6 +216,12 @@ export const styles = StyleSheet.create({
     flex: 1.4,
     alignItems: "center",
     justifyContent: "center",
+    border: 5,
+    borderRadius: 15,
+    marginLeft: 20,
+    marginRight: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   titleContainer: {
     flexDirection: "column",

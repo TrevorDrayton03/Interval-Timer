@@ -19,20 +19,16 @@ const App = () => {
   return (
     <View style={[styles.container, darkTheme.container]}>
       <StatusBar
-        // animated={true}
         backgroundColor={"#121212"}
         barStyle={'light-content'}
-      // statusBarStyle='dark-content'
-      // showHideTransition={'fade'}
-      // hidden={false}
       >
       </StatusBar>
       <View style={styles.titleContainer}>
-        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Training Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
+        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Total Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
-      <View style={[styles.smallerContainer, darkTheme.smallerContainer]}>
+      <View style={[styles.smallerContainer, darkTheme.surface]}>
         <Timer
-          name="Round Time"
+          name="Round"
           icon="boxing-glove"
           incremental={5}
           value={roundLength}
@@ -43,8 +39,8 @@ const App = () => {
         >
         </Timer>
         <Timer
-          name="Rest Time"
-          icon="arrow-down-circle"
+          name="Rest"
+          icon="pause-octagon"
           incremental={5}
           value={restLength}
           setValue={setRestLength}
@@ -54,8 +50,8 @@ const App = () => {
         >
         </Timer>
         <Timer
-          name="Ready Time"
-          icon="timelapse"
+          name="Ready"
+          icon="checkbox-marked"
           incremental={5}
           value={readyLength}
           setValue={setReadyLength}
@@ -66,7 +62,7 @@ const App = () => {
         </Timer>
         <Timer
           name="Intervals"
-          icon="alarm-bell"
+          icon="timer"
           incremental={1}
           value={intervals}
           setValue={setIntervals}

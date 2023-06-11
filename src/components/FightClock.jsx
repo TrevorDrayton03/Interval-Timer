@@ -260,7 +260,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   return (
     <View>
       <TouchableOpacity onPress={onPressHandle}>
-        <Icon name="send" size={50} color="#BB86FC"></Icon>
+        <Icon name="play-circle-outline" size={50} color="#BB86FC"></Icon>
       </TouchableOpacity>
       <Modal
         visible={modalVisible}

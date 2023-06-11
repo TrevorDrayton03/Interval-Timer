@@ -47,6 +47,9 @@ export const darkTheme = StyleSheet.create({
   secondary: {
     color: secondary,
   },
+  surface: {
+    backgroundColor: surface,
+  },
 });
 
 export default darkTheme;
