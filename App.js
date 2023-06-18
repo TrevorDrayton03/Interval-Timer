@@ -24,7 +24,7 @@ const App = () => {
       >
       </StatusBar>
       <View style={styles.titleContainer}>
-        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Total Time: {roundLength > 0 ? displayTime : "0:00"}</Text>
+        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Effective Duration: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
       <View style={[styles.smallerContainer, darkTheme.surface]}>
         <Timer

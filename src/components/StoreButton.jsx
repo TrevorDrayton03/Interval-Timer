@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
 import helpers from "../helpers/helpers";
@@ -121,7 +122,7 @@ const StoreButton = ({
                     numberOfLines={2}
                     style={[styles.storeButtonTextInput, darkTheme.onSurface]}
                     placeholderTextColor="#CCCCCC"
-                    // placeholderTextColor="#03DAC6"
+                  // placeholderTextColor="#03DAC6"
                   ></TextInput>
                 </View>
                 <View style={styles.storeButtonButtonInputContainer}>
@@ -170,76 +171,72 @@ const StoreButton = ({
                 ]}
               />
             </View>
-            <ScrollView style={styles.storeButtonScrollView}>
+            <ScrollView style={[styles.storeButtonScrollView, darkTheme.storeButtonScrollView]}>
               {allItems &&
                 allItems.map((item, index) => {
                   return (
-                    <View key={index} style={styles.storeButtonColumnContainer}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setRoundLength(item.storeRoundLength);
-                          setRestLength(item.storeRestLength);
-                          setReadyLength(item.storeReadyLength);
-                          setIntervals(item.storeIntervals);
-                          setModalVisible(false);
-                        }}
-                        onLongPress={() => {
-                          deleteItemHandle(item.title);
-                        }}
-                      >
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => {
+                        setRoundLength(item.storeRoundLength);
+                        setRestLength(item.storeRestLength);
+                        setReadyLength(item.storeReadyLength);
+                        setIntervals(item.storeIntervals);
+                        setModalVisible(false);
+                      }}
+                      onLongPress={() => {
+                        deleteItemHandle(item.title);
+                      }}
+                    >
+                      <View style={styles.storeButtonColumnContainer}>
                         <View style={styles.storeButtonRowContainer}>
-                          <Text
-                            style={[
-                              styles.storeButtonRow4,
-                              darkTheme.onSurface,
-                            ]}
-                          >
+                          <Text style={[styles.storeButtonRow4, darkTheme.onSurface]}>
                             {item.title}
                           </Text>
-                          <Text
-                            style={[
-                              styles.storeButtonRow5,
-                              darkTheme.onSurface,
-                            ]}
-                          >
+                          <Text style={[styles.storeButtonRow5, darkTheme.onSurface]}>
                             {item.storeRoundLength}
                           </Text>
-                          <Text
-                            style={[
-                              styles.storeButtonRow5,
-                              darkTheme.onSurface,
-                            ]}
-                          >
+                          <Text style={[styles.storeButtonRow5, darkTheme.onSurface]}>
                             {item.storeRestLength}
                           </Text>
-                          <Text
-                            style={[
-                              styles.storeButtonRow5,
-                              darkTheme.onSurface,
-                            ]}
-                          >
+                          <Text style={[styles.storeButtonRow5, darkTheme.onSurface]}>
                             {item.storeReadyLength}
                           </Text>
-                          <Text
-                            style={[
-                              styles.storeButtonRow4,
-                              darkTheme.onSurface,
-                            ]}
-                          >
+                          <Text style={[styles.storeButtonRow4, darkTheme.onSurface]}>
                             {item.storeIntervals}
                           </Text>
                         </View>
                         <View style={styles.storeButtonRowContainer}>
                           {/* <View style={styles.storeButtonBlackBar2} /> */}
                         </View>
-                      </TouchableOpacity>
-                    </View>
+                      </View>
+                    </TouchableOpacity>
                   );
                 })}
             </ScrollView>
           </View>
-          <View style={styles.storeButtonFooterContainer}>
+          <View style={styles.saveCurrentTimer}>
+            <TouchableOpacity
+              onPress={() => setInputModalVisible(true)}
+              style={[styles.button, darkTheme.button]}
+            >
+              <Text style={darkTheme.onPrimary}>Save Current Timer</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.columnStoreButton}>
+            <View style={styles.row}>
+              <View style={styles.backButton}>
+                <TouchableOpacity onPress={() => setModalVisible(false)}>
+                  <Icon2 name={"arrow-back"} size={40} color="#03DAC6" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+          {/* <View style={styles.storeButtonFooterContainer}>
             <View style={styles.storeButtonFooter}>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <Icon2 name={"arrow-back"} size={40} color="#03DAC6" />
+              </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setInputModalVisible(true)}
                 style={[styles.button, darkTheme.button]}
@@ -247,7 +244,7 @@ const StoreButton = ({
                 <Text style={darkTheme.onPrimary}>Save Current Timer</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </View> */}
         </View>
       </Modal>
     </View>

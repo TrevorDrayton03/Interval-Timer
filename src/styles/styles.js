@@ -171,22 +171,38 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     // padding: 10,
-    backgroundColor: '#212121',
+    backgroundColor: '#303030',
     borderRadius: 15,
-    borderColor: "#03DAC6",
+    // borderColor: "#03DAC6",
+    borderColor: "#121212",
     borderWidth: 2,
-    margin: 5,
-    padding: 10,
+    margin: 4,
+    padding: 25,
     marginLeft: 10,
     marginRight: 10
   },
-  storeButtonFooterContainer: {
-    flex: 0.5,
-    justifyContent: "flex-end",
-  },
-  storeButtonFooter: {
+
+  // storeButtonFooter: {
+  //   flexDirection: "row",
+  //   justifyContent: "space-around",
+  // },
+  // storeButtonFooterContainer: {
+  //   flexDirection: 'column',
+  //   flex: 0.5,
+  //   justifyContent: "center",
+  // },
+  saveCurrentTimer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    flex: 0.85,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginTop: 0,
+    padding: 0
+  },
+  backButton: {
+    flexDirection: "row",
+    flex: .85,
+    justifyContent: "flex-start",
   },
   storeButtonInputModalContainer: {
     flex: 1,
@@ -249,7 +265,11 @@ export const styles = StyleSheet.create({
   },
   column: {
     flex: 0.25,
-    alignItems: "flex-start",
+    alignItems: "center",
+  },
+  columnStoreButton: {
+    flex: .52,
+    alignItems: "center",
   },
   trainingTime: {
     fontSize: 28,

@@ -50,6 +50,9 @@ export const darkTheme = StyleSheet.create({
   surface: {
     backgroundColor: surface,
   },
+  storeButtonScrollView: {
+    backgroundColor: surface,
+  },
 });
 
 export default darkTheme;
