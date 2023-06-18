@@ -6,6 +6,7 @@ import MinuteSecondPicker from "./MinuteSecondPicker";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
 import helpers from "../helpers/helpers";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
 
 const Timer = ({
   name,
@@ -73,6 +74,15 @@ const Timer = ({
                     OK
                   </Text>
                 </Pressable>
+              </View>
+              <View style={styles.timerBackColumn}>
+                <View style={styles.row}>
+                  <View style={styles.timerBackButton}>
+                    <TouchableOpacity onPress={() => setModalVisible(false)}>
+                      <Icon2 name={"arrow-back"} size={40} color="#03DAC6" />
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
             </View>
           </Modal>

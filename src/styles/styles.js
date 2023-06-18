@@ -271,6 +271,20 @@ export const styles = StyleSheet.create({
     flex: .52,
     alignItems: "center",
   },
+  // timerBackRow: {
+  //   flexDirection: "row",
+  //   flex: 1,
+  //   justifyContent: 'flex-start',
+  // },
+  timerBackButton: {
+    flexDirection: "row",
+    flex: .17,
+    justifyContent: "flex-end",
+  },
+  timerBackColumn: {
+    flexDirection: "column",
+    flex: .10,
+  },
   trainingTime: {
     fontSize: 28,
   },
