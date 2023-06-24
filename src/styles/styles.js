@@ -96,7 +96,6 @@ export const styles = StyleSheet.create({
   },
   fightClockComplete: {
     fontWeight: "bold",
-    fontSize: 40,
   },
   // StoreButton
   storeButtonTextInputContainer: {

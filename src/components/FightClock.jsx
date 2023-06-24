@@ -7,6 +7,7 @@ import {
   Alert,
   AppState,
   Vibration,
+  Dimensions
 } from "react-native";
 import { Audio } from "expo-av";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -33,6 +34,9 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   let totalDuration =
     roundLength * intervals + restLength * (intervals - 1) + readyLength;
   let displayTime = helpers.displayTime(duration);
+
+  const screenWidth = Dimensions.get('window').width;
+  const fontSize = Math.min(screenWidth * .25, 200); // Adjust the multiplier as needed  
 
   const onPressHandle = () => {
     if (roundLength === 0) {
@@ -282,35 +286,44 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         >
           {timerState === "ready" && (
             <View>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Ready Time Left: {displayTime}
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize }]}>
+                {displayTime}
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                Get Ready
               </Text>
             </View>
           )}
           {timerState === "round" && (
             <View>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Round Time Left: {displayTime}
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize }]}>
+                {displayTime}
               </Text>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Round: {rounds}
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                Round
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 30, textAlign: 'center' }]}>
+                {rounds} / {intervals}
               </Text>
             </View>
           )}
           {timerState === "rest" && (
             <View>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Rest Time Left: {displayTime}
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize }]}>
+                {displayTime}
               </Text>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Round: {rounds}
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                Rest
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 30, textAlign: 'center' }]}>
+                {rounds} / {intervals}
               </Text>
             </View>
           )}
           {timerState === "complete" && (
             <View>
-              <Text style={[styles.fightClockComplete, darkTheme.onSurface]}>
-                DONE!
+              <Text style={[styles.fightClockComplete, darkTheme.onSurface, { fontSize }]}>
+                DONE
               </Text>
             </View>
           )}
