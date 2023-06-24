@@ -292,6 +292,8 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
               <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
                 Get Ready
               </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 30, textAlign: 'center' }]}>
+              </Text>
             </View>
           )}
           {timerState === "round" && (
