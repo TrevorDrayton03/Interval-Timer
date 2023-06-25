@@ -14,6 +14,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
 import helpers from "../helpers/helpers";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
 
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   const [duration, setDuration] = useState(
@@ -30,6 +31,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   const [timerState, setTimerState] = useState(null);
   const [singleBellSound, setSingleBellSound] = useState();
   const [tripleBellSound, setTripleBellSound] = useState();
+  const [paused, setPaused] = useState(false);
 
   let totalDuration =
     roundLength * intervals + restLength * (intervals - 1) + readyLength;
@@ -59,6 +61,29 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
       setDuration(readyLength > 0 ? readyLength - 1 : roundLength - 1);
       setRounds(1);
     }
+  };
+
+  const pauseInterval = () => {
+    setPaused(true);
+    clearInterval(training);
+    setTraining(null);
+    setStopTime(Date.now());
+  };
+
+  const resumeInterval = () => {
+    setPaused(false);
+    setStartTime((prevStartTime) => {
+      const currentTime = Date.now();
+      const elapsedTime = currentTime - stopTime;
+      return prevStartTime + elapsedTime;
+    });
+    setTraining(
+      setInterval(() => {
+        setDuration((prevCount) => {
+          return prevCount - 1;
+        });
+      }, 1000)
+    );
   };
 
   const handleReadyState = (currentTime, readyLength) => {
@@ -261,22 +286,25 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     setStopTime(null);
   }, [duration]);
 
+  const resetOnClose = () => {
+    setModalVisible(false);
+    clearInterval(training);
+    setTraining(null);
+    setStartTime(null);
+    setAlteringState(false);
+    setStopTime(null);
+    setPaused(false);
+  }
+
   return (
     <View>
       <TouchableOpacity onPress={onPressHandle}>
-        <Icon name="play-circle-outline" size={50} color="#BB86FC"></Icon>
+        <Icon name="play-circle-outline" size={70} color="#BB86FC"></Icon>
       </TouchableOpacity>
       <Modal
         visible={modalVisible}
         animationType="fade"
-        onRequestClose={() => {
-          setModalVisible(false);
-          clearInterval(training);
-          setTraining(null);
-          setStartTime(null);
-          setAlteringState(false);
-          setStopTime(null);
-        }}
+        onRequestClose={resetOnClose}
       >
         <View
           style={[
@@ -286,7 +314,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         >
           {timerState === "ready" && (
             <View>
-              <Text style={[styles.text, darkTheme.onSurface, { fontSize }]}>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
@@ -298,7 +326,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           )}
           {timerState === "round" && (
             <View>
-              <Text style={[styles.text, darkTheme.onSurface, { fontSize }]}>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
@@ -311,7 +339,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           )}
           {timerState === "rest" && (
             <View>
-              <Text style={[styles.text, darkTheme.onSurface, { fontSize }]}>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
@@ -329,6 +357,26 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
               </Text>
             </View>
           )}
+          <View style={{ flexDirection: 'column', flex: .785, justifyContent: 'flex-end', alignItems: 'center' }}>
+            {timerState !== "complete" && (
+              <TouchableOpacity onPress={paused ? resumeInterval : pauseInterval}>
+                {paused ? (
+                  <Icon2 name={"play-circle-outline"} size={70} color="#BB86FC" />
+                ) : (
+                  <Icon2 name={"pause-circle-outline"} size={70} color="#BB86FC" />
+                )}
+              </TouchableOpacity>
+            )}
+          </View>
+          <View style={styles.fightClockBackColumn}>
+            <View style={styles.row}>
+              <View style={styles.fightClockBackButton}>
+                <TouchableOpacity onPress={resetOnClose}>
+                  <Icon2 name="arrow-back" size={40} color="#03DAC6" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
         </View>
       </Modal>
     </View>

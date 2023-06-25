@@ -112,7 +112,7 @@ const StoreButton = ({
                     darkTheme.onSurface,
                   ]}
                 >
-                  Save Current Timer
+                  Save Timer
                 </Text>
                 <View style={[styles.storeButtonTextInputContainer, darkTheme.surface]}>
                   <TextInput
@@ -122,8 +122,8 @@ const StoreButton = ({
                     numberOfLines={2}
                     style={[styles.storeButtonTextInput, darkTheme.onSurface]}
                     placeholderTextColor="#CCCCCC"
-                  // placeholderTextColor="#03DAC6"
-                  ></TextInput>
+                  >
+                  </TextInput>
                 </View>
                 <View style={styles.storeButtonButtonInputContainer}>
                   <TouchableOpacity
