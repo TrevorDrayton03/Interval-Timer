@@ -180,7 +180,6 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
-
   // storeButtonFooter: {
   //   flexDirection: "row",
   //   justifyContent: "space-around",
@@ -205,7 +204,7 @@ export const styles = StyleSheet.create({
   },
   fightClockBackColumn: {
     flexDirection: "row",
-    flex: .125,
+    flex: .08,
     justifyContent: "flex-end",
   },
   fightClockBackButton: {

@@ -313,7 +313,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           ]}
         >
           {timerState === "ready" && (
-            <View>
+            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
@@ -325,7 +325,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             </View>
           )}
           {timerState === "round" && (
-            <View>
+            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
@@ -338,7 +338,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             </View>
           )}
           {timerState === "rest" && (
-            <View>
+            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
@@ -351,13 +351,19 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             </View>
           )}
           {timerState === "complete" && (
-            <View>
-              <Text style={[styles.fightClockComplete, darkTheme.onSurface, { fontSize }]}>
+            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Text style={[styles.fightClockComplete, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 DONE
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                {/* for spacing */}
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                {/* for spacing */}
               </Text>
             </View>
           )}
-          <View style={{ flexDirection: 'column', flex: .785, justifyContent: 'flex-end', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'column', flex: .215, justifyContent: 'flex-end', alignItems: 'center' }}>
             {timerState !== "complete" && (
               <TouchableOpacity onPress={paused ? resumeInterval : pauseInterval}>
                 {paused ? (
