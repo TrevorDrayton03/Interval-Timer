@@ -90,18 +90,17 @@ export const styles = StyleSheet.create({
   // FightClock
   fightClockModalContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: 24,
+    // alignItems: "flex-start",
+    justifyContent: "space-between",
+    // fontSize: 24,
   },
   fightClockComplete: {
     fontWeight: "bold",
-    fontSize: 40,
   },
   // StoreButton
   storeButtonTextInputContainer: {
     borderWidth: 2,
-    borderColor: "#03DAC6",
+    borderColor: "#121212",
     borderRadius: 15,
     margin: 20,
     justifyContent: "center",
@@ -181,7 +180,6 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
-
   // storeButtonFooter: {
   //   flexDirection: "row",
   //   justifyContent: "space-around",
@@ -203,6 +201,23 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flex: .85,
     justifyContent: "flex-start",
+  },
+  fightClockBackColumn: {
+    flexDirection: "row",
+    flex: .08,
+    justifyContent: "flex-end",
+  },
+  fightClockBackButton: {
+    flexDirection: "row",
+    flex: .17,
+    justifyContent: "flex-end",
+  },
+  buttonsContainer: {
+    flex: .2,
+    flexDirection: "row",
+    // justifyContent: "space-around",
+    alignItems: "flex-end",
+    paddingBottom: 0,
   },
   storeButtonInputModalContainer: {
     flex: 1,

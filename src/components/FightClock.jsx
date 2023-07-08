@@ -7,12 +7,14 @@ import {
   Alert,
   AppState,
   Vibration,
+  Dimensions
 } from "react-native";
 import { Audio } from "expo-av";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
 import helpers from "../helpers/helpers";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
 
 const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   const [duration, setDuration] = useState(
@@ -22,6 +24,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   const [training, setTraining] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [stopTime, setStopTime] = useState(null);
+  const [pauseTime, setPauseTime] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [alteringState, setAlteringState] = useState(false);
   const appState = useRef(AppState.currentState);
@@ -29,10 +32,14 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   const [timerState, setTimerState] = useState(null);
   const [singleBellSound, setSingleBellSound] = useState();
   const [tripleBellSound, setTripleBellSound] = useState();
+  const [paused, setPaused] = useState(false);
 
   let totalDuration =
     roundLength * intervals + restLength * (intervals - 1) + readyLength;
   let displayTime = helpers.displayTime(duration);
+
+  const screenWidth = Dimensions.get('window').width;
+  const fontSize = Math.min(screenWidth * .25, 200); // Adjust the multiplier as needed  
 
   const onPressHandle = () => {
     if (roundLength === 0) {
@@ -55,6 +62,29 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
       setDuration(readyLength > 0 ? readyLength - 1 : roundLength - 1);
       setRounds(1);
     }
+  };
+
+  const pauseInterval = () => {
+    setPaused(true);
+    clearInterval(training);
+    setTraining(null);
+    setPauseTime(Date.now());
+  };
+
+  const resumeInterval = () => {
+    setPaused(false);
+    setStartTime((prevStartTime) => {
+      const currentTime = Date.now();
+      const elapsedTime = currentTime - pauseTime;
+      return prevStartTime + elapsedTime;
+    });
+    setTraining(
+      setInterval(() => {
+        setDuration((prevCount) => {
+          return prevCount - 1;
+        });
+      }, 1000)
+    );
   };
 
   const handleReadyState = (currentTime, readyLength) => {
@@ -255,24 +285,28 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
       }
     }
     setStopTime(null);
+    setPauseTime(null)
   }, [duration]);
+
+  const resetOnClose = () => {
+    setModalVisible(false);
+    clearInterval(training);
+    setTraining(null);
+    setStartTime(null);
+    setAlteringState(false);
+    setStopTime(null);
+    setPaused(false);
+  }
 
   return (
     <View>
       <TouchableOpacity onPress={onPressHandle}>
-        <Icon name="play-circle-outline" size={50} color="#BB86FC"></Icon>
+        <Icon name="play-circle-outline" size={70} color="#BB86FC"></Icon>
       </TouchableOpacity>
       <Modal
         visible={modalVisible}
         animationType="fade"
-        onRequestClose={() => {
-          setModalVisible(false);
-          clearInterval(training);
-          setTraining(null);
-          setStartTime(null);
-          setAlteringState(false);
-          setStopTime(null);
-        }}
+        onRequestClose={resetOnClose}
       >
         <View
           style={[
@@ -281,39 +315,76 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           ]}
         >
           {timerState === "ready" && (
-            <View>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Ready Time Left: {displayTime}
+            <View style={{ flexDirection: 'column', flex: .55, justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
+                {displayTime}
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                Get Ready
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 30, textAlign: 'center' }]}>
               </Text>
             </View>
           )}
           {timerState === "round" && (
-            <View>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Round Time Left: {displayTime}
+            <View style={{ flexDirection: 'column', flex: .55, justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
+                {displayTime}
               </Text>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Round: {rounds}
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                Round
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 30, textAlign: 'center' }]}>
+                {rounds} / {intervals}
               </Text>
             </View>
           )}
           {timerState === "rest" && (
-            <View>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Rest Time Left: {displayTime}
+            <View style={{ flexDirection: 'column', flex: .55, justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
+                {displayTime}
               </Text>
-              <Text style={[styles.text, darkTheme.onSurface]}>
-                Round: {rounds}
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                Rest
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 30, textAlign: 'center' }]}>
+                {rounds} / {intervals}
               </Text>
             </View>
           )}
           {timerState === "complete" && (
-            <View>
-              <Text style={[styles.fightClockComplete, darkTheme.onSurface]}>
-                DONE!
+            <View style={{ flexDirection: 'column', flex: .575, justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Text style={[styles.fightClockComplete, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
+                DONE
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                {/* for spacing */}
+              </Text>
+              <Text style={[styles.text, darkTheme.onSurface, { fontSize: 40, textAlign: 'center' }]}>
+                {/* for spacing */}
               </Text>
             </View>
           )}
+          <View style={{ flexDirection: 'column', flex: .215, justifyContent: 'flex-end', alignItems: 'center' }}>
+            {timerState !== "complete" && (
+              <TouchableOpacity onPress={paused ? resumeInterval : pauseInterval}>
+                {paused ? (
+                  <Icon2 name={"play-circle-outline"} size={70} color="#BB86FC" />
+                ) : (
+                  <Icon2 name={"pause-circle-outline"} size={70} color="#BB86FC" />
+                )}
+              </TouchableOpacity>
+            )}
+          </View>
+          <View style={styles.fightClockBackColumn}>
+            <View style={styles.row}>
+              <View style={styles.fightClockBackButton}>
+                <TouchableOpacity onPress={resetOnClose}>
+                  <Icon2 name="arrow-back" size={40} color="#03DAC6" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
         </View>
       </Modal>
     </View>
