@@ -14,7 +14,6 @@ const helpers = {
     let seconds = value % 60;
     let minutes = Math.floor(value / 60) % 60;
     let hours = Math.floor(value / 3600);
-    //minutes = helpers.zeroPad(minutes);
     seconds = helpers.zeroPad(seconds);
     if (hours == 0) {
       var displayTime = minutes + ":" + seconds;
@@ -24,7 +23,7 @@ const helpers = {
       var displayTime = hours + ":" + minutes + ":" + seconds;
       return displayTime;
     }
-  },
+  }, 
   setItem: async function (key, value) {
     try {
       await AsyncStorage.setItem(key, value);

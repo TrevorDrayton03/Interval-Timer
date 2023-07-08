@@ -24,6 +24,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   const [training, setTraining] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [stopTime, setStopTime] = useState(null);
+  const [pauseTime, setPauseTime] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [alteringState, setAlteringState] = useState(false);
   const appState = useRef(AppState.currentState);
@@ -67,14 +68,14 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
     setPaused(true);
     clearInterval(training);
     setTraining(null);
-    setStopTime(Date.now());
+    setPauseTime(Date.now());
   };
 
   const resumeInterval = () => {
     setPaused(false);
     setStartTime((prevStartTime) => {
       const currentTime = Date.now();
-      const elapsedTime = currentTime - stopTime;
+      const elapsedTime = currentTime - pauseTime;
       return prevStartTime + elapsedTime;
     });
     setTraining(
@@ -284,6 +285,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
       }
     }
     setStopTime(null);
+    setPauseTime(null)
   }, [duration]);
 
   const resetOnClose = () => {
@@ -313,7 +315,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           ]}
         >
           {timerState === "ready" && (
-            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'column', flex: .55, justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
@@ -325,7 +327,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             </View>
           )}
           {timerState === "round" && (
-            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'column', flex: .55, justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
@@ -338,7 +340,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             </View>
           )}
           {timerState === "rest" && (
-            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'column', flex: .55, justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={[styles.text, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 {displayTime}
               </Text>
@@ -351,7 +353,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             </View>
           )}
           {timerState === "complete" && (
-            <View style={{ flexDirection: 'column', flex: .64, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'column', flex: .575, justifyContent: 'flex-end', alignItems: 'center' }}>
               <Text style={[styles.fightClockComplete, darkTheme.onSurface, { fontSize, textAlign: 'center' }]}>
                 DONE
               </Text>

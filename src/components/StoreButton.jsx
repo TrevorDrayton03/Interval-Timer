@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Modal,
-  Button,
   Text,
   View,
   TouchableOpacity,
@@ -29,8 +28,6 @@ const StoreButton = ({
   const [allItems, setAllItems] = useState(null);
   const [inputModalVisible, setInputModalVisible] = useState(false);
   const [inputText, setInputText] = useState(null);
-
-  // change key to uuivd from title
 
   useEffect(() => {
     setAllItemsHandle();
@@ -232,19 +229,6 @@ const StoreButton = ({
               </View>
             </View>
           </View>
-          {/* <View style={styles.storeButtonFooterContainer}>
-            <View style={styles.storeButtonFooter}>
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <Icon2 name={"arrow-back"} size={40} color="#03DAC6" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setInputModalVisible(true)}
-                style={[styles.button, darkTheme.button]}
-              >
-                <Text style={darkTheme.onPrimary}>Save Current Timer</Text>
-              </TouchableOpacity>
-            </View>
-          </View> */}
         </View>
       </Modal>
     </View>

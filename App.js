@@ -6,6 +6,7 @@ import StoreButton from "./src/components/StoreButton";
 import styles from "./src/styles/styles";
 import darkTheme from "./src/styles/darkTheme";
 import helpers from "./src/helpers/helpers";
+import KeepAwake from 'react-native-keep-awake';
 
 const App = () => {
   const [roundLength, setRoundLength] = useState(5);
@@ -79,12 +80,13 @@ const App = () => {
           roundLength={roundLength}
           readyLength={readyLength}
         >
+          <KeepAwake />
         </FightClock>
       </View>
       <View style={styles.column}>
         <View style={styles.row}>
           <View style={styles.storeButtonContainer}>
-            <StoreButton
+            <StoreButton    
               intervals={intervals}
               restLength={restLength}
               roundLength={roundLength}
