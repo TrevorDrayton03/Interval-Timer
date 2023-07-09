@@ -23,9 +23,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#121212",
-        "permissions": ["default", "!RECORD_AUDIO"]
+        "backgroundColor": "#121212"
       },
+      "permissions": ["default", "!RECORD_AUDIO"],
       "package": "intevraltime0311.myapp"
     },
     "web": {
