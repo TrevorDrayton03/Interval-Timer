@@ -204,12 +204,12 @@ export const styles = StyleSheet.create({
   },
   fightClockBackColumn: {
     flexDirection: "row",
-    flex: .08,
+    flex: .11,
     justifyContent: "flex-end",
   },
   fightClockBackButton: {
     flexDirection: "row",
-    flex: .17,
+    flex: .23,
     justifyContent: "flex-end",
   },
   buttonsContainer: {
@@ -275,15 +275,15 @@ export const styles = StyleSheet.create({
   },
   storeButtonContainer: {
     flexDirection: "row",
-    flex: 0.82,
+    flex: 0.86,
     justifyContent: "flex-start",
   },
   column: {
-    flex: 0.25,
+    flex: 0.4,
     alignItems: "center",
   },
   columnStoreButton: {
-    flex: .52,
+    flex: .75,
     alignItems: "center",
   },
   // timerBackRow: {
@@ -293,12 +293,12 @@ export const styles = StyleSheet.create({
   // },
   timerBackButton: {
     flexDirection: "row",
-    flex: .17,
+    flex: .22,
     justifyContent: "flex-end",
   },
   timerBackColumn: {
     flexDirection: "column",
-    flex: .10,
+    flex: .15,
   },
   trainingTime: {
     fontSize: 28,

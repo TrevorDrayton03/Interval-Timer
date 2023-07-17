@@ -300,7 +300,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={onPressHandle}>
+      <TouchableOpacity onPress={onPressHandle} style={{padding: 10}}>
         <Icon name="play-circle-outline" size={70} color="#BB86FC"></Icon>
       </TouchableOpacity>
       <Modal
@@ -369,9 +369,9 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             {timerState !== "complete" && (
               <TouchableOpacity onPress={paused ? resumeInterval : pauseInterval}>
                 {paused ? (
-                  <Icon2 name={"play-circle-outline"} size={70} color="#BB86FC" />
+                  <Icon2 name={"play-circle-outline"} size={70} style={{padding: 10}} color="#BB86FC" />
                 ) : (
-                  <Icon2 name={"pause-circle-outline"} size={70} color="#BB86FC" />
+                  <Icon2 name={"pause-circle-outline"} size={70} style={{padding: 10}} color="#BB86FC" />
                 )}
               </TouchableOpacity>
             )}
@@ -379,7 +379,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           <View style={styles.fightClockBackColumn}>
             <View style={styles.row}>
               <View style={styles.fightClockBackButton}>
-                <TouchableOpacity onPress={resetOnClose}>
+                <TouchableOpacity onPress={resetOnClose} style={{padding: 10}}>
                   <Icon2 name="arrow-back" size={40} color="#03DAC6" />
                 </TouchableOpacity>
               </View>

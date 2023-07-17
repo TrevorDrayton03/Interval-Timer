@@ -80,7 +80,7 @@ const StoreButton = ({
 
   return (
     <View>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ padding: 20}}>
         <Icon name={"bookmark-multiple-outline"} size={30} color="#03DAC6" />
       </TouchableOpacity>
       <Modal
@@ -223,7 +223,7 @@ const StoreButton = ({
           <View style={styles.columnStoreButton}>
             <View style={styles.row}>
               <View style={styles.backButton}>
-                <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <TouchableOpacity onPress={() => setModalVisible(false)} style={{ padding: 10}}>
                   <Icon2 name={"arrow-back"} size={40} color="#03DAC6" />
                 </TouchableOpacity>
               </View>
