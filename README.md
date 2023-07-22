@@ -27,7 +27,7 @@ In order to create a high quality mobile application, the application:
 
 ## Screenshots
 <div style="display: inline-block;">
-<img src="https://user-images.githubusercontent.com/56656811/225755433-12209553-0d1c-4e14-b530-d6d63741f9e9.png" alt="March 16 Screenshot #1" width="300">
-<img src="https://user-images.githubusercontent.com/56656811/225755443-10fcda52-1faf-4c26-b267-1ef4344fa1e8.png" alt="March 16 Screenshot #2" width="300">
-<img src="https://user-images.githubusercontent.com/56656811/225755451-b8d232ff-5f87-4d86-a499-54956885fccc.png" alt="March 16 Screenshot #3" width="300">
+<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/318979fe-73f5-4c85-8865-0d4f1d05df2d" alt="March 16 Screenshot #1" width="300">
+<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/338f908f-0c9a-4a46-9f98-c88fd751dfed" alt="March 16 Screenshot #2" width="300">
+<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/151cd62d-b7c7-46d3-9c68-90952c9c47bf" alt="March 16 Screenshot #3" width="300">
 </div>
