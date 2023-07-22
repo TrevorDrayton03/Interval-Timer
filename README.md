@@ -3,27 +3,27 @@
 ##### Project: React-Native Expo Mobile Application
 ##### Author: Trevor Drayton
 
-##### **Caveat:** This is application is a work in progress.
-
 ## About 
 
-
-Interval Timer was inspired when I was using a popular interval timer when exercising in the gym. There was some features that I wish it had. Now, I am developing one for myself that will implement the features I want from an interval timer. Then, I will share it with others for free on the app store.
-
-In order to create a high quality mobile application, the application: 
-- must be robust
-- must be well-documented
-- must include a test suite
-- must work on various devices
-- must be user friendly, intuitive, and attractive ( a good design )
-- must be maintained
+Interval Timer was inspired when exercising at the gym with my friend using an interval timer. I was complaining about adds and features that I wanted. My friend said "why don't you just make one?". Now it's on the play store for free for anyone else who wants to use it.
 
 ## Features
 - Store user-created timers to easily use for later
-- When a timer is started and the app is minimized/backgrounded, the timer is restored to the current time when the app is active again
-- Choose whether or not to use ready or rest rounds
-- Vibration and sound to signify round changes
+- An active timer session will restore state to the proper duration and round when foregrounded if accidentally backgrounded.
+- Configurable; choose whether or not to have rest or ready rounds.
+- Vibration and sounds to signify round changes, near-end of rounds, and when it's over.
 - Set the duration of each round using a picker, onPressIn, or onPress
+- Material Dark Theme
+
+## Future Releases
+- Toggle milliseconds
+- Toggle sound, vibrations, light mode
+- Toggle vibrations
+- Toggle light/dark mode
+- Toggle ready time (making it an unchangeable, default value)
+- Refactor the layout
+- Default timer to be added to stored timers
+- Release on the Apple App Store
 
 ## Screenshots
 <div style="display: inline-block;">
