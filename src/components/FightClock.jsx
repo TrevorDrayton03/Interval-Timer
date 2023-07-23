@@ -32,6 +32,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   const [timerState, setTimerState] = useState(null);
   const [singleBellSound, setSingleBellSound] = useState();
   const [tripleBellSound, setTripleBellSound] = useState();
+  const [beepSound, setBeepSound] = useState();
   const [paused, setPaused] = useState(false);
 
   let totalDuration =
@@ -39,7 +40,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
   let displayTime = helpers.displayTime(duration);
 
   const screenWidth = Dimensions.get('window').width;
-  const fontSize = Math.min(screenWidth * .25, 200); // Adjust the multiplier as needed  
+  const fontSize = Math.min(screenWidth * .25, 200);
 
   const onPressHandle = () => {
     if (roundLength === 0) {
@@ -142,8 +143,15 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
       );
       setTripleBellSound(sound);
     }
-    playSingleBell();
-    playTripleBell();
+    async function playBeep() {
+      let { sound } = await Audio.Sound.createAsync(
+        require("../sounds/beep.wav")
+      );
+      setBeepSound(sound);
+    }
+    playSingleBell()
+    playTripleBell()
+    playBeep()
 
     const subscription = AppState.addEventListener("change", (nextAppState) => {
       if (appState.current.match(/active/) && nextAppState === "background") {
@@ -251,7 +259,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           }
         }
         setRounds((prevCount) => {
-          console.log("reached setRounds"); // problem is here
+          console.log("reached setRounds");
           singleBellSound.replayAsync();
           Vibration.vibrate();
           if (timerState === "ready") {
@@ -284,6 +292,9 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
         singleBellSound.replayAsync();
       }
     }
+    if (duration <= 2 && duration >= 0) {
+      beepSound.replayAsync()
+    }
     setStopTime(null);
     setPauseTime(null)
   }, [duration]);
@@ -300,7 +311,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={onPressHandle} style={{padding: 10}}>
+      <TouchableOpacity onPress={onPressHandle} style={{ padding: 10 }}>
         <Icon name="play-circle-outline" size={70} color="#BB86FC"></Icon>
       </TouchableOpacity>
       <Modal
@@ -369,9 +380,9 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
             {timerState !== "complete" && (
               <TouchableOpacity onPress={paused ? resumeInterval : pauseInterval}>
                 {paused ? (
-                  <Icon2 name={"play-circle-outline"} size={70} style={{padding: 10}} color="#BB86FC" />
+                  <Icon2 name={"play-circle-outline"} size={70} style={{ padding: 10 }} color="#BB86FC" />
                 ) : (
-                  <Icon2 name={"pause-circle-outline"} size={70} style={{padding: 10}} color="#BB86FC" />
+                  <Icon2 name={"pause-circle-outline"} size={70} style={{ padding: 10 }} color="#BB86FC" />
                 )}
               </TouchableOpacity>
             )}
@@ -379,7 +390,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength }) => {
           <View style={styles.fightClockBackColumn}>
             <View style={styles.row}>
               <View style={styles.fightClockBackButton}>
-                <TouchableOpacity onPress={resetOnClose} style={{padding: 10}}>
+                <TouchableOpacity onPress={resetOnClose} style={{ padding: 10 }}>
                   <Icon2 name="arrow-back" size={40} color="#03DAC6" />
                 </TouchableOpacity>
               </View>
