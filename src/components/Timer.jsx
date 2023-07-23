@@ -78,7 +78,7 @@ const Timer = ({
               <View style={styles.timerBackColumn}>
                 <View style={styles.row}>
                   <View style={styles.timerBackButton}>
-                    <TouchableOpacity onPress={() => setModalVisible(false)} style={{ padding: 10}} >
+                    <TouchableOpacity onPress={() => setModalVisible(false)} style={{ padding: 10 }} >
                       <Icon2 name={"arrow-back"} size={40} color="#03DAC6" />
                     </TouchableOpacity>
                   </View>
