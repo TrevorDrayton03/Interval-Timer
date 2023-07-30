@@ -30,4 +30,7 @@ Interval Timer was inspired when exercising at the gym with my friend using an i
 <img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/318979fe-73f5-4c85-8865-0d4f1d05df2d" alt="March 16 Screenshot #1" width="300">
 <img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/338f908f-0c9a-4a46-9f98-c88fd751dfed" alt="March 16 Screenshot #2" width="300">
 <img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/151cd62d-b7c7-46d3-9c68-90952c9c47bf" alt="March 16 Screenshot #3" width="300">
+<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/f1bf17e7-e31b-4848-b4a5-185aa32d08ea" alt="July 30 Screenshot #4" width="300">
+<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/cc65cb72-67f2-434b-b691-9e0affb6af07" alt="July 30 Screenshot #5" width="300">
+
 </div>
