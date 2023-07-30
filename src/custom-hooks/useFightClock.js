@@ -5,7 +5,7 @@ import {
   Vibration,
   Dimensions
 } from "react-native";
-import helpers from "../helpers/helpers";
+import { getDisplayTime } from "../../src/helpers/helpers";
 
 
 const useFightClock = (intervals, restLength, roundLength, readyLength, beepSound, singleBellSound, tripleBellSound) => {
@@ -26,7 +26,7 @@ const useFightClock = (intervals, restLength, roundLength, readyLength, beepSoun
 
   let totalDuration =
     roundLength * intervals + restLength * (intervals - 1) + readyLength;
-  let displayTime = helpers.displayTime(duration);
+  let displayTime = getDisplayTime(duration);
 
   const screenWidth = Dimensions.get('window').width;
   const fontSize = Math.min(screenWidth * .25, 200);

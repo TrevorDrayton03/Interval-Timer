@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import helpers from "../helpers/helpers";
+import { setItem, getMultipleItems, deleteItem, getAllKeys } from "../../src/helpers/helpers";
 import { Alert } from "react-native";
 
 const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
@@ -22,13 +22,13 @@ const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
       storeIntervals: intervals,
     };
     training = JSON.stringify(training);
-    await helpers.setItem(title, training);
+    await setItem(title, training);
     await setAllItemsHandle();
   }, [roundLength, restLength, readyLength, intervals]);
 
   const setAllItemsHandle = useCallback(async () => {
-    const keys = await helpers.getAllKeys();
-    setAllItems(await helpers.getMultipleItems(keys));
+    const keys = await getAllKeys();
+    setAllItems(await getMultipleItems(keys));
   }, []);
 
   const deleteItemHandle = useCallback(async (key) => {
@@ -43,7 +43,7 @@ const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
         {
           text: "Delete",
           onPress: async () => {
-            helpers.deleteItem(key);
+            deleteItem(key);
             await setAllItemsHandle(setAllItems);
           },
         },
@@ -53,10 +53,10 @@ const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
   }, []);
 
   const deleteAllItemsHandle = useCallback(async () => {
-    const keys = await helpers.getAllKeys();
-    setAllItems(await helpers.deleteMultipleItems(keys));
+    const keys = await getAllKeys();
+    setAllItems(await deleteMultipleItems(keys));
   }, []);
-  
+
   return {
     modalVisible,
     setModalVisible,

@@ -5,8 +5,8 @@ import IncrementDecrementbutton from "./IncrementDecrementButton";
 import MinuteSecondPicker from "./MinuteSecondPicker";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
-import helpers from "../helpers/helpers";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
+import { getDisplayTime} from "../../src/helpers/helpers";
 
 const Timer = ({
   name,
@@ -20,7 +20,7 @@ const Timer = ({
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  let displayTime = helpers.displayTime(value);
+  let displayTime = getDisplayTime(value);
 
   return (
     <View style={[styles.timerContainer, darkTheme.timerContainer]}>

@@ -5,10 +5,10 @@ import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
 import styles from "./src/styles/styles";
 import darkTheme from "./src/styles/darkTheme";
-import helpers from "./src/helpers/helpers";
 import useSetSounds from "./src/custom-hooks/useSetSounds";
 import useTimerStates from "./src/custom-hooks/useTimerStates";
 import { useKeepAwake } from "expo-keep-awake";
+import { getDisplayTime } from "./src/helpers/helpers";
 
 const App = () => {
   const {
@@ -31,7 +31,7 @@ const App = () => {
   useKeepAwake()
 
   let trainingTime = roundLength * intervals + restLength * (intervals - 1);
-  let displayTime = helpers.displayTime(trainingTime)
+  let displayTime = getDisplayTime(trainingTime)
 
   return (
     <View style={[styles.container, darkTheme.container]}>
