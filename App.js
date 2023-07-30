@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, View, StatusBar } from "react-native";
 import Timer from "./src/components/Timer";
 import FightClock from "./src/components/FightClock";
@@ -6,13 +6,29 @@ import StoreButton from "./src/components/StoreButton";
 import styles from "./src/styles/styles";
 import darkTheme from "./src/styles/darkTheme";
 import helpers from "./src/helpers/helpers";
-import KeepAwake from 'react-native-keep-awake';
+import useSetSounds from "./src/custom-hooks/useSetSounds";
+import useTimerStates from "./src/custom-hooks/useTimerStates";
+import { useKeepAwake } from "expo-keep-awake";
 
 const App = () => {
-  const [roundLength, setRoundLength] = useState(5);
-  const [restLength, setRestLength] = useState(0);
-  const [readyLength, setReadyLength] = useState(0);
-  const [intervals, setIntervals] = useState(1);
+  const {
+    beepSound,
+    singleBellSound,
+    tripleBellSound
+  } = useSetSounds()
+
+  const {
+    roundLength,
+    restLength,
+    readyLength,
+    intervals,
+    setRoundLength,
+    setRestLength,
+    setReadyLength,
+    setIntervals
+  } = useTimerStates()
+
+  useKeepAwake()
 
   let trainingTime = roundLength * intervals + restLength * (intervals - 1);
   let displayTime = helpers.displayTime(trainingTime)
@@ -25,7 +41,7 @@ const App = () => {
       >
       </StatusBar>
       <View style={styles.titleContainer}>
-        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Effective Duration: {roundLength > 0 ? displayTime : "0:00"}</Text>
+        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Duration: {roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
       <View style={[styles.smallerContainer, darkTheme.surface]}>
         <Timer
@@ -79,14 +95,16 @@ const App = () => {
           restLength={restLength}
           roundLength={roundLength}
           readyLength={readyLength}
+          beepSound={beepSound}
+          tripleBellSound={tripleBellSound}
+          singleBellSound={singleBellSound}
         >
-          <KeepAwake />
         </FightClock>
       </View>
       <View style={styles.column}>
         <View style={styles.row}>
           <View style={styles.storeButtonContainer}>
-            <StoreButton    
+            <StoreButton
               intervals={intervals}
               restLength={restLength}
               roundLength={roundLength}

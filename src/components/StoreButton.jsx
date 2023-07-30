@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Modal,
   Text,
   View,
   TouchableOpacity,
-  Alert,
   TextInput,
   ScrollView,
 } from "react-native";
@@ -12,7 +11,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
-import helpers from "../helpers/helpers";
+import useStoreButton from "../custom-hooks/useStoreButton";
 
 const StoreButton = ({
   roundLength,
@@ -24,63 +23,22 @@ const StoreButton = ({
   setIntervals,
   setReadyLength,
 }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [allItems, setAllItems] = useState(null);
-  const [inputModalVisible, setInputModalVisible] = useState(false);
-  const [inputText, setInputText] = useState(null);
 
-  useEffect(() => {
-    setAllItemsHandle();
-    setInputText(null);
-  }, [inputModalVisible]);
-
-  const setItemHandle = async (title) => {
-    let training = {
-      title: title,
-      storeRoundLength: roundLength,
-      storeRestLength: restLength,
-      storeReadyLength: readyLength,
-      storeIntervals: intervals,
-    };
-    training = JSON.stringify(training);
-    await helpers.setItem(title, training);
-    await setAllItemsHandle();
-  };
-
-  const setAllItemsHandle = async () => {
-    const keys = await helpers.getAllKeys();
-    setAllItems(await helpers.getMultipleItems(keys));
-  };
-
-  const deleteItemHandle = async (key) => {
-    Alert.alert(
-      "Delete",
-      "Are you sure you want to delete " + key + "?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          onPress: async () => {
-            helpers.deleteItem(key);
-            await setAllItemsHandle(setAllItems);
-          },
-        },
-      ],
-      { cancelable: false }
-    );
-  };
-
-  const deleteAllItemsHandle = async () => {
-    const keys = await helpers.getAllKeys();
-    setAllItems(await helpers.deleteMultipleItems(keys));
-  };
+  const {
+    modalVisible,
+    setModalVisible,
+    allItems,
+    inputModalVisible,
+    setInputModalVisible,
+    inputText,
+    setInputText,
+    setItemHandle,
+    deleteItemHandle,
+  } = useStoreButton(roundLength, restLength, readyLength, intervals)
 
   return (
     <View>
-      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ padding: 20}}>
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ padding: 20 }}>
         <Icon name={"bookmark-multiple-outline"} size={30} color="#03DAC6" />
       </TouchableOpacity>
       <Modal
@@ -223,7 +181,7 @@ const StoreButton = ({
           <View style={styles.columnStoreButton}>
             <View style={styles.row}>
               <View style={styles.backButton}>
-                <TouchableOpacity onPress={() => setModalVisible(false)} style={{ padding: 10}}>
+                <TouchableOpacity onPress={() => setModalVisible(false)} style={{ padding: 10 }}>
                   <Icon2 name={"arrow-back"} size={40} color="#03DAC6" />
                 </TouchableOpacity>
               </View>
