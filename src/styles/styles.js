@@ -7,9 +7,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
   },
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    flex: 1
   },
   row: {
     flex: 1,
@@ -262,20 +260,33 @@ export const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   titleContainer: {
+    flexDirection: "row",
+    flex: .5,
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: "#212121",
+    borderRadius: 15,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20,
+  },
+  durationContainer: {
     flexDirection: "column",
-    flex: 1,
+    flex: .7,
     alignItems: "center",
     justifyContent: "center",
   },
-  startButtonContainer: {
+  fightClockContainer: {
     flexDirection: "row",
-    flex: 0.6,
+    flex: 0.5,
     alignItems: "center",
     justifyContent: "space-evenly",
   },
   storeButtonContainer: {
     flexDirection: "row",
-    flex: 0.86,
+    flex: 0.84,
     justifyContent: "flex-start",
   },
   column: {
@@ -301,6 +312,9 @@ export const styles = StyleSheet.create({
     flex: .15,
   },
   trainingTime: {
+    fontSize: 40,
+  },
+  titleText: {
     fontSize: 28,
   },
   button: {

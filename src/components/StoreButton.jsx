@@ -38,8 +38,8 @@ const StoreButton = ({
 
   return (
     <View>
-      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ padding: 20 }}>
-        <Icon name={"bookmark-multiple-outline"} size={30} color="#03DAC6" />
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ padding: 10 }}>
+        <Icon name={"bookmark-multiple-outline"} size={35} color="#03DAC6" />
       </TouchableOpacity>
       <Modal
         visible={modalVisible}

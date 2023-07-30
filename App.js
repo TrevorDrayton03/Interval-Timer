@@ -3,6 +3,7 @@ import { Text, View, StatusBar } from "react-native";
 import Timer from "./src/components/Timer";
 import FightClock from "./src/components/FightClock";
 import StoreButton from "./src/components/StoreButton";
+import Settings from "./src/components/Settings";
 import styles from "./src/styles/styles";
 import darkTheme from "./src/styles/darkTheme";
 import useSetSounds from "./src/custom-hooks/useSetSounds";
@@ -41,7 +42,16 @@ const App = () => {
       >
       </StatusBar>
       <View style={styles.titleContainer}>
-        <Text style={[styles.trainingTime, darkTheme.onSurface]}>Duration: {roundLength > 0 ? displayTime : "0:00"}</Text>
+        <View>
+          <Text style={[styles.titleText, darkTheme.onSurface]}>Interval Timer</Text>
+        </View>
+        <View >
+          <Settings>
+          </Settings>
+        </View>
+      </View>
+      <View style={styles.durationContainer}>
+        <Text style={[styles.trainingTime, darkTheme.onSurface]}>{roundLength > 0 ? displayTime : "0:00"}</Text>
       </View>
       <View style={[styles.smallerContainer, darkTheme.surface]}>
         <Timer
@@ -89,7 +99,7 @@ const App = () => {
         >
         </Timer>
       </View>
-      <View style={styles.startButtonContainer}>
+      <View style={styles.fightClockContainer}>
         <FightClock
           intervals={intervals}
           restLength={restLength}

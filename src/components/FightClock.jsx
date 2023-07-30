@@ -95,7 +95,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
               </Text>
             </View>
           )}
-          <View style={{ flexDirection: 'column', flex: .215, justifyContent: 'flex-end', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'column', flex: .35, justifyContent: 'flex-end', alignItems: 'center' }}>
             {timerState !== "complete" && (
               <TouchableOpacity onPress={paused ? resumeInterval : pauseInterval}>
                 {paused ? (
