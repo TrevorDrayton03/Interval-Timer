@@ -11,29 +11,14 @@ import darkTheme from "../styles/darkTheme"
 import Icon2 from "react-native-vector-icons/MaterialIcons"
 import useFightClock from "../custom-hooks/useFightClock"
 import { useKeepAwake } from "expo-keep-awake"
-import { useSettings, saveSettingsToStorage } from '../contexts/SettingsContext'
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound, singleBellSound, tripleBellSound }) => {
-  const { settings, setSettings } = useSettings()
-  // console.log(settings)
-
-  // const updateSettings = () => {
-  //   let updatedSettings = { ...settings, soundSetting: !settings.soundSetting }
-  //   setSettings(updatedSettings)
-  //   saveSettingsToStorage(updatedSettings)
-  // }
-
-  // useEffect(() => {
-  //   if (settings.soundSetting === true) {
-  //     updateSettings()
-  //   }
-  // }, [settings])
-
+  const { settings, setSettings } = useSettingsContext()
   const isSoundsEnabled = settings.soundSetting
   const isVibrationsEnabled = settings.vibrationSetting
   const isMillisecondsEnabled = settings.millisecondSetting
   const isRoundEndSoundEnabled = settings.roundEndSoundSetting
-
 
   const {
     rounds,

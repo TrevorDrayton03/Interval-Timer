@@ -1,20 +1,23 @@
 import { useState } from 'react'
 
-const useSettings = (sounds, vibrations) => {
+const useSettings = (settings, setSettings) => {
   const [modalVisible, setModalVisible] = useState(false)
-  const [isSoundsEnabled, setIsSoundsEnabled] = useState(sounds);
-  const [isVibrationsEnabled, setIsVibrationsEnabled] = useState(vibrations);
 
-  const toggleSounds = () => setIsSoundsEnabled((previousState) => !previousState);
-  const toggleVibrations = () => setIsVibrationsEnabled((previousState) => !previousState);
+  console.log(settings)
+
+  const toggleSounds = () => { setSettings((previousState) => ({ ...previousState, soundSetting: !previousState.soundSetting })) };
+  const toggleVibrations = () => { setSettings((previousState) => ({ ...previousState, vibrationSetting: !previousState.vibrationSetting })) };
+
+  let isSoundsEnabled = settings.soundSetting
+  let isVibrationsEnabled = settings.vibrationSetting
 
   return {
     modalVisible,
     setModalVisible,
+    toggleVibrations,
+    toggleSounds,
     isSoundsEnabled,
     isVibrationsEnabled,
-    toggleVibrations,
-    toggleSounds
   }
 }
 

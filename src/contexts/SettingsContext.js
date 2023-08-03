@@ -50,7 +50,7 @@ export const SettingsProvider = ({ children }) => {
   )
 }
 
-export const useSettings = () => {
+export const useSettingsContext = () => {
   const context = useContext(SettingsContext)
   if (!context) {
     throw new Error('useSettings must be used within a SettingsProvider')

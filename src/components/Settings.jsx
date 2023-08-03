@@ -5,8 +5,11 @@ import darkTheme from "../styles/darkTheme"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import Icon2 from "react-native-vector-icons/MaterialIcons"
 import useSettings from "../custom-hooks/useSettings"
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 const Settings = () => {
+  const { settings, setSettings } = useSettingsContext()
+
   const {
     modalVisible,
     setModalVisible,
@@ -14,7 +17,7 @@ const Settings = () => {
     isVibrationsEnabled,
     toggleVibrations,
     toggleSounds
-  } = useSettings(true, false)
+  } = useSettings(settings, setSettings)
 
   return (
     <View style={[styles.trainingTime, darkTheme.onSurface]}>
