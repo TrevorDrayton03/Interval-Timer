@@ -47,7 +47,7 @@ const StoreButton = ({
         onRequestClose={() => setModalVisible(false)}
       >
         <View
-          style={[styles.storeButtonModalView, darkTheme.storeButtonModalView]}
+          style={[styles.container, darkTheme.storeButtonModalView]}
         >
           {
             <Modal

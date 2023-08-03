@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     height: 50,
     width: 110,
     marginVertical: 0,
-    padding: 0,
   },
   pickerContainer: {
     flex: 1,
@@ -72,9 +71,6 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
-  timerModalContainer: {
-    flex: 1,
-  },
   timerText: {
     fontSize: 30,
   },
@@ -86,12 +82,6 @@ export const styles = StyleSheet.create({
     fontSize: 30,
   },
   // FightClock
-  fightClockModalContainer: {
-    flex: 1,
-    // alignItems: "flex-start",
-    justifyContent: "space-between",
-    // fontSize: 24,
-  },
   fightClockComplete: {
     fontWeight: "bold",
   },
@@ -104,9 +94,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-  },
-  storeButtonModalView: {
-    flex: 1,
   },
   storeButtonModalContainer: {
     alignItems: "center",
@@ -293,9 +280,29 @@ export const styles = StyleSheet.create({
     flex: 0.4,
     alignItems: "center",
   },
+  settingsRow: {
+    flex: .1,
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 20,
+    padding: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: "#212121",
+    borderRadius: 15,
+  },
   columnStoreButton: {
     flex: .75,
     alignItems: "center",
+  },
+  settingsBackButton: {
+    flex: 1,
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+    padding: 15,
+    paddingLeft: 30
   },
   // timerBackRow: {
   //   flexDirection: "row",

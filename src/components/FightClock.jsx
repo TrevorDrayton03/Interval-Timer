@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react"
 import {
   Modal,
   View,
   Text,
-  TouchableOpacity,
-} from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import styles from "../styles/styles";
-import darkTheme from "../styles/darkTheme";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
-import useFightClock from "../custom-hooks/useFightClock";
-import { useKeepAwake } from "expo-keep-awake";
+  TouchableOpacity
+} from "react-native"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import styles from "../styles/styles"
+import darkTheme from "../styles/darkTheme"
+import Icon2 from "react-native-vector-icons/MaterialIcons"
+import useFightClock from "../custom-hooks/useFightClock"
+import { useKeepAwake } from "expo-keep-awake"
+import { useSettings, saveSettingsToStorage } from '../contexts/SettingsContext'
 
 const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound, singleBellSound, tripleBellSound }) => {
+  const { settings, setSettings } = useSettings()
+  // console.log(settings)
+
+  // const updateSettings = () => {
+  //   let updatedSettings = { ...settings, soundSetting: !settings.soundSetting }
+  //   setSettings(updatedSettings)
+  //   saveSettingsToStorage(updatedSettings)
+  // }
+
+  // useEffect(() => {
+  //   if (settings.soundSetting === true) {
+  //     updateSettings()
+  //   }
+  // }, [settings])
+
+  const isSoundsEnabled = settings.soundSetting
+  const isVibrationsEnabled = settings.vibrationSetting
+  const isMillisecondsEnabled = settings.millisecondSetting
+  const isRoundEndSoundEnabled = settings.roundEndSoundSetting
+
+
   const {
     rounds,
     modalVisible,
@@ -24,7 +46,17 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
     pauseInterval,
     resumeInterval,
     resetOnClose,
-  } = useFightClock(intervals, restLength, roundLength, readyLength, beepSound, singleBellSound, tripleBellSound)
+  } = useFightClock(
+    intervals,
+    restLength,
+    roundLength,
+    readyLength,
+    beepSound,
+    singleBellSound,
+    tripleBellSound,
+    isSoundsEnabled,
+    isVibrationsEnabled,
+  )
 
   useKeepAwake()
 
@@ -40,7 +72,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
       >
         <View
           style={[
-            styles.fightClockModalContainer,
+            styles.container,
             darkTheme.fightClockModalContainer,
           ]}
         >
@@ -118,7 +150,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
         </View>
       </Modal>
     </View>
-  );
-};
+  )
+}
 
-export default FightClock;
+export default FightClock
