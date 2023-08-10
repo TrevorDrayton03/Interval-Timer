@@ -229,7 +229,7 @@ const useFightClock = (intervals,
         }
         setRounds((prevCount) => {
           isSoundsEnabled ? singleBellSound.replayAsync() : null
-          isVibrationsEnabled ? Vibration.vibrate() : null
+          isVibrationsEnabled ? Vibration.vibrate(1100) : null
           if (timerState === "ready") {
             return prevCount
           }
