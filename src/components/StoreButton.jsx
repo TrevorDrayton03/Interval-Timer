@@ -72,7 +72,7 @@ const StoreButton = ({
                 <View style={[styles.storeButtonTextInputContainer, darkTheme.surface]}>
                   <TextInput
                     onChangeText={setInputText}
-                    placeholder="Name"
+                    placeholder=""
                     maxLength={50}
                     numberOfLines={2}
                     style={[styles.storeButtonTextInput, darkTheme.onSurface]}
