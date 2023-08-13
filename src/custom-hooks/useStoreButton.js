@@ -28,7 +28,6 @@ const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
 
   const setAllItemsHandle = (async () => {
     let keys = await getAllKeys()
-    console.log(keys)
     keys = keys.filter((key) => key !== "appSettings")
     setAllItems(await getMultipleItems(keys))
   })
