@@ -6,11 +6,11 @@ const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [allItems, setAllItems] = useState(null)
   const [inputModalVisible, setInputModalVisible] = useState(false)
-  const [inputText, setInputText] = useState("TEST")
+  const [inputText, setInputText] = useState("")
 
   useEffect(() => {
     setAllItemsHandle()
-    setInputText("TEST")
+    setInputText("")
   }, [inputModalVisible])
 
   const setItemHandle = (async (name) => {

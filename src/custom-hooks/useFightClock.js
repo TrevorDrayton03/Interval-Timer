@@ -19,7 +19,7 @@ const useFightClock = (intervals,
   isVibrationsEnabled,
 ) => {
   const [duration, setDuration] = useState(
-    readyLength > 0 ? readyLength - 1 : roundLength - 1
+    readyLength > 0 ? readyLength : roundLength
   )
   const [rounds, setRounds] = useState(1)
   const [training, setTraining] = useState(null)
@@ -48,7 +48,7 @@ const useFightClock = (intervals,
       setTraining(
         setInterval(() => {
           setDuration((prevCount) => {
-            return prevCount - 1
+            return prevCount -1
           })
         }, 1000)
       )
@@ -57,7 +57,7 @@ const useFightClock = (intervals,
       } else {
         setTimerState("round")
       }
-      setDuration(readyLength > 0 ? readyLength - 1 : roundLength - 1)
+      setDuration(readyLength > 0 ? readyLength : roundLength)
       setRounds(1)
     }
   }, [roundLength, readyLength])
@@ -153,13 +153,13 @@ const useFightClock = (intervals,
   useEffect(() => {
     if (!alteringState) {
       if (timerState === "rest") {
-        setDuration(restLength - 1)
+        setDuration(restLength)
       }
       if (timerState === "round") {
-        setDuration(roundLength - 1)
+        setDuration(roundLength)
       }
       if (timerState === "ready") {
-        setDuration(readyLength - 1)
+        setDuration(readyLength)
       }
     }
     setAlteringState(false)
@@ -216,10 +216,10 @@ const useFightClock = (intervals,
       } else {
       }
     } else {
-      if (timerState === "ready" && duration === -1 && rounds === 1) {
+      if (timerState === "ready" && duration === 0 && rounds === 1) {
         setTimerState("round")
       }
-      if (duration === -1 && rounds != intervals) {
+      if (duration === 0 && rounds != intervals) {
         if (restLength > 0 && timerState != "ready") {
           if (timerState === "rest") {
             setTimerState("round")
@@ -243,7 +243,7 @@ const useFightClock = (intervals,
           }
         })
       }
-      if (duration === -1 && rounds === intervals && timerState != "ready") {
+      if (duration === 0 && rounds === intervals && timerState != "ready") {
         clearInterval(training)
         setTraining(null)
         setTimerState("complete")
@@ -252,7 +252,7 @@ const useFightClock = (intervals,
         setStartTime(null)
       }
       if (
-        duration === -1 &&
+        duration === 0 &&
         rounds === intervals &&
         intervals === 1 &&
         timerState === "ready"
