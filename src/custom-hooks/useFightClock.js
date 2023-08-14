@@ -260,7 +260,7 @@ const useFightClock = (intervals,
         isSoundsEnabled ? singleBellSound.replayAsync() : null
       }
     }
-    if (duration <= 2 && duration >= 0 && timerState !== null) {
+    if (duration <= 3 && duration > 0 && timerState !== null) {
       isSoundsEnabled ? beepSound.replayAsync() : null
     }
     setStopTime(null)
