@@ -38,8 +38,8 @@ const StoreButton = ({
 
   return (
     <View>
-      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ padding: 20 }}>
-        <Icon name={"bookmark-multiple-outline"} size={30} color="#03DAC6" />
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ padding: 10 }}>
+        <Icon name={"bookmark-multiple-outline"} size={35} color="#03DAC6" />
       </TouchableOpacity>
       <Modal
         visible={modalVisible}
@@ -47,7 +47,7 @@ const StoreButton = ({
         onRequestClose={() => setModalVisible(false)}
       >
         <View
-          style={[styles.storeButtonModalView, darkTheme.storeButtonModalView]}
+          style={[styles.container, darkTheme.storeButtonModalView]}
         >
           {
             <Modal
@@ -72,7 +72,7 @@ const StoreButton = ({
                 <View style={[styles.storeButtonTextInputContainer, darkTheme.surface]}>
                   <TextInput
                     onChangeText={setInputText}
-                    placeholder="Name"
+                    placeholder=""
                     maxLength={50}
                     numberOfLines={2}
                     style={[styles.storeButtonTextInput, darkTheme.onSurface]}

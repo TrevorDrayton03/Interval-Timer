@@ -4,6 +4,8 @@ import { Picker } from "@react-native-picker/picker";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
 
+// change to react-native-dropdown-picker?
+
 const MinuteSecondPicker = ({ value, setValue }) => {
   const SECONDS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
   const MINUTES = [
@@ -40,7 +42,6 @@ const MinuteSecondPicker = ({ value, setValue }) => {
               value={val}
               style={{
                 color: "white",
-                // backgroundColor: "#121212",
                 backgroundColor: '#212121',
                 fontSize: 24,
               }}
@@ -49,27 +50,28 @@ const MinuteSecondPicker = ({ value, setValue }) => {
         </Picker>
       </View>
       <View style={styles.container}>
-        <Text style={[styles.text, darkTheme.onSurface]}>Seconds:</Text>
-        <Picker
-          selectedValue={SECONDS.indexOf(value % 60) * 5}
-          style={styles.picker}
-          onValueChange={(itemValue) => setSecond(itemValue)}
-          dropdownIconColor="#BB86FC"
-        >
-          {[...SECONDS.keys()].map((val) => (
-            <Picker.Item
-              key={val}
-              label={(val * 5).toString()}
-              value={val * 5}
-              style={{
-                color: "white",
-                // backgroundColor: "#121212",
-                backgroundColor: '#212121',
-                fontSize: 24,
-              }}
-            />
-          ))}
-        </Picker>
+        <View style={styles.pickerContainer}>
+          <Text style={[styles.text, darkTheme.onSurface]}>Seconds:</Text>
+          <Picker
+            selectedValue={SECONDS.indexOf(value % 60) * 5}
+            style={styles.picker}
+            onValueChange={(itemValue) => setSecond(itemValue)}
+            dropdownIconColor="#BB86FC"
+          >
+            {[...SECONDS.keys()].map((val) => (
+              <Picker.Item
+                key={val}
+                label={(val * 5).toString()}
+                value={val * 5}
+                style={{
+                  color: "white",
+                  backgroundColor: '#212121',
+                  fontSize: 26,
+                }}
+              />
+            ))}
+          </Picker>
+        </View>
       </View>
     </View>
   );

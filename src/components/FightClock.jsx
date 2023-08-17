@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react"
 import {
   Modal,
   View,
   Text,
-  TouchableOpacity,
-} from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import styles from "../styles/styles";
-import darkTheme from "../styles/darkTheme";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
-import useFightClock from "../custom-hooks/useFightClock";
-import { useKeepAwake } from "expo-keep-awake";
+  TouchableOpacity
+} from "react-native"
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import styles from "../styles/styles"
+import darkTheme from "../styles/darkTheme"
+import Icon2 from "react-native-vector-icons/MaterialIcons"
+import useFightClock from "../custom-hooks/useFightClock"
+import { useKeepAwake } from "expo-keep-awake"
+import { useSettingsContext } from '../contexts/SettingsContext'
 
 const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound, singleBellSound, tripleBellSound }) => {
+  const { settings, setSettings } = useSettingsContext()
+  const isSoundsEnabled = settings.soundSetting
+  const isVibrationsEnabled = settings.vibrationSetting
+  const isMillisecondsEnabled = settings.millisecondSetting
+  const isRoundEndSoundEnabled = settings.roundEndSoundSetting
+
   const {
     rounds,
     modalVisible,
@@ -24,7 +31,17 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
     pauseInterval,
     resumeInterval,
     resetOnClose,
-  } = useFightClock(intervals, restLength, roundLength, readyLength, beepSound, singleBellSound, tripleBellSound)
+  } = useFightClock(
+    intervals,
+    restLength,
+    roundLength,
+    readyLength,
+    beepSound,
+    singleBellSound,
+    tripleBellSound,
+    isSoundsEnabled,
+    isVibrationsEnabled,
+  )
 
   useKeepAwake()
 
@@ -40,7 +57,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
       >
         <View
           style={[
-            styles.fightClockModalContainer,
+            styles.container,
             darkTheme.fightClockModalContainer,
           ]}
         >
@@ -95,7 +112,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
               </Text>
             </View>
           )}
-          <View style={{ flexDirection: 'column', flex: .215, justifyContent: 'flex-end', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'column', flex: .35, justifyContent: 'flex-end', alignItems: 'center' }}>
             {timerState !== "complete" && (
               <TouchableOpacity onPress={paused ? resumeInterval : pauseInterval}>
                 {paused ? (
@@ -118,7 +135,7 @@ const FightClock = ({ intervals, restLength, roundLength, readyLength, beepSound
         </View>
       </Modal>
     </View>
-  );
-};
+  )
+}
 
-export default FightClock;
+export default FightClock

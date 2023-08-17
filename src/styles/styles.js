@@ -7,9 +7,7 @@ export const styles = StyleSheet.create({
     fontSize: 24,
   },
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    flex: 1
   },
   row: {
     flex: 1,
@@ -28,7 +26,6 @@ export const styles = StyleSheet.create({
     height: 50,
     width: 110,
     marginVertical: 0,
-    padding: 0,
   },
   pickerContainer: {
     flex: 1,
@@ -74,9 +71,6 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
-  timerModalContainer: {
-    flex: 1,
-  },
   timerText: {
     fontSize: 30,
   },
@@ -88,12 +82,6 @@ export const styles = StyleSheet.create({
     fontSize: 30,
   },
   // FightClock
-  fightClockModalContainer: {
-    flex: 1,
-    // alignItems: "flex-start",
-    justifyContent: "space-between",
-    // fontSize: 24,
-  },
   fightClockComplete: {
     fontWeight: "bold",
   },
@@ -106,9 +94,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-  },
-  storeButtonModalView: {
-    flex: 1,
   },
   storeButtonModalContainer: {
     alignItems: "center",
@@ -262,29 +247,62 @@ export const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   titleContainer: {
+    flexDirection: "row",
+    flex: .5,
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: "#212121",
+    borderRadius: 15,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20,
+  },
+  durationContainer: {
     flexDirection: "column",
-    flex: 1,
+    flex: .7,
     alignItems: "center",
     justifyContent: "center",
   },
-  startButtonContainer: {
+  fightClockContainer: {
     flexDirection: "row",
-    flex: 0.6,
+    flex: 0.5,
     alignItems: "center",
     justifyContent: "space-evenly",
   },
   storeButtonContainer: {
     flexDirection: "row",
-    flex: 0.86,
+    flex: 0.84,
     justifyContent: "flex-start",
   },
   column: {
     flex: 0.4,
     alignItems: "center",
   },
+  settingsRow: {
+    flex: .1,
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 20,
+    padding: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: "#212121",
+    borderRadius: 15,
+  },
   columnStoreButton: {
     flex: .75,
     alignItems: "center",
+  },
+  settingsBackButton: {
+    flex: 1,
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+    padding: 15,
+    paddingLeft: 30
   },
   // timerBackRow: {
   //   flexDirection: "row",
@@ -301,6 +319,9 @@ export const styles = StyleSheet.create({
     flex: .15,
   },
   trainingTime: {
+    fontSize: 40,
+  },
+  titleText: {
     fontSize: 28,
   },
   button: {

@@ -1,35 +1,36 @@
-import { useState, useEffect, useCallback } from "react";
-import { setItem, getMultipleItems, deleteItem, getAllKeys } from "../../src/helpers/helpers";
-import { Alert } from "react-native";
+import { useState, useEffect, useCallback } from "react"
+import { setItem, getMultipleItems, deleteItem, getAllKeys, deleteMultipleItems } from "../../src/helpers/helpers"
+import { Alert } from "react-native"
 
 const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [allItems, setAllItems] = useState(null);
-  const [inputModalVisible, setInputModalVisible] = useState(false);
-  const [inputText, setInputText] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false)
+  const [allItems, setAllItems] = useState(null)
+  const [inputModalVisible, setInputModalVisible] = useState(false)
+  const [inputText, setInputText] = useState("")
 
   useEffect(() => {
-    setAllItemsHandle();
-    setInputText(null);
-  }, [inputModalVisible]);
+    setAllItemsHandle()
+    setInputText("")
+  }, [inputModalVisible])
 
-  const setItemHandle = useCallback(async (title) => {
+  const setItemHandle = (async (name) => {
     let training = {
-      title: title,
+      title: name,
       storeRoundLength: roundLength,
       storeRestLength: restLength,
       storeReadyLength: readyLength,
       storeIntervals: intervals,
-    };
-    training = JSON.stringify(training);
-    await setItem(title, training);
-    await setAllItemsHandle();
-  }, [roundLength, restLength, readyLength, intervals]);
+    }
+    training = JSON.stringify(training)
+    await setItem(name, training)
+    await setAllItemsHandle()
+  })
 
-  const setAllItemsHandle = useCallback(async () => {
-    const keys = await getAllKeys();
-    setAllItems(await getMultipleItems(keys));
-  }, []);
+  const setAllItemsHandle = (async () => {
+    let keys = await getAllKeys()
+    keys = keys.filter((key) => key !== "appSettings")
+    setAllItems(await getMultipleItems(keys))
+  })
 
   const deleteItemHandle = useCallback(async (key) => {
     Alert.alert(
@@ -43,19 +44,19 @@ const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
         {
           text: "Delete",
           onPress: async () => {
-            deleteItem(key);
-            await setAllItemsHandle(setAllItems);
+            deleteItem(key)
+            await setAllItemsHandle(setAllItems)
           },
         },
       ],
       { cancelable: false }
-    );
-  }, []);
+    )
+  }, [])
 
-  const deleteAllItemsHandle = useCallback(async () => {
-    const keys = await getAllKeys();
-    setAllItems(await deleteMultipleItems(keys));
-  }, []);
+  // const deleteAllItemsHandle = useCallback(async () => {
+  //   const keys = await getAllKeys()
+  //   setAllItems(await deleteMultipleItems(keys))
+  // }, [])
 
   return {
     modalVisible,
@@ -67,7 +68,7 @@ const useStoreButton = (roundLength, restLength, readyLength, intervals) => {
     setInputText,
     setItemHandle,
     deleteItemHandle,
-    deleteAllItemsHandle
+    // deleteAllItemsHandle
   }
 }
 

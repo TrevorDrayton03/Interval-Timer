@@ -6,7 +6,7 @@ import MinuteSecondPicker from "./MinuteSecondPicker";
 import styles from "../styles/styles";
 import darkTheme from "../styles/darkTheme";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
-import { getDisplayTime} from "../../src/helpers/helpers";
+import { getDisplayTime } from "../../src/helpers/helpers";
 
 const Timer = ({
   name,
@@ -55,7 +55,7 @@ const Timer = ({
           >
             <View
               style={[
-                styles.timerModalContainer,
+                styles.container,
                 darkTheme.timerModalContainer,
               ]}
             >
