@@ -34,7 +34,8 @@
         "!RECORD_AUDIO"
       ],
       "package": "intevraltime0311.myapp",
-      "runtimeVersion": "1.0.0"
+      "runtimeVersion": "1.0.0",
+      "target": "expo-13"
     },
     "web": {
       "favicon": "./assets/favicon.png"

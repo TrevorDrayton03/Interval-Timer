@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   build:
-    name: Install and Build
+    name: Install, Build, Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,5 +21,30 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: npm ci
-      - name: Build on EAS
+      - name: Build Expo App
         run: eas build -p android
+  # deploy:
+  #   name: Deploy to Google Play
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download artifact
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: app
+  #         path: app
+  #     - name: Deploy to Google Play
+  #       uses: r0adkll/upload-google-play@v1
+  #       with:
+  #         serviceAccountJson: ${{ secrets.GOOGLE_PLAY_JSON }}
+  #         packageName: com.example.IntervalTimer
+  #         releaseFiles: app/*.aab
+  #         track: internal
+  #         whatsNewListing: "This release contains bug fixes and improvements."
+  #         whatsNewLanguage: en-US
+  #         releaseName: "v1.0.0"
+  #         releaseNotes: "This release contains bug fixes and improvements."
+  #         releaseNotesLanguage: en-US
+  #         releaseStatus: completed
+  #         userFraction: 0.1
+  #         rollout: 0.1
