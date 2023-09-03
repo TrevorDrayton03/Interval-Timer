@@ -127,7 +127,7 @@ const StoreButton = ({
               />
             </View>
             <ScrollView style={[styles.storeButtonScrollView, darkTheme.storeButtonScrollView]}>
-              {allItems &&
+              {allItems && Object.keys(allItems).length > 0 ? 
                 allItems.map((item, index) => {
                   return (
                     <TouchableOpacity
@@ -167,7 +167,7 @@ const StoreButton = ({
                       </View>
                     </TouchableOpacity>
                   );
-                })}
+                }) : <Text style={[styles.noTimersText, darkTheme.onSurface]}>You have no saved timers. Add a new one by setting the main page and then pressing the "Save Current Timer" button below. Hold down a saved timer to delete one.</Text>}
             </ScrollView>
           </View>
           <View style={styles.saveCurrentTimer}>

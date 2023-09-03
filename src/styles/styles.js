@@ -331,6 +331,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
+  noTimersText: {
+    fontSize: 20,
+    padding: 20,
+    textAlign: "center",
+  }
 });
 
 export default styles;
