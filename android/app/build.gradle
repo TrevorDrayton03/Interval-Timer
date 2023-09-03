@@ -84,7 +84,7 @@ android {
     namespace 'intevraltime0311.myapp'
     defaultConfig {
         applicationId 'intevraltime0311.myapp'
-        minSdkVersion rootProject.ext.mzinSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 6
         versionName "1.0.6"
