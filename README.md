@@ -2,7 +2,7 @@
 
 ##### Project: React-Native Expo Mobile Application
 ##### Author: Trevor Drayton
-
+##### https://play.google.com/store/apps/details?id=intevraltime0311.myapp&hl=en_CA&gl=US
 ## About 
 
 Interval Timer was inspired when exercising at the gym with my friend using an interval timer. I was complaining about adds and features that I wanted. My friend said "why don't you just make one?". Now it's on the play store for free for anyone else who wants to use it.
