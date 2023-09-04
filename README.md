@@ -16,10 +16,8 @@ Interval Timer was inspired when exercising at the gym with my friend using an i
 - Material Dark Theme
 
 ## Screenshots
-<div style="display: inline-block;">
-![ss1](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/77c54b40-40bb-4ba6-be96-563b4ff96f98)
-![ss3](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/505c9119-2883-4803-b320-7e55a8da127c)
-![ss2](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/07fe192b-a7d2-427e-8f81-89c51ba1de65)
-![ss4](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/82b3dba1-4a4d-46cc-85ca-72c558b06e6f)
-![ss5](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/10601757-cf3d-4f2c-9272-5550edffab2c)
-</div>
+![ss1](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/74bfbe2c-729f-49f5-b958-2c5360b56363)
+![ss2](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/9604aab8-18f7-493d-8994-94cb9f567f00)
+![ss3](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/1e7b3b10-57e1-4ff1-97db-f615eddb58d2)
+![ss4](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/343dbbbb-8391-4080-84af-70f493910b66)
+![ss5](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/1710717a-a91c-4a76-894b-ba4303238adf)
