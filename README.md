@@ -15,22 +15,11 @@ Interval Timer was inspired when exercising at the gym with my friend using an i
 - Set the duration of each round using a picker, onPressIn, or onPress
 - Material Dark Theme
 
-## Future Releases
-- Toggle milliseconds
-- Toggle sound, vibrations, light mode
-- Toggle vibrations
-- Toggle light/dark mode
-- Toggle ready time (making it an unchangeable, default value)
-- Refactor the layout
-- Default timer to be added to stored timers
-- Release on the Apple App Store
-
 ## Screenshots
 <div style="display: inline-block;">
-<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/318979fe-73f5-4c85-8865-0d4f1d05df2d" alt="March 16 Screenshot #1" width="300">
-<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/338f908f-0c9a-4a46-9f98-c88fd751dfed" alt="March 16 Screenshot #2" width="300">
-<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/151cd62d-b7c7-46d3-9c68-90952c9c47bf" alt="March 16 Screenshot #3" width="300">
-<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/f1bf17e7-e31b-4848-b4a5-185aa32d08ea" alt="July 30 Screenshot #4" width="300">
-<img src="https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/cc65cb72-67f2-434b-b691-9e0affb6af07" alt="July 30 Screenshot #5" width="300">
-
+![ss1](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/77c54b40-40bb-4ba6-be96-563b4ff96f98)
+![ss3](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/505c9119-2883-4803-b320-7e55a8da127c)
+![ss2](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/07fe192b-a7d2-427e-8f81-89c51ba1de65)
+![ss4](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/82b3dba1-4a4d-46cc-85ca-72c558b06e6f)
+![ss5](https://github.com/TrevorDrayton03/Interval-Timer/assets/56656811/10601757-cf3d-4f2c-9272-5550edffab2c)
 </div>
