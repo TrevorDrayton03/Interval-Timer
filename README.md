@@ -5,14 +5,14 @@
 ##### https://play.google.com/store/apps/details?id=intevraltime0311.myapp&hl=en_CA&gl=US
 ## About 
 
-Interval Timer was inspired when exercising at the gym with my friend using an interval timer. I was complaining about adds and features that I wanted. My friend said "why don't you just make one?". Now it's on the play store for free for anyone else who wants to use it.
+Interval Timer was inspired when exercising at the gym with my friend using an interval timer. I was complaining about adds and features that I wanted. My friend said "why don't you just make one?". Now it's on the Play Store for free.
 
 ## Features
-- Store user-created timers to easily use for later
-- An active timer session will restore state to the proper duration and round when foregrounded if accidentally backgrounded.
-- Configurable; choose whether or not to have rest or ready rounds.
-- Vibration and sounds to signify round changes, near-end of rounds, and when it's over.
-- Set the duration of each round using a picker, onPressIn, or onPress
+- Store user-created timers
+- An active timer session will restore application state when foregrounded if accidentally backgrounded
+- Configurable; choose whether or not to have rest or ready rounds
+- Vibration and sound options to signify round changes, near-end of rounds, and when it's completed
+- Set the duration of each round using a picker, onPressIn, or onPress buttons
 - Material Dark Theme
 
 ## Screenshots
